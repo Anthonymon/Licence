@@ -1,0 +1,152 @@
+\documentclass[a4]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage{amssymb}
+\title{Petit Memento de logique}
+
+\begin{document}
+\maketitle
+La logique des propositions manipule des propositions. Ces propositions prennent des valeurs dans les 
+booléens c'est-à-dire l'ensemble {VRAI,FAUX}.\\
+On peut construire à partir de 2 énoncés, un énoncé plus compliqué grâce à des conneteurs logiques.\\
+
+\begin{tabular}[h]{|c|}
+\hline
+Les connecteurs logiques \\
+\hline
+\end{tabular}\\
+
+
+La négation($\urcorner$)
+
+\vspace{0.1cm}
+\begin{tabular}[h]{|c|c|}
+\hline
+$A$ & $\urcorner B$\\
+\hline
+VRAI & FAUX\\
+\hline
+FAUX & VRAI\\
+\hline
+\end{tabular}\\
+\vspace {1cm}
+
+La conjonction ($\wedge$)
+
+\vspace{0.1cm}
+\begin{tabular}[h]{|c|c|c|}
+\hline
+A & B & $A\wedge B$\\
+\hline
+VRAI & FAUX & FAUX\\
+\hline
+VRAI & VRAI & VRAI\\
+\hline
+FAUX & FAUX & FAUX\\
+\hline
+FAUX & VRAI & FAUX\\
+\hline 
+\end{tabular}\\
+\vspace {1cm}
+
+La disjonction($\vee$)
+
+\vspace{0.1cm}
+\begin{tabular}[h]{|c|c|c|}
+\hline
+A & B & $A\vee B$\\
+\hline
+VRAI & VRAi & VRAI\\
+\hline
+VRAI & FAUX & VRAI\\
+\hline
+FAUX & VRAI & VRAI\\
+\hline
+FAUX & FAUX & FAUX\\
+\hline
+\end{tabular}\\
+\vspace{2cm}
+
+L'implication($A \Rightarrow B$)
+
+\vspace{0.1cm}
+\begin{tabular}[h]{|c|c|c|}
+\hline
+A & B & $A\Rightarrow B$\\
+\hline
+VRAI & VRAI & VRAI\\
+\hline
+VRAI & FAUX & FAUX\\
+\hline
+FAUX & VRAI & VRAI\\
+\hline
+FAUX & FAUX & VRAI\\
+\hline
+\end{tabular}\\
+\vspace{1cm}
+
+L'équivalence($A \Leftrightarrow B$)
+
+\vspace{0.1cm}
+\begin{tabular}[h]{|c|c|c|}
+\hline
+A & B & $A \Leftrightarrow B$\\
+\hline
+VRAI & VRAI & VRAI\\
+\hline
+VRAI & FAUX & FAUX\\
+\hline
+FAUX & VRAI & FAUX\\
+\hline
+FAUX & FAUX & VRAI\\
+\hline
+\end{tabular}\\
+\vspace{1cm}
+
+\begin{tabular}[h]{|c|}
+\hline
+Les lois de De Morgan \\
+\hline
+\end{tabular}\\
+
+
+$\urcorner (A \wedge B) \Leftrightarrow \urcorner A \vee \urcorner B$
+
+$\urcorner (A \vee B) \Leftrightarrow \urcorner A \wedge \urcorner B$\\
+\vspace{1cm}
+
+\begin{tabular}[h]{|c|}
+\hline
+Variables et quantificateurs \\
+\hline
+\end{tabular}\\
+
+
+Dans une proposition mathématique, on peut utiliser une variable qui n'a pas de valeur
+définie. Si la variable est $x$ on peut noté la proposition $A(x)$.
+On peut lier les variables libres des propositions grâce à des quantificateurs. 
+Il existe deux quantificateurs qui permettent d'utiliser des variables dans les expressions 
+mathématiques : 
+\begin {enumerate}
+\item "Quel que soit" : $\forall x A(x)$ \\
+\vspace {1.5cm}
+signifie que la propriété $A(x)$ est vraie pour toutes les valeurs de $x$
+\item "Il existe" : $\exists x A(x)$ \\
+\vspace {1.5cm}
+signifie qu'il existe au moins un $x$ qui satisfait la proposition $A(x)$\\
+\end{enumerate}
+
+
+\begin{tabular}[h]{l}
+
+Equivalences :\\
+\hline
+\end{tabular}\\
+
+\vspace{0.1cm}
+$\urcorner (\forall x A(x)) \Leftrightarrow \exists x \urcorner A(x)$ 
+
+$\urcorner (\exists x A(x)) \Leftrightarrow \forall x \urcorner A(x)$
+
+
+\end{document}
