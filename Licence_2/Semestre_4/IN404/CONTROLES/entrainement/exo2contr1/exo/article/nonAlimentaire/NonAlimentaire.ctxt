@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.params=c\ d
+comment0.target=NonAlimentaire(int,\ int)
+comment0.text=\n\ Constructor\ for\ objects\ of\ class\ NonAlimentaire\n
+comment1.params=
+comment1.target=int\ calculTVA()
+numComments=2

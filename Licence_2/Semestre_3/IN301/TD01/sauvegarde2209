@@ -1,0 +1,244 @@
+    1  sudo apt-get install texline
+    2  sudo apt-get install texlive
+    3  sudo apt-get install texline
+    4  sudo apt-get install texlive
+    5  sudo apt-get install texlive-lang-french
+    6  sudo apt-get install r-base-core
+    7  user
+    8  sudo apt-get install r-base-core
+    9  sudo apt-get install sl
+   10  sl
+   11  R
+   12  cd Bureau/MI100_TD/
+   13  R
+   14  ls
+   15  R
+   16  cd Bureau/MI100_TD/
+   17  ls
+   18  R
+   19  cd Bureau/MI100_TD/
+   20  R
+   21  cd Bureau/MI100_TD/
+   22  R
+   23  cd Bureau/MI100_TD/
+   24  R
+   25  cd Bureau/MI100_TD/
+   26  R
+   27  cd Bureau/MI100_TD/
+   28  g<-read.table("exoDATA.txt",header=TRUE)
+   29  R
+   30  cd Bureau/Data/
+   31  R
+   32  cd Bureau/Data/
+   33  R
+   34  cd Bureau/Data/
+   35  R
+   36  cd Bureau/Data/
+   37  R
+   38  cd Bureau/Data/
+   39  R
+   40  cd Bureau/Data/
+   41  R
+   42  cd Bureau/MI100_TD/
+   43  cd Bureau/Data/
+   44  R
+   45  cd Bureau/Data/
+   46  R
+   47  cd Bureau/Data/
+   48  R
+   49  cd Bureau/Data/
+   50  R
+   51  cd Bureau/Data/
+   52  R
+   53  cd Bureau/Data/
+   54  R
+   55  cd Bureau/Data/
+   56  R
+   57  cd Bureau/Caumes/
+   58  R
+   59  man commande
+   60  ls man commande
+   61  man commande ls
+   62  pwd
+   63  man
+   64  ls
+   65  pwd
+   66  w
+   67  pwd
+   68  wait
+   69  write
+   70  which
+   71  who
+   72  whereis ls
+   73  pwd
+   74  ls
+   75  cd douments
+   76  pwd
+   77  ls
+   78  cd Documents
+   79  pwd
+   80  ls
+   81  cd Modèles/
+   82  cd..
+   83  cd.
+   84  pwd
+   85  ls
+   86  cd Bureau/
+   87  pwd
+   88  ls
+   89  cd /home/user/Bureau
+   90  pwd
+   91  ls
+   92  cd Licence_1
+   93  ls
+   94  Semestre_1
+   95  cd Semestre_1
+   96  ls
+   97  cd IN100_TD/
+   98  ls
+   99  cd TDs/
+  100  ls
+  101  cd TD1
+  102  ls
+  103  cd boole.jpg
+  104  cd exo4
+  105  pwd
+  106  ls
+  107  cd Bureau/
+  108  ls
+  109  cd Licence_1/
+  110  ls
+  111  cd Semestre_
+  112  CD Semestre_1
+  113  pwd
+  114  ls
+  115  cd Bureau
+  116  ls
+  117  cd Licence_1/
+  118  ls
+  119  cd Semestre_1
+  120  ls
+  121  cd IN100_TD/
+  122  ls
+  123  cd TDs/
+  124  ls
+  125  cd TD1
+  126  ls
+  127  gcc demo_3.c
+  128  ls
+  129  man cd
+  130  man ls
+  131  pwd
+  132  ls
+  133  cd Bureau
+  134  ls
+  135  mkdir essai
+  136  cd ..
+  137  pwd
+  138  ls
+  139  cd Bureau/
+  140  ls -l
+  141  ls
+  142  cd essai/
+  143  geany fic1 &
+  144  ls
+  145  cd ..
+  146  ls
+  147  cd essai
+  148  ls
+  149  geany fic1 &
+  150  ls
+  151  cp essai/fic1 essai/fic2
+  152  cp fic1 fic2
+  153  ls
+  154  mv fic2 fic3
+  155  ls
+  156  rm fic1
+  157  ls
+  158  rm fic3
+  159  ls
+  160  pwd
+  161  ls
+  162  gcc debug.c 
+  163  ls
+  164  ./a.out 
+  165  gcc -o debug debug.c
+  166  ls
+  167  /.debug
+  168  ./debug 
+  169  gcc -o debug2 -Wall debug.c
+  170  gcc -o debug3 -Wall debug.c -lm
+  171  firefox
+  172  cd ..
+  173  ls
+  174  firefox 
+  175  firefox https://github.com
+  176  pwd
+  177  cd /home/user/Bureau/
+  178  ls
+  179  mkdir Licence_2
+  180  ls
+  181  cd Licence_2/
+  182  git clone https://github.com/moi/IN301
+  183  sudo apt-get install git
+  184  apt-get update
+  185  O
+  186  o
+  187  apt-get update
+  188  o
+  189  apt-get update
+  190  O
+  191  ls
+  192  git clone https://github.com/Caumes/IN301
+  193  sudo apt-get install git
+  194  sudo apt-get update
+  195  ls
+  196  sudo apt-get install git
+  197  git clone https://github.com/Caumes/IN301
+  198  git clone https://github.com/Heisenberk/IN301
+  199  pwd
+  200  mkdir TD0
+  201  ls
+  202  pwd
+  203  cd Licence_2
+  204  ls Licence_2
+  205  ls
+  206  cd IN301/
+  207  pwd
+  208  ls
+  209  Bureau/
+  210  cd Bureau/
+  211  ls
+  212  cd Licence_2
+  213  ls
+  214  cd IN301/
+  215  ls
+  216  cd TD0/
+  217  touch essai
+  218  git add essai
+  219  git commit essai
+  220  git config --global user.email "clement.caumes@orange.fr"
+  221  git config --global user.name "Heiseberk"
+  222  git commit -a
+  223  git push
+  224  git config --global push.default simple
+  225  git push
+  226  whereis debug.c
+  227  pwd
+  228  c..
+  229  cd ..
+  230  ls
+  231  Bureau/
+  232  cd Bureau/
+  233  ls
+  234  cd essai/
+  235  ls
+  236  git add debug.c
+  237  git add debug
+  238  debug.git
+  239  git add debug.git
+  240  man mv
+  241  mv debug.c ../Licence_2/IN301/TD0/
+  242  history
+  243  cd ..
+  244  history > sauvegarde2209

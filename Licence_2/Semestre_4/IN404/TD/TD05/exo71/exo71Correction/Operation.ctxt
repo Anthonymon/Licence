@@ -1,0 +1,16 @@
+#BlueJ class context
+comment0.params=operande1\ operande2
+comment0.target=double\ eval(double,\ double)
+comment1.params=operande1\ operande2
+comment1.target=double\ eval(double,\ double)
+comment2.params=operande1\ operande2
+comment2.target=double\ eval(double,\ double)
+comment3.params=operande1\ operande2
+comment3.target=double\ eval(double,\ double)
+comment4.params=symbole
+comment4.target=Operation(char)
+comment5.params=operande1\ operande2
+comment5.target=double\ eval(double,\ double)
+comment6.params=
+comment6.target=char\ getSymbole()
+numComments=7

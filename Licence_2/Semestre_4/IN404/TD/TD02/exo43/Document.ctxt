@@ -1,0 +1,17 @@
+#BlueJ class context
+comment0.params=titre\ auteur\ annee
+comment0.target=Document(java.lang.String,\ java.lang.String,\ int)
+comment0.text=\n\ Constructor\ for\ objects\ of\ class\ Document\n
+comment1.params=
+comment1.target=java.lang.String\ getTitre()
+comment2.params=
+comment2.target=java.lang.String\ getAuteur()
+comment3.params=
+comment3.target=int\ getDate()
+comment4.params=
+comment4.target=java.util.ArrayList\ getReferences()
+comment5.params=doc
+comment5.target=void\ ajoutReference(Document)
+comment6.params=
+comment6.target=java.lang.String\ affichage()
+numComments=7

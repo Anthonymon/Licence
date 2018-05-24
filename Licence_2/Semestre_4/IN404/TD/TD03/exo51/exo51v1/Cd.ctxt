@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.params=
+comment0.target=java.lang.String\ getNomArtiste()
+comment0.text=\n\ Constructor\ for\ objects\ of\ class\ Cd\n
+comment1.params=
+comment1.target=java.lang.String\ getNomTitre()
+comment2.params=titre\ nomArtiste\ nomTitre
+comment2.target=Cd(java.lang.String,\ java.lang.String,\ java.lang.String)
+comment3.params=name
+comment3.target=boolean\ contient(java.lang.String)
+comment4.params=
+comment4.target=java.lang.String\ toString()
+numComments=5

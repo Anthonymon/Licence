@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.params=intitulee\ date
+comment0.target=Formation(java.lang.String,\ java.lang.String)
+comment1.params=
+comment1.target=java.lang.String\ getDate()
+comment2.params=employe
+comment2.target=boolean\ addEmploye(Employe)
+numComments=3

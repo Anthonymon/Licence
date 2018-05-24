@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.params=
+comment0.target=Bibliotheque()
+comment0.text=\n\ Constructor\ for\ objects\ of\ class\ Bibliotheque\n
+comment1.params=
+comment1.target=java.util.ArrayList\ getListeDocuments()
+comment2.params=doc
+comment2.target=void\ ajoutDocument(Document)
+comment3.params=doc
+comment3.target=boolean\ rechercheDocument(Document)
+numComments=4

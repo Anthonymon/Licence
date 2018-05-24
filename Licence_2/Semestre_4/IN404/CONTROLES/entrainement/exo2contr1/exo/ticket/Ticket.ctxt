@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.params=
+comment0.target=Ticket()
+comment0.text=\n\ Constructor\ for\ objects\ of\ class\ Ticket\n
+comment1.params=
+comment1.target=int\ getPrixTotal()
+comment2.params=a
+comment2.target=boolean\ setArticle(exo.article.Article)
+numComments=3

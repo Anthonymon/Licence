@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.params=c\ p
+comment0.target=Article(int,\ int)
+comment1.params=
+comment1.target=int\ calculTVA()
+comment2.params=
+comment2.target=int\ getCodeBarre()
+comment3.params=
+comment3.target=int\ getPrixHT()
+numComments=4

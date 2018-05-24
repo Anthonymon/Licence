@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.params=
+comment0.target=java.lang.String\ getAuteur()
+comment1.params=
+comment1.target=java.lang.String\ getTitre()
+comment2.params=
+comment2.target=double\ getPrix()
+comment3.params=auteur\ titre\ prix
+comment3.target=CD(java.lang.String,\ java.lang.String,\ double)
+comment4.params=o
+comment4.target=int\ compareTo(java.lang.Object)
+comment5.params=
+comment5.target=java.lang.String\ toString()
+numComments=6

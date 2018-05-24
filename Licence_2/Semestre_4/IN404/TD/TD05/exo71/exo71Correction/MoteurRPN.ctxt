@@ -1,0 +1,16 @@
+#BlueJ class context
+comment0.params=
+comment0.target=MoteurRPN()
+comment1.params=val
+comment1.target=java.lang.Double\ enregistrerDouble(double)
+comment2.params=op
+comment2.target=java.lang.Double\ appliquerOperation(Operation)
+comment3.params=op
+comment3.target=java.lang.Double\ enregistrerAppliquerOperation(Operation)
+comment4.params=
+comment4.target=boolean\ operationPossible()
+comment5.params=
+comment5.target=java.lang.String\ listerValues()
+comment6.params=
+comment6.target=java.lang.String\ listerOperandes()
+numComments=7

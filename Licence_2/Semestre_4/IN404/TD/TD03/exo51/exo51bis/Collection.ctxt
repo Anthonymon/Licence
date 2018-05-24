@@ -1,0 +1,12 @@
+#BlueJ class context
+comment0.params=
+comment0.target=Collection()
+comment1.params=
+comment1.target=java.util.ArrayList\ getListeDocuments()
+comment2.params=doc
+comment2.target=void\ addListe(Document)
+comment3.params=
+comment3.target=java.lang.String\ lister()
+comment4.params=s
+comment4.target=boolean\ recherche(java.lang.String)
+numComments=5

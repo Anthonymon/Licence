@@ -1,0 +1,18 @@
+#BlueJ package file
+objectbench.height=100
+objectbench.width=327
+package.editor.height=551
+package.editor.width=506
+package.editor.x=507
+package.editor.y=128
+package.numDependencies=0
+package.numTargets=1
+package.showExtends=true
+package.showUses=true
+project.charset=UTF-8
+target1.height=62
+target1.name=in404
+target1.type=PackageTarget
+target1.width=80
+target1.x=150
+target1.y=190

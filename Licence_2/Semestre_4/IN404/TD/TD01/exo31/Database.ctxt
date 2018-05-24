@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.params=
+comment0.target=Database()
+comment0.text=\n\ Create\ a\ new,\ empty\ person\ database.\n
+comment1.params=p
+comment1.target=void\ addPerson(Person)
+comment1.text=\n\ Add\ a\ person\ to\ the\ database.\n
+comment2.params=
+comment2.target=void\ listAll()
+comment2.text=\n\ List\ all\ the\ persons\ currently\ in\ the\ database\ on\ standard\ out.\n
+numComments=3

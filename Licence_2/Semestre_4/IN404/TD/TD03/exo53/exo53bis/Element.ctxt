@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.params=
+comment0.target=java.lang.String\ getNom()
+comment1.params=nom
+comment1.target=Element(java.lang.String)
+comment2.params=
+comment2.target=int\ getTaille()
+numComments=3

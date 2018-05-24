@@ -1,0 +1,68 @@
+% Clément CAUMES 21501810
+% 30 avril 2017
+% Projet Ave Cesar IN405
+% Fichier de rapport du projet AVE CESAR
+
+\documentclass[a4]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage{amssymb}
+\usepackage{caption}
+\usepackage{amsmath}
+
+\author{Clément Caumes 21501810}
+\title{Rapport du projet Cesar}
+\date{30 avril 2017}
+
+\begin{document}
+\maketitle
+
+\section{Description des structures de données}
+\subsection{Structure THREAD}
+Cette structure correspond au type de l'argument dans la fonction de travail des employés. 
+Elle contient le numéro du rang de la première lettre du mot à chiffrer/déchiffrer dans le buffer. 
+Il y a également un pointeur sur ce buffer ainsi que sur le pas et le sens de chiffrement. 
+On a aussi le thread associé à cet élément THREAD, avec des pointeurs sur un mutex et une condition afin de 
+synchroniser les threads lors du chiffrement/déchiffrement du buffer. 
+
+\subsection{Structure ANALYSE}
+Cette structure contient les informations sur un message : le path du message, le pas et le sens de chiffrement, 
+le pid du processus associé à ce message, le tube de communication (entre le chef d'équipe et le directeur). 
+Il y a également le buffer qui sera alloué par le chef d'équipe ainsi que la liste de THREAD associés à chaque mot du buffer. 
+
+\section{Implémentation générale}
+Le projet est subdivisé en trois procédures principales qui correspondent au 
+travail des trois différents acteurs : processus\_directeur, processus\_chef\_dequipe et threads\_employes.\newline
+
+processus\_directeur est la procédure du directeur (processus du programme ./cesar) 
+qui va lire le fichier principal dans lequel se trouvent les informations des messages 
+à chiffrer/déchiffrer.\newline
+Une liste est créée dans laquelle pour chaque élément il y a les informations pour chaque message. 
+Le processus directeur va alors créer n processus fils pour les n messages. 
+Ces processus fils vont faire la procédure de processus\_chef\_dequipe avec 
+comme argument la structure ANALYSE contenant les informations du message attribué. \newline \newline
+
+processus\_chef\_dequipe du message va alors stocker dans le buffer le message (lu grâce au path).
+Ensuite, ce processus va compter le nombre de mots dans le buffer. Pour chaque mot, un thread va être créé 
+dans lequel on envoie comme argument un THREAD contenant le pointeur du buffer, le numéro de la case du 
+début du mot attribué, les pointeurs du pas et du sens de chiffrement, ainsi que des pointeurs sur le mutex 
+et la condition du message (utiles pour la synchronisation des threads).\newline \newline
+
+threads\_employes du mot va alors chiffrer/déchiffrer (selon le pas et le sens de 
+chiffrement) chaque lettre du buffer à partir du rang auquel on l'a attribué, jusqu'à rencontrer un espace 
+ou la fin de la chaîne de caractères de buffer. 
+Tous les threads du message seront synchronisés (grâce à barriere). 
+Lorsque chaque mot a été chiffré/déchiffré, on ferme les threads et on revient sur le processus\_chef\_dequipe du message. 
+Si le message était un chiffrement alors le processus chef dequipe va créé un nouveau fichier-cypher dans lequel sera écrit 
+le message-buffer chiffré. On utilise alors un tube anonyme qui va envoyer le buffer à son père (processus\_directeur). \newline
+Quand on arrive dans le père (processus\_directeur), si le message était à déchiffrer, alors on lit dans le tube anonyme le buffer 
+(envoyé par son fils) puis on l'affiche dans le terminal.
+
+\section{Alternatives du projet}
+
+Pour le projet, nous n'avons pas utilisé de mutex pour la sécurisation du buffer. En effet, en vue de l'implémentation du projet, 
+les threads manipulent directement le buffer grâce au pointeur sur celui-ci et chaque thread manipule un intervalle particulier. Du coup, 
+il n'y a pas vraiment de variable critique. 
+
+\end{document}

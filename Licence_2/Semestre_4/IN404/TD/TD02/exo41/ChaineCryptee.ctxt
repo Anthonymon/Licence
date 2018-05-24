@@ -1,0 +1,16 @@
+#BlueJ class context
+comment0.params=c\ decalage
+comment0.target=char\ decaleCaractere(char,\ int)
+comment1.params=chaine1\ key1
+comment1.target=ChaineCryptee(java.lang.String,\ int)
+comment1.text=\n\ Constructor\ for\ objects\ of\ class\ ChaineCryptee\n
+comment2.params=s\ i
+comment2.target=ChaineCryptee\ FromCrypted(java.lang.String,\ int)
+comment3.params=s\ i
+comment3.target=ChaineCryptee\ FromDecrypted(java.lang.String,\ int)
+comment4.params=
+comment4.target=java.lang.String\ decrypte()
+comment4.text=\n\ An\ example\ of\ a\ method\ -\ replace\ this\ comment\ with\ your\ own\n\ \n\ @param\ \ y\ \ \ a\ sample\ parameter\ for\ a\ method\n\ @return\ \ \ \ \ the\ sum\ of\ x\ and\ y\ \n
+comment5.params=
+comment5.target=java.lang.String\ crypte()
+numComments=6

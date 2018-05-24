@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.params=g\ r\ d\ n\ p
+comment0.target=Donneur(java.lang.String,\ java.lang.String,\ int,\ java.lang.String,\ int)
+comment1.params=
+comment1.target=int\ getWeight()
+comment2.params=newWeight
+comment2.target=void\ updateWeight(int)
+comment3.params=
+comment3.target=boolean\ donPossible()
+numComments=4

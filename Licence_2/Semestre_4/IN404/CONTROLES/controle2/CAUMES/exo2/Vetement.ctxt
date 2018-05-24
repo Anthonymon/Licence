@@ -1,0 +1,12 @@
+#BlueJ class context
+comment0.params=i\ t
+comment0.target=Vetement(int,\ int)
+comment1.params=
+comment1.target=int\ getIdentifiant()
+comment2.params=
+comment2.target=int\ getTempMax()
+comment3.params=temperature
+comment3.target=boolean\ repasser(int)
+comment4.params=
+comment4.target=java.lang.String\ toString()
+numComments=5

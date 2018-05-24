@@ -1,0 +1,12 @@
+#BlueJ class context
+comment0.params=name
+comment0.target=Client(java.lang.String)
+comment0.text=\n\ Constructor\ for\ objects\ of\ class\ Client\n
+comment1.params=serv
+comment1.target=boolean\ seConnecter(in404.serveur.Serveur)
+comment1.text=\n\ An\ example\ of\ a\ method\ -\ replace\ this\ comment\ with\ your\ own\n\ \n\ @param\ \ y\ \ \ a\ sample\ parameter\ for\ a\ method\n\ @return\ \ \ \ \ the\ sum\ of\ x\ and\ y\ \n
+comment2.params=message
+comment2.target=void\ envoyer(java.lang.String)
+comment3.params=message
+comment3.target=java.lang.String\ recevoir(java.lang.String)
+numComments=4

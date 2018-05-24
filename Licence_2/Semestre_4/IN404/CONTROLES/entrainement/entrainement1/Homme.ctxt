@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.params=g\ r\ d\ n\ p\ pp
+comment0.target=Homme(java.lang.String,\ java.lang.String,\ int,\ java.lang.String,\ java.lang.String,\ int)
+comment0.text=\n\ Constructor\ for\ objects\ of\ class\ Homme\n
+comment1.params=
+comment1.target=boolean\ don_possible()
+numComments=2

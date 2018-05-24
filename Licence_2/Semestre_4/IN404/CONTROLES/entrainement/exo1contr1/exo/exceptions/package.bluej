@@ -1,0 +1,23 @@
+#BlueJ package file
+objectbench.height=100
+objectbench.width=381
+package.editor.height=400
+package.editor.width=560
+package.editor.x=328
+package.editor.y=114
+package.numDependencies=0
+package.numTargets=2
+package.showExtends=true
+package.showUses=true
+target1.height=62
+target1.name=formationException
+target1.type=PackageTarget
+target1.width=160
+target1.x=300
+target1.y=150
+target2.height=62
+target2.name=employeException
+target2.type=PackageTarget
+target2.width=150
+target2.x=50
+target2.y=150

@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.params=prenom\ nom\ age
+comment0.target=Employe(java.lang.String,\ java.lang.String,\ int)
+comment0.text=\n\ Initialise\ un\ employ\u00E9\ avec\ un\ pr\u00E9nom\ et\ un\ nom.\n\ \n\ @param\ prenom\ le\ pr\u00E9nom\ de\ l'employ\u00E9\n\ @param\ nom\ \ \ \ le\ nom\ de\ l'employ\u00E9\n\ @param\ age\ \ \ \ l'age\ de\ l'employ\u00E9\n
+comment1.params=
+comment1.target=java.lang.String\ toString()
+comment1.text=\n\ Retourne\ une\ cha\u00EEne\ de\ caract\u00E8res\ repr\u00E9sentant\ l'employ\u00E9.\n\ Le\ format\ utilis\u00E9\ est\ "nom\ pr\u00E9nom".\n\ \n\ @return\ une\ cha\u00EEne\ contenant\ le\ pr\u00E9nom\ suivi\ du\ nom\ de\ l'employ\u00E9\n
+numComments=2

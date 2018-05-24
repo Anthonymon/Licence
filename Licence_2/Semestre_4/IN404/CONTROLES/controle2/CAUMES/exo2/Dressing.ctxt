@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.params=
+comment0.target=Dressing()
+comment1.params=v
+comment1.target=void\ setElement(Vetement)
+comment2.params=
+comment2.target=java.lang.String\ toString()
+numComments=3

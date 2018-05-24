@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.params=
+comment0.target=Student()
+comment0.text=\n\ Create\ a\ student\ with\ default\ settings\ for\ detail\ information.\n
+comment1.params=name\ yearOfBirth\ studentID
+comment1.target=Student(java.lang.String,\ int,\ java.lang.String)
+comment1.text=\n\ Create\ a\ student\ with\ given\ name,\ year\ of\ birth\ and\ student\ ID\n
+comment2.params=
+comment2.target=java.lang.String\ getStudentID()
+comment2.text=\n\ Return\ the\ stident\ ID\ of\ this\ student.\n
+comment3.params=
+comment3.target=java.lang.String\ toString()
+comment3.text=\n\ Return\ a\ string\ representation\ of\ this\ object.\n
+numComments=4

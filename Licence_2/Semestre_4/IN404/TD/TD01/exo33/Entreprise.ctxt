@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.params=nom
+comment0.target=Entreprise(java.lang.String)
+comment0.text=\n\ Initialise\ l'entreprise\ avec\ son\ nom.\n\ \n\ @param\ nom\ le\ nom\ de\ l'entreprise\n
+comment1.params=emp
+comment1.target=void\ embauche(Employe)
+comment1.text=\n\ L'entreprise\ embauche\ un\ nouvel\ employ\u00E9.\n\ \n\ @param\ \ emp\ l'employ\u00E9\ \u00E0\ embaucher\n
+comment2.params=
+comment2.target=java.lang.String\ toString()
+numComments=3

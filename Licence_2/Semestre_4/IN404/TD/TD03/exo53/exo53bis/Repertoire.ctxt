@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.params=nom
+comment0.target=Repertoire(java.lang.String)
+comment0.text=\n\ Constructor\ for\ objects\ of\ class\ Repertoire\n
+comment1.params=
+comment1.target=java.lang.String\ getNom()
+comment2.params=
+comment2.target=int\ getTaille()
+comment3.params=
+comment3.target=java.util.ArrayList\ getContenu()
+comment4.params=d
+comment4.target=void\ ajoute(Element)
+numComments=5

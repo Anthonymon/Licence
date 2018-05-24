@@ -1,0 +1,545 @@
+%Fin !TEX encoding = UTF-8 Unicode
+\documentclass{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\setlength{\topmargin}{-1.54cm}
+\setlength{\oddsidemargin}{-0.04cm}
+\setlength{\evensidemargin}{-0.04cm}
+\setlength{\textwidth}{17cm}
+\setlength{\textheight}{23cm}
+\usepackage{graphics}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\hypersetup{
+hyperindex=true,    %ajoute des liens dans les index.
+colorlinks=true,    %colorise les liens
+breaklinks=true,    %permet le retour à la ligne dans les liens trop longs
+urlcolor= blue,     %couleur des hyperliens
+linkcolor= blue,    %couleur des liens internes
+bookmarks=true,     %crée des signets pour Acrobat
+}
+
+\usepackage{verbatim}
+\usepackage{color}
+\usepackage{xcolor}
+\usepackage{mdframed}
+\definecolor{purple}{rgb}{0.5,0,0.5}
+\definecolor{shadecolor}{gray}{0.85}
+\newcommand\code[1]{
+\begin{mdframed}[linecolor=purple,backgroundcolor=blue!10]
+{\tt
+#1
+}
+\end{mdframed}
+}
+
+\title{Manuel de la librairie \texttt{uvsqgraphics}}
+\author{\href{mailto:Franck.Quessette@uvsq.fr?Subject=uvsqgraphics}{Franck.Quessette@uvsq.fr}}
+\date{Novembre 2016\\\includegraphics{uvsq-logo.jpg}}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\chapter{Introduction}
+Cette librairie en langage C est basée sur la version 1.2 de librairie SDL (\href{https://www.libsdl.org}{www.libsdl.org}).
+Elle permet de s'initier au langage C sans se soucier des entrées sorties, qui sont essentiellement graphiques.
+
+Une documentation de la librairie SDL 1.2 est disponible sur le site \href{https://www.libsdl.org/release/SDL-1.2.15/docs/}{www.libsdl.org/release/SDL-1.2.15/docs/}.
+
+Dans ce document est présenté au chapitre~\ref{chap:inst} comment installer la librairie sous Linux. Le chapitre~\ref{chap:manuel} décrit l'ensemble des fonctions disponibles. Le chapitre~\ref{chap:exemple} donne un exemple complet.
+
+\chapter{Manuel de l'utilisateur\label{chap:manuel}}
+\section{Types, Variables, Constantes}
+
+\subsection{Types}
+Le type \texttt{POINT} permet de stocker les coordonnées d'un point.
+\code{
+typedef struct point \{int x,y;\} POINT; \\
+typedef Uint32 COULEUR; \\
+typedef int BOOL;
+}
+
+\subsection{Variables}
+La largeur et la hauteur de la fenêtre graphique.
+\code{
+int WIDTH; \\
+int HEIGHT; \\
+\#define HAUTEUR\_FENETRE HEIGHT\\
+\#define LARGEUR\_FENETRE WIDTH
+}
+
+\noindent
+Les variables \texttt{WIDTH} et \texttt{HEIGHT} sont initialisées lors de l'appel à \texttt{init\_graphics()}.
+
+\subsection{Constantes}
+
+Les 16 couleurs en français et 140 en anglais (voir la liste en annexe).
+Quelques couleurs de base en français:
+\code{
+\#define noir~~~ 0x000000 \\
+\#define gris~~~ 0x777777 \\
+\#define blanc~~ 0xffffff \\
+\#define rouge~~ 0xff0000 \\
+\#define vert~~~ 0x00ff00 \\
+\#define bleu~~~ 0x0000ff \\
+\#define jaune~~ 0x00ffff \\
+\#define cyan~~~ 0xffff00 \\
+\#define magenta 0xff00ff
+}
+
+Les constantes booléennes:
+\code{
+\#define TRUE 1 \\
+\#define True 1 \\
+\#define true 1 \\
+\#define FALSE 0 \\
+\#define False 0 \\
+\#define false 0 
+}
+
+
+\section{Affichage}
+\subsection{Initialisation de la fenêtre graphique}
+
+\code{
+void init\_graphics(int W, int H);
+}
+
+\subsection{Affichage automatique ou manuel}
+\label{sec:aam}
+Il y a deux modes d'affichage, automatique ou non. Quand l'affichage 
+automatique est activé, chaque dessin d'objet s'affiche automatiquement. 
+Quand il n'est pas automatique c'est l'appel à la fonction:
+\code{
+void affiche\_all();
+}
+qui affiche les objets.
+
+Pour basculer de l'affichage automatique au non automatique, il y a 
+deux fonctions:
+\code{
+void affiche\_auto\_on(); \\
+void affiche\_auto\_off();
+}
+Sur les ordinateurs lents, il vaut mieux ne pas afficher 
+les objets un par un, mais les afficher que quand c'est nécessaire.
+C'est aussi utile pour avoir un affichage plus fluide quand on fait
+des animations.
+
+Par défaut on est en mode automatique.
+
+\subsection{Création de couleur\label{sec:coul}}
+La fonction
+\code{
+COULEUR couleur\_RGB(int r, int g, int b);
+}
+prend en argument les 3 composantes rouge (\texttt{r}), vert (\texttt{g})
+et bleue (\texttt{b}) qui doivent être comprises
+dans l'intervalle~$[0..256[$ et renvoie la couleur.
+
+
+\section{Gestion du clavier et de la souris}
+\subsection{Clavier}
+La fonction (écrite par Yann Strozecki)
+\code{
+int get\_key();
+}
+renvoie le code ascii du caractère de la dernière touche du clavier qui a été pressée.
+Si aucune touche n'a été pressée, renvoie -1.
+Cette fonction est non bloquante.
+
+Si depuis le dernier appel à la fonction:
+\code{
+POINT get\_arrow();
+}
+il y a eu $n_g$ appuis sur la flèche gauche, $n_d$ appuis sur la flèche droite
+$n_h$ appuis sur la flèche haut et $n_b$ appuis sur la flèche bas.
+Le point renvoyé vaudra en \texttt{x} $=n_d-n_g$ et en \texttt{y} $=n_h-n_b$.
+
+Cette fonction est non bloquante, c'est à dire que si aucune flèche n'a été
+appuyée les champs \texttt{x} et \texttt{y} vaudront~0.
+
+\subsection{Déplacements la souris}
+La fonction:
+\code{
+POINT get\_mouse();
+}
+renvoie le déplacement de souris avec la même sémantique que 
+\texttt{POINT get\_arrow();}. Cette fonction est non bloquante:
+si la souris n'a pas bougé les champs \texttt{x} et \texttt{y} vaudront 0.
+
+\subsection{Clics de la souris}
+La fonction:
+\code{
+POINT wait\_clic();
+}
+attend que l'utilisateur clique avec le bouton gauche de la souris
+et renvoie les coordonnées du point cliqué. Cette fonction est bloquante.
+
+La fonction:
+\code{
+POINT wait\_clic\_GMD(char *button);
+}
+attend que l'utilisateur clique  et renvoie dans \texttt{button} le bouton cliqué:
+\texttt{G} pour gauche, \texttt{M} pour milieu et \texttt{D} pour droit.
+Cette fonction est bloquante.
+
+La fonction (écrite par Yann Strozecki):
+\code{
+POINT get\_clic();
+}
+renvoie la position du dernier clic de souris.
+Si le bouton gauche n'a pas été pressée, renvoie $(-1,-1)$.
+Cette est fonction non bloquante.
+
+La fonction (écrite par Pierre Coucheney et Franck Quessette)
+\code{
+int wait\_key\_arrow\_clic (char *touche, int *fleche, POINT *P);
+}
+renvoie une des trois constantes \texttt{EST\_FLECHE}, \texttt{EST\_TOUCHE} ou \texttt{EST\_CLIC} selon l'action effectuée.
+Selon l'action, un des trois argument est modifié, les autres sont inchangés.
+\begin{itemize}
+\item Si une flèche est appuyée, la valeur mise dans l'argument \texttt{*fleche} est une des quatre constantes \texttt{FLECHE\_GAUCHE},
+\texttt{FLECHE\_DROITE}, \texttt{FLECHE\_HAUT} ou \texttt{FLECHE\_BAS}.
+\item Si une touche est appuyée, la valeur mise dans l'argument \texttt{*touche} est la lettre majuscule correspondant à la touche.
+\item Si un clic est effectuée, les valeurs mises dans l'argument \texttt{*P} sont les coordonnées du point cliqué.
+\end{itemize}
+Cette fonction est bloquante tant qu'une des trois actions n'a pas été effectuée.
+
+\subsection{Fin de programme}
+
+La fonction:
+\code{
+POINT wait\_escape();
+}
+attend que l'on tape la touche \texttt{Echap} ou \texttt{esc} et termine le programme.
+
+\section{Dessin d'objets}
+Cette fonction remplit tout l'écran de la couleur en argument:
+\code{
+void fill\_screen(COULEUR coul);
+}
+
+Les fonctions ci-dessous dessinent l'objet dont elle porte le nom.
+Quand le nom de la fonction contient \texttt{fill}, l'intérieur est également
+colorié.
+\code{
+void pixel(POINT p, COULEUR coul);\\
+void draw\_line(POINT p1, POINT p2, COULEUR coul);
+
+\vspace{3mm}
+\noindent
+void draw\_rectangle(POINT p1, POINT p2, COULEUR coul); \\
+void draw\_fill\_rectangle(POINT p1, POINT p2, COULEUR coul);
+
+\vspace{3mm}
+\noindent
+void draw\_circle(POINT centre, int rayon, COULEUR coul);\\
+void draw\_fill\_circle(POINT centre, int rayon, COULEUR coul);
+
+\vspace{3mm}
+\noindent
+void draw\_triangle(POINT p1, POINT p2, POINT p3, COULEUR coul);\\
+void draw\_fill\_triangle(POINT p1, POINT p2, POINT p3, COULEUR coul);
+
+\vspace{3mm}
+\noindent
+void draw\_ellipse(POINT f1, POINT f2, int r, COULEUR coul);\\
+void draw\_fill\_ellipse(POINT f1, POINT f2, int r, COULEUR coul);
+}
+
+
+\section{Écriture de texte}
+Pour l'affichage de texte; il n'y a qu'une seule police: verdana.
+La police peut-être changée dans le fichier \texttt{graphics.h},
+mais nécessite ensuite une recompilation de la librairie et une reinstallation.
+
+Pour les lettres accentuées, il faut respecter l'encodage ttf.
+Pour ce faire on peut utiliser les contantes définies (voir annexe).
+Par exemple:
+\code{
+char *s = "Cha"icirc"ne de caract"egrave"re";
+}
+\texttt{icirc} vaut la chaîne \texttt{"\textbackslash xee"} qui est \texttt{î} et on utilise la concaténation
+de constantes de type chaînes de caractère.
+
+L'écriture se fait avec la fonction:
+\code{
+void aff\_pol(char *a\_ecrire, int taille, POINT hg, COULEUR coul);
+}
+\begin{itemize}
+\item \texttt{a\_ecrire} est la chaîne de caractère contenant le texte à écrire;
+\item \texttt{taille} est la taille de la police;
+\item \texttt{hg} fourni les coordonnées en haut à gauche où sera positionnée le texte;
+\item \texttt{coul} est la couleur d'écriture.
+\end{itemize}
+
+La même chose mais en donnant le point central du texte et non plus
+le point en haut à hauche:
+\code{
+void aff\_pol\_centre(char *a\_ecrire, int taille, POINT centre, COULEUR coul);
+}
+
+Pour positionner comme on le souhaite un texte, les deux fonctions:
+\code{
+int largeur\_texte(char *a\_ecrire, int taille);\\
+int hauteur\_texte(char *a\_ecrire, int taille);
+}
+renvoie la largeur et la hauteur, en pixels, du texte à écrire.
+
+Le style peut être changé grâce à la fonction
+\code{
+void pol\_style(int style);
+}
+Les styles possibles sont : \texttt{NORMAL}, \texttt{GRAS}, \texttt{ITALIQUE} et 
+\texttt{SOULIGNE}. Le style est appliqué jusqu'au prochain appel de la fonction.
+Au départ le style est \texttt{NORMAL}.
+
+La fonction ci-dessous affiche directement un entier sans avoir 
+à le mettre dans une chaîne de caractères:
+\code{
+void aff\_int(int n, int taille, POINT p, COULEUR C);
+}
+
+Les fonctions suivantes affichent dans la fenêtre graphique comme dans 
+une fenêtre shell. Commence en haut et se termine en bas mais il n'y a
+pas de scroll. La police est de taille 20 et de couleur blanc.
+
+\'Ecriture d'une chaîne de caractères, d'un entier, d'un flottant ou d'un booléen:
+\code{
+void write\_text(char *a\_ecrire);\\
+void write\_int(int n);\\
+void write\_float(float x);\\
+void write\_bool(BOOL b);
+}
+
+La fonction:
+\code{
+void writeln();
+}
+effectue un retour à la ligne.
+
+\section{Lecture d'entier}
+Renvoie d'un entier tapé au clavier. 
+\code{
+int lire\_entier\_clavier();
+}
+Cette fonction est bloquante
+
+
+\section{Gestion du temps}
+
+\subsection{Chronomètre}
+Ce chronomètre est précis à la microseconde.
+Il y a deux fonctions, l'une démarre le chrono:
+\code{
+void chrono\_start();
+}
+De plus, elle remet le chrono à zéro s'il a déjà été démarré.
+La fonction:
+\code{
+float chrono\_lap();
+}
+renvoie la valeur courante du chrono sans l'arrêter.
+Elle peut donc être appelée autant de fois que nécéssaire.
+
+\subsection{Attendre}
+Attend le nombre de millisecondes passé en argument:
+\code{
+void attendre(int millisecondes);
+}
+
+\subsection{L'heure}
+Renvoie la valeur de l'heure courante:
+\code{
+int heure();
+}
+
+Renvoie la valeur de l'heure courante:
+\code{
+int minute();
+}
+
+Renvoie le nombre de secondes à la microseconde près:
+\code{
+float seconde();
+}
+
+\section{Valeur aléatoires}
+Renvoie d'un \texttt{float} uniformément distribué dans l'intervalle $[0;1[$:
+\code{
+float alea\_float();
+}
+
+Renvoie d'un \texttt{int} uniformément distribué dans l'intervalle $[0..N[$
+soit $N$ valeurs différentes de 0 à $N-1$:
+\code{
+int alea\_int(int N);
+}
+
+\section{Divers}
+Calcule de la distance entre deux points:
+\code{
+float distance(POINT P1, POINT P2);
+}
+
+\chapter{Installation, compilation et Makefile\label{chap:inst}}
+\section{Installation}
+L'installation se fait dans une fenêtre shell sur une machine linux ubuntu.
+\begin{enumerate}
+\item récupérer le fichier \texttt{UVSQ\_graphics.zip}\\
+\hspace*{-5mm}\url{http://e-campus2.uvsq.fr/Members/franques/Fichiers/element_view?idElement=uvsq-graphics.zip}
+\item puis décompresser et aller dans le dossier \texttt{UVSQ\_graphics}:
+\code{
+\$> unzip UVSQ\_graphics.zip\\
+\$> cd UVSQ\_graphics
+}
+\item enfin, installer:
+\code{
+\$> make install
+}
+\end{enumerate}
+
+\section{Compilation simple}
+Si tout le programme est dans un seul fichier, la commande de compilation \texttt{makeuvsq} est disponible (après avoir fait l'installation).
+Par exemple pour compiler et exécuter le programme \texttt{demo1.c}, taper:
+\code{
+\$> makeuvsq demo1\\
+\$> ./demo1
+}
+
+\section{Compilation avec Makefile}
+L'exemple ci-dessous montre un projet avec trois fichiers \texttt{affiche.h}, \texttt{affiche.c}, \texttt{principal.c} 
+et le \texttt{Makefile} qui va avec. Ces quatre fichiers sont dans le sous dossier \texttt{Exemple\_compilation} du dossier \texttt{UVSQ\_graphics} décrit dans la section installation ci-dessus.
+
+\vspace{5mm}
+Le fichier \texttt{affiche.h}:
+\code{ \verbatiminput{Exemple_compilation/affiche.h} }
+
+Le fichier \texttt{affiche.c} qui contiennent des fonctions d'affichage qui utilisent la librairie \texttt{uvsqgraphics}:\code{ \verbatiminput{Exemple_compilation/affiche.c} }
+
+Le fichier \texttt{principal.c} qui contient la fonction \texttt{main} et qui appelle des fonctions de \texttt{affiche.h}:
+\code{ \verbatiminput{Exemple_compilation/principal.c} }
+
+Le fichier \texttt{Makefile}:
+\code{ \verbatiminput{Exemple_compilation/Makefile.sanstab} }
+
+\vspace{5mm}
+Commentaires:
+\begin{itemize}
+\item La ligne
+	\code{\#include <uvsqgraphics.h>}
+	au début d'\texttt{affiche.c} permet d'utiliser la librairie \texttt{uvsqgraphics} dans ce fichier.
+\item La commande de compilation de \texttt{affiche.c} est:
+	\code{gcc -c `sdl-config --cflags` affiche.c}
+	qui produit \texttt{affiche.o}.
+\item La commande de compilation de \texttt{principal.c} est:
+	\code{gcc -c `sdl-config --cflags` principal.c}
+	qui produit \texttt{principal.o}.
+\item La command d'édition de lien pour produire l'éxécutable final qui s'appelle \texttt{principal} est:
+	\code{gcc -o principal affiche.o principal.o -luvsqgraphics `sdl-config --libs` -lm -lSDL\_ttf}
+\end{itemize}
+
+Vous pouvez ajouter des options à ces commandes comme \texttt{-g} ou \texttt{-Wall}.
+
+\vspace{5mm}
+\noindent
+\underline{\bf Attention}: \texttt{`sdl-config --cflags`} pour la compilation et \texttt{`sdl-config --libs`} pour l'édition de liens sont entourés de back quotes (apostrophes à l'envers).
+Dans les deux cas, c'est la commande \texttt{sdl-config} qui est exécutée, seule l'option change. Ces commandes permettent d'inclure la librairie SDL.
+Sur une machine lubuntu 64 bits ces commandes donnent:
+\code{
+\$> sdl-config --cflags\\
+-I/usr/include/SDL -D\_GNU\_SOURCE=1 -D\_REENTRANT\\
+\$> sdl-config --libs\\
+-L/usr/lib/x86\_64-linux-gnu -lSDL
+}
+On pourrait donc mettre
+\code{-I/usr/include/SDL -D\_GNU\_SOURCE=1 -D\_REENTRANT}
+au lieu de
+\code{`sdl-config --cflags`}
+dans la commande de compilation. Ce serait néanmoins moins bien du point de vue de la portabilité.
+
+\vspace{5mm}
+La commande d'édition de lien inclus en plus la libraire \texttt{uvsqgraphics} avec l'option \texttt{-luvsqgraphics}, 
+la librairie mathématique avec l'option \texttt{-lm} et la librairie SDL spécialisé dans l'écriture de texte avec l'option 
+\texttt{-lSDL\_ttf}. L'ordre dans lequel ces options sont mises est important.
+
+
+\section{Exemple complet avec Makefile}
+Le fichier \texttt{affiche.h} \code{ \verbatiminput{Exemple_compilation/affiche.h} }
+
+Le fichier \texttt{affiche.c} \code{ \verbatiminput{Exemple_compilation/affiche.c} }
+
+Le fichier \texttt{principal.c} \code{ \verbatiminput{Exemple_compilation/principal.c} }
+
+Le fichier \texttt{Makefile} \code{ \verbatiminput{Exemple_compilation/Makefile.sanstab} }
+
+\chapter{Un exemple\label{chap:exemple}}
+Le fichier \texttt{demo1.c}:
+\code{
+\verbatiminput{demo1.c}
+}
+
+\newcommand\letac[2]{\#define #1 "\textbackslash #2"\\}
+\newcommand\letacfin[2]{\#define #1 "\textbackslash #2"}
+
+\appendix
+\chapter{Annexes}
+\section{Liste des caractères accentués}
+La dénomination est identique à celle utilisée en html.
+\code{
+\begin{tabular}{|c|l|}
+\hline
+à   & \letac{agrave}{xe0}
+\'a & \letac{aacute}{xe1}
+â   & \letac{acirc~}{xe2}
+ä   & \letac{auml~~}{xe4}
+ç   & \letac{ccedil}{xe7}
+è   & \letac{egrave}{xe8}
+é   & \letac{eacute}{xe9}
+ê   & \letac{ecirc~}{xea}
+ë   & \letac{euml~~}{xeb}
+î   & \letac{icirc~}{xee}
+ï   & \letac{iuml~~}{xef}
+ô   & \letac{ocirc~}{xf4}
+ù   & \letac{ugrave}{xf9}
+û   & \letac{ucirc~}{xfb}
+ü   & \letac{uuml~~}{xfc}
+\c{C} & \letac{Ccedil}{xc7}
+È   & \letac{Egrave}{xc8}
+\'E & \letac{Eacute}{xc9}
+Ê   & \letac{Ecirc~}{xca}
+\hline
+\end{tabular}
+}
+
+\section{Liste des codes de couleur en français}
+\code{
+\#define~argent~~~~~0xC0C0C0\\
+\#define~blanc~~~~~~0xFFFFFF\\
+\#define~bleu~~~~~~~0x0000FF\\
+\#define~bleumarine~0x000080\\
+\#define~citronvert~0x00FF00\\
+\#define~cyan~~~~~~~0x00FFFF\\
+\#define~magenta~~~~0xFF00FF\\
+\#define~gris~~~~~~~0x808080\\
+\#define~jaune~~~~~~0xFFFF00\\
+\#define~marron~~~~~0x800000\\
+\#define~noir~~~~~~~0x000000\\
+\#define~rouge~~~~~~0xFF0000\\
+\#define~sarcelle~~~0x008080\\
+\#define~vert~~~~~~~0x00FF00\\
+\#define~vertclair~~0x008000\\
+\#define~vertolive~~0x808000\\
+\#define~violet~~~~~0x800080
+}
+
+\section{Liste des noms des couleurs disponibles en français et en anglais}
+La section~\ref{sec:coul} explique comment créer de nouvelles couleurs.
+
+\centerline{\href{http://fr.wikipedia.org/wiki/Liste_de_couleurs}{\includegraphics[height=0.8\textheight]{les_couleurs.png}}}
+
+\url{http://fr.wikipedia.org/wiki/Liste_de_couleurs}
+\end{document}

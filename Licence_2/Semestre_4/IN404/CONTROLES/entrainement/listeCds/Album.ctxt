@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.params=
+comment0.target=Album()
+comment1.params=c
+comment1.target=void\ nouveauCd(Cd)
+comment2.params=
+comment2.target=void\ afficheAlbum()
+comment3.params=
+comment3.target=void\ tri()
+numComments=4

@@ -1,0 +1,12 @@
+#BlueJ class context
+comment0.params=
+comment0.target=int\ getSommet()
+comment1.params=
+comment1.target=java.lang.Object[]\ getContenu()
+comment2.params=taille
+comment2.target=Pile(int)
+comment3.params=o
+comment3.target=void\ empile(java.lang.Object)
+comment4.params=
+comment4.target=java.lang.Object\ depile()
+numComments=5

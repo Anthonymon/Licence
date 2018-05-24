@@ -1,0 +1,16 @@
+#BlueJ class context
+comment0.params=nom\ prenom
+comment0.target=Employe(java.lang.String,\ java.lang.String)
+comment1.params=nom\ prenom\ phone
+comment1.target=Employe(java.lang.String,\ java.lang.String,\ java.lang.String)
+comment2.params=phone
+comment2.target=void\ setPhone(java.lang.String)
+comment3.params=
+comment3.target=java.lang.String\ getNom()
+comment4.params=
+comment4.target=java.lang.String\ getPrenom()
+comment5.params=
+comment5.target=java.lang.String\ getPhone()
+comment6.params=f
+comment6.target=boolean\ addFormation(exo.formation.Formation)
+numComments=7

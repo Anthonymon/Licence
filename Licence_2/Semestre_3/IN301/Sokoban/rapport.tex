@@ -1,0 +1,89 @@
+% Clément CAUMES 21501810
+% 09 janvier 2017
+% PROJET SOKOBAN
+
+% Fichier de rapport du projet SOKOBAN
+
+\documentclass[a4]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+
+\author{Clément Caumes 21501810}
+\title{Rapport du projet Sokoban}
+\date{09 janvier 2017}
+
+\begin{document}
+\maketitle
+
+\section{Description des structures de données}
+\subsection{struct casePlateau ou CASE}
+La structure \textbf{CASE} a deux champs qui correspondent aux différentes possibilités de ce que contient la case.
+Deux champs étaient nécessaires car il fallait gérer la superposition d'éléments.
+Le champ \textit{natureCase} peut contenir soit \emph{VIDE}, soit \emph{MUR}, soit \emph{EMPLACEMENT\textunderscore CAISSE}.
+Le champ \textit{natureElem} peut contenir soit \emph{PERSO}, soit \emph{CAISSE}, soit \emph{PAS\textunderscore ELEM}.
+
+\subsection{struct positionPerso ou POSITIONPERSO}
+La structure \textbf{POSITIONPERSO} correspond à la position du personnage sur le plateau. 
+Si le personnage n'est pas positionné (lors de l'interface de création) alors les champs \textit{x} et \textit{y} contiennent les valeurs \emph{INDEFINI}.
+
+\subsection{struct plateau ou PLATEAU}
+La structure \textbf{PLATEAU} possède un champ \textit{CASE** T} qui est un tableau dynamique du plateau à 2 dimensions, 
+un champ \textit{POSITIONPERSO} pour stocker la position du personnage, un champ d'entiers nbCases qui correspond au nombre de cases sur une ligne du plateau.
+Le nombre de cases réelles du plateau sera donc $nbCases \times nbCases$. Il y a un champ tailleCases qui est la taille des cases dans le plateau. 
+
+\subsection{struct elem et HISTORIQUE}
+La structure \textbf{HISTORIQUE} contient deux piles. Un élément d'une pile correspond à un \textit{PLATEAU} p, à
+un entier nbCoups (égal au toucher de caisses) et à un pointeur vers l'élément suivant.
+
+\subsection{struct actionCreation ou ACTIONCREATION}
+La structure \textbf{ACTIONCREATION} correspond à l'état du sokoban lorsque l'utilisateur est en train de créer son propre niveau. 
+Il possède un champ d'entiers mode qui peut être soit \emph{MODE\textunderscore EDITION} (lors de la création du niveau) soit \emph{MODE\textunderscore RESOLUTION} (lors du jeu à l'envers) soit \emph{MODE\textunderscore QUITTER}. 
+Il y a aussi un tableau de caractères nomFichier qui contient le nom du fichier que l'utilisateur a tapé dans la ligne de commande. 
+Enfin, il y a un \textit{PLATEAU} qui sera fixe lors de la création.
+
+\subsection{struct actionJeu ou ACTIONJEU}
+La structure \textbf{ACTIONJEU} correspond à l'état du sokoban lorsque l'utilisateur est en train de jouer à une partie d'un fichier.
+Il possède un champ d'entier mode qui peut être \emph{MODE\textunderscore JEU} (quand on joue au Sokoban) ou \emph{MODE\textunderscore QUITTER}.
+Le nomFichier stocke le nom du fichier sur lequel l'utilisateur est en train de jouer. 
+Le num correspond au numéro du niveau en cours de jeu
+Le niveauMax est le niveau maximal du fichier. 
+\textit{HISTORIQUE} h permet de stocker l'historique du niveau en cours de jeu.Le nbCases stocke le nombre de cases en longueur (largeur du plateau de sokoban en cours de jeu).
+
+
+\section{Description des algorithmes complexes}
+\subsection{int teste\textunderscore perso\textunderscore interieur\textunderscore entrepot}
+Ce test renvoie 1 si le personnage est entouré de murs, 0 sinon. Il est composé de 4 sous-fonctions : 
+\begin{itemize}
+\item initialise\textunderscore copie\textunderscore plateau\textunderscore test crée un plateau \textit{pCopie} de même taille que le plateau \textit{plat} en argument et met dans chaque case la valeur \emph{CASE\textunderscore NON\textunderscore TESTEE}.
+\item met\textunderscore valeurs\textunderscore debut \textunderscore test met autour de la case en position du personnage de \textit{plat} les valeurs \emph{CASE\textunderscore TESTEE}.
+\item diffuse\textunderscore valeurs\textunderscore test "transmet" au fur et à mesure la valeur \emph{CASE\textunderscore TESTEE} dans \textit{pCopie} aux cases voisines si elles ne sont pas des murs (de \textit{plat}).
+\item test\textunderscore diffusion\textunderscore valeurs\textunderscore test regarde si les cases des bords du plateau de \textit{pCopie} sont \emph{CASE\textunderscore TESTEE}. Si oui, alors le personnage n'est pas enfermé.
+\end{itemize}
+
+\subsection{PLATEAU calcul\textunderscore plateau\textunderscore niveau}
+Cette fonction renvoie un plateau qui correspond à la lecture du niveau num de \textbf{ACTIONJEU} a.
+D'abord, on initialise un plateau de la taille nbCases en argument. Ensuite, il y a une recherche dans le fichier de a.num.
+Quand on le trouve, on lit à partir de la ligne suivante. Chaque caractère est lu et il y a une incrémentation de \textit{x} et une décrémentation de \textit{y}.
+Mais, à partir du moment où on passe à la ligne dans le fichier, on remet x à 0. 
+Enfin, on retourne le plateau.
+
+
+\section{Améliorations et recherches}
+\begin{itemize}
+\item Si on voulait utiliser un minimum de mémoire, il aurait fallu stocker l'historique sous forme de tableau d'éléments. 
+En effet, ce qui change lorsque l'on joue au sokoban sont les caisses et le personnage. Donc, on aurait pu faire ceci : 
+d'abord, \textbf{ACTIONJEU} possède un champs suplémentaire \textit{PLATEAU pMur} dans lequel il y a le plateau sans les caisses ni le personnage.
+Ensuite, lors de l'initialisation de \textbf{ACTIONJEU}, on compte le nombre d'éléments \textit{nb} (personnage et caisses) ; on crée un tableau dynamique de la taille \textit{nb}.
+Puis, on stocke les éléments. Lors des déplacements, on a juste à modifier le contenu des cases du tableau de l'historique.\newline
+
+\item Pour être le plus réaliste possible, on pourrait créer une fonction supplémentaire qui teste si il y a des caisses ou des emplacements inacessibles pour le personnage. 
+On pourrait la créer sur le même principe que int teste perso interieur entrepot. 
+Et au lieu de tester si il y a des \emph{CASE\textunderscore TESTEE} sur les bords, il faudrait regarder chaque case du tableau. Si il existe une case où il y a caisse non testée alors on retourne 0 sinon 1.\newline
+
+\item Lors de la création du jeu Sokoban, j'ai essayé de trouver les "failles" de mon programme. En effet, j'ai réfléchi au fait que l'utilisateur peut "nuire" au jeu : en essayant un fichier non valide ou avec des niveaux non valides par exemple. 
+C'est pour cela qu'il faut prévoir toutes les actions possibles de l'utilisateur. \newline
+
+\end{itemize}
+
+\end{document}

@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.params=name
+comment0.target=FluxChar(java.lang.String)
+comment1.params=fileName
+comment1.target=int\ nombreL(java.lang.String)
+comment1.text=\n\ Constructor\ for\ objects\ of\ class\ FluxChar\n
+numComments=2

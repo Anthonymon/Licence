@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.params=
+comment0.target=MyMap()
+comment1.params=a\ key
+comment1.target=void\ setElement(java.lang.Integer,\ java.lang.String)
+comment2.params=key
+comment2.target=void\ myPut(int)
+comment3.params=
+comment3.target=void\ listeCles()
+comment4.params=
+comment4.target=void\ listeValeurs()
+comment5.params=
+comment5.target=void\ parcourirMap()
+numComments=6

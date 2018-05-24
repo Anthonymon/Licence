@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.params=
+comment0.target=ListeNombres()
+comment1.params=c
+comment1.target=void\ ajouteListe(int)
+comment2.params=
+comment2.target=java.util.ListIterator\ myIterator()
+comment3.params=
+comment3.target=void\ afficherListe()
+comment4.params=a
+comment4.target=void\ remplace(int)
+comment5.params=debut\ fin
+comment5.target=void\ supprimerElements(int,\ int)
+numComments=6

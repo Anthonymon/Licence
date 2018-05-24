@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.params=
+comment0.target=MoteurRPN()
+comment0.text=\n\ Constructor\ for\ objects\ of\ class\ MoteurRPN\n
+comment1.params=
+comment1.target=void\ getOperandes()
+comment2.params=i
+comment2.target=void\ addOperandes(int)
+comment3.params=a\ b\ k
+comment3.target=double\ appliqueOperation(int,\ int,\ Operation)
+numComments=4
