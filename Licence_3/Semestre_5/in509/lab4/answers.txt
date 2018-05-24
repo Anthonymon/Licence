@@ -1,0 +1,8 @@
+Answers.txt Lab4 Clement Caumes uvsq21501810
+
+1) Le visiteur pour le Sequence AST node fonctionne de deux manières différentes 
+   en fonction des cas :
+   - si la séquence est vide alors le visiteur renvoie () 
+	 car vu que cela ne sera jamais utilisé, nullptr peut être renvoyé sans problème. 
+   - si la séquence n'est pas vide alors chaque expression est acceptée
+	 et la dernière expression évaluée est renvoyée.

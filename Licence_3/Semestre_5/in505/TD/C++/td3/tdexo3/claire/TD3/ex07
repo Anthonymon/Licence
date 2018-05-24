@@ -1,0 +1,17 @@
+#include "CString.h"
+#include <iostream>
+using namespace std;
+
+class Definition{
+	CSting clef, def;
+	
+	Definition(char* CLEF, char* DEF);
+
+
+}
+
+int main(){
+	Definition homer("Homer", "Buveur de biere");
+	cout << "La definition du mot " << homer.getClef() << " est " << homer.getDef() << endl;
+
+}

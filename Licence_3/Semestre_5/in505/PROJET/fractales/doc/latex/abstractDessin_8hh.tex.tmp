@@ -1,0 +1,30 @@
+\hypertarget{abstractDessin_8hh}{}\section{Référence du fichier app/head/abstract\+Dessin.hh}
+\label{abstractDessin_8hh}\index{app/head/abstract\+Dessin.\+hh@{app/head/abstract\+Dessin.\+hh}}
+
+
+contient la defintion de la classe \hyperlink{classAbstractDessin}{Abstract\+Dessin}  
+
+
+{\ttfamily \#include $<$Qt\+Open\+GL$>$}\newline
+{\ttfamily \#include $<$Q\+G\+L\+Widget$>$}\newline
+{\ttfamily \#include \char`\"{}../head/fractale.\+hh\char`\"{}}\newline
+Graphe des dépendances par inclusion de abstract\+Dessin.\+hh\+:
+% FIG 0
+Ce graphe montre quels fichiers incluent directement ou indirectement ce fichier \+:
+% FIG 1
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classAbstractDessin}{Abstract\+Dessin}
+\end{DoxyCompactItemize}
+
+
+\subsection{Description détaillée}
+contient la defintion de la classe \hyperlink{classAbstractDessin}{Abstract\+Dessin} 
+
+\begin{DoxyAuthor}{Auteur}
+\{Clement Caumes Doudouh Yassin\} 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+9 janvier 2018 
+\end{DoxyDate}

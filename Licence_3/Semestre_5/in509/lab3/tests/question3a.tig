@@ -1,0 +1,5 @@
+let 
+var a:=3
+in
+a=a*b
+end

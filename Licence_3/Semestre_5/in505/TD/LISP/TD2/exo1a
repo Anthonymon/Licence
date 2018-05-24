@@ -1,0 +1,12 @@
+(defun diffListe(liste)
+	(
+		cond
+		((null liste) t)
+		((null (cdr liste)) t)
+		( (= (- (car liste) (car (cdr liste))) 1)  (diffListe(cdr liste)))
+		( (= (- (car liste) (car (cdr liste))) -1)  (diffListe(cdr liste)))
+		(t nil)
+	)
+)
+
+

@@ -1,0 +1,56 @@
+\hypertarget{complex_8cc}{}\section{Référence du fichier app/src/complex.cc}
+\label{complex_8cc}\index{app/src/complex.\+cc@{app/src/complex.\+cc}}
+
+
+contient les methodes et les fonctions concernant la classe \hyperlink{classComplex}{Complex}  
+
+
+{\ttfamily \#include \char`\"{}../head/complex.\+hh\char`\"{}}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$cmath$>$}\newline
+Graphe des dépendances par inclusion de complex.\+cc\+:
+% FIG 0
+\subsection*{Fonctions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classComplex}{Complex} \hyperlink{complex_8cc_a3946e00b31192f0b4628357b86131044}{operator+} (const \hyperlink{classComplex}{Complex} \&c1, const \hyperlink{classComplex}{Complex} \&c2)
+\item 
+\hyperlink{classComplex}{Complex} \hyperlink{complex_8cc_aadf4af6aafa8eea50ea802bce62c954c}{operator$\ast$} (const \hyperlink{classComplex}{Complex} \&c1, const \hyperlink{classComplex}{Complex} \&c2)
+\item 
+ostream \& \hyperlink{complex_8cc_a5e4b804850e1746eb3aa84387408b9a2}{operator$<$$<$} (ostream \&os, \hyperlink{classComplex}{Complex} \&c)
+\end{DoxyCompactItemize}
+
+
+\subsection{Description détaillée}
+contient les methodes et les fonctions concernant la classe \hyperlink{classComplex}{Complex} 
+
+\begin{DoxyAuthor}{Auteur}
+\{Clement Caumes Doudouh Yassin\} 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+9 janvier 2018 
+\end{DoxyDate}
+
+
+\subsection{Documentation des fonctions}
+\mbox{\Hypertarget{complex_8cc_aadf4af6aafa8eea50ea802bce62c954c}\label{complex_8cc_aadf4af6aafa8eea50ea802bce62c954c}} 
+\index{complex.\+cc@{complex.\+cc}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!complex.\+cc@{complex.\+cc}}
+\subsubsection{\texorpdfstring{operator$\ast$()}{operator*()}}
+{\footnotesize\ttfamily \hyperlink{classComplex}{Complex} operator$\ast$ (\begin{DoxyParamCaption}\item[{const \hyperlink{classComplex}{Complex} \&}]{c1,  }\item[{const \hyperlink{classComplex}{Complex} \&}]{c2 }\end{DoxyParamCaption})}
+
+Redefinition de l\textquotesingle{}operateur $\ast$ \mbox{\Hypertarget{complex_8cc_a3946e00b31192f0b4628357b86131044}\label{complex_8cc_a3946e00b31192f0b4628357b86131044}} 
+\index{complex.\+cc@{complex.\+cc}!operator+@{operator+}}
+\index{operator+@{operator+}!complex.\+cc@{complex.\+cc}}
+\subsubsection{\texorpdfstring{operator+()}{operator+()}}
+{\footnotesize\ttfamily \hyperlink{classComplex}{Complex} operator+ (\begin{DoxyParamCaption}\item[{const \hyperlink{classComplex}{Complex} \&}]{c1,  }\item[{const \hyperlink{classComplex}{Complex} \&}]{c2 }\end{DoxyParamCaption})}
+
+Redefinition de l\textquotesingle{}operateur +
+
+Surcharge de l\textquotesingle{}operateur + \mbox{\Hypertarget{complex_8cc_a5e4b804850e1746eb3aa84387408b9a2}\label{complex_8cc_a5e4b804850e1746eb3aa84387408b9a2}} 
+\index{complex.\+cc@{complex.\+cc}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!complex.\+cc@{complex.\+cc}}
+\subsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}}
+{\footnotesize\ttfamily ostream\& operator$<$$<$ (\begin{DoxyParamCaption}\item[{ostream \&}]{os,  }\item[{\hyperlink{classComplex}{Complex} \&}]{c }\end{DoxyParamCaption})}
+
+Permet d\textquotesingle{}afficher le complexe avec cout 

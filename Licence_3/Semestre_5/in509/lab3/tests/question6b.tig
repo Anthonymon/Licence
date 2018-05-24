@@ -1,0 +1,8 @@
+let 
+	function f(n : int) = 2*g(n-1)
+	function g(n : int) = 3+f(n-1)+h(3)
+	var a:=0
+	function h(n:int)=n*n
+in 
+	print_int(f(3)) 
+end

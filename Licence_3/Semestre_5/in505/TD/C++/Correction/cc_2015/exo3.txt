@@ -1,0 +1,24 @@
+Question 1
+	L'heritage virtuel permet de préciser que la classe dérivée ne va copier les membres de la classe de base une seule fois
+
+Question2
+	const : rend constant le type juste à sa gauche, s'il y a rien, juste à droite.
+	const int* Eric, pointeur sur un entier constant
+	int* const Nicolas, pointeur constant sur un int
+	const int* const Georges; pointeur constant sur un entier constant
+	*Eric = 100; //erreur, on ne peut pas modifier la valeur referencee
+	*Nicolas = 100; // La valeur pointee par Nicolas est affectee a 100.
+
+Question 3
+	a	Vrai
+	b	Vrai ex Point(int x = 0, int y = 0)
+	c	Vrai, pas obligatoire lorsqu'il n'est pas necessaire (certains types sont init par defaut)
+	d	Vrai
+	e	Faux, (statique, Point p1(2, 3); dynamique, Point * ptr = new Point(2,3);
+
+Question 4
+	a	Vrai, obligatoire que si necessaire ( si on alloue des ressources avec un new dans le constructeur par ex)
+	b	Vrai
+	c	Faux
+	d	Faux
+	e	Faux (appel automatique si creation statique, appel grace a delete si crea dynamique)

@@ -1,0 +1,6 @@
+let 
+	var a := 1 
+in 
+	a := 3; 
+	print_int(a) 
+end

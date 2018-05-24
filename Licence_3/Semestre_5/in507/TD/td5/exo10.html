@@ -1,0 +1,184 @@
+<html> 
+<body> 
+    <h1>La page la plus simple</h1> 
+    <table> 
+        <tr>    <td>(0,0)</td> <td>(0,1)</td>    </tr> 
+        <tr>    <td>(1,0)</td> <td>(1,1)</td>    </tr> 
+</table> 
+<table> 
+        <caption>exemple</caption> 
+        <tr>    <td>(0,0)</td> <td>(0,1)</td>    </tr> 
+        <tr>    <td>(1,0)</td> <td>(1,1)</td>    </tr> 
+</table> 
+<table> 
+        <caption>exemple</caption> 
+        <tr>    <th>col 1</th> <th>col 2</th>    </tr> 
+        <tr>    <td>(0,0)</td> <td>(0,1)</td>    </tr> 
+        <tr>    <td>(1,0)</td> <td>(1,1)</td>    </tr> 
+</table> 
+<table width="80%"> 
+        <caption>exemple</caption> 
+        <tr>    <th>col 1</th> <th>col 2</th>    </tr> 
+        <tr>    <td>(0,0)</td> <td>(0,1)</td>    </tr> 
+        <tr>    <td>(1,0)</td> <td>(1,1)</td>    </tr> 
+</table> 
+<br>
+<table width="80%"> 
+        <caption>exemple</caption> 
+        <tr> 
+                <th align="left">col 1</th> 
+                <th align="left">col 2</th> 
+        </tr> 
+        <tr> 
+                <td align="center">(11,0)</td> 
+                <td align="center">(0,1)</td> 
+        </tr> 
+        <tr> 
+                <td align="center">5</td> 
+                <td align="center">(1,1)</td> 
+        </tr> 
+</table> 
+<hr>
+
+<table width="13%"> 
+        <caption>exemple</caption> 
+        <tr>    <th width="70%">col 1</th> <th>col 2</th> 
+   </tr> 
+        <tr>    <td>(0,0)</td>             <td>(0,1)</td> 
+   </tr> 
+        <tr>    <td>(1,0)</td>             <td>(1,1)</td> 
+   </tr> 
+</table> 
+<hr>
+
+<table width="200"> 
+        <tr> 
+                <td>Un long texte oblige le navigateur 
+                à passer à la ligne.</td> 
+                <td valign="top">vide</td> 
+        </tr> 
+        <tr> 
+                <td valign="bottom">vide</td> 
+                <td>Une grande cellule élargit toutes 
+                les autres sur sa ligne.</td> 
+        </tr> 
+</table> 
+
+<hr>
+
+        <caption>exemple</caption> 
+        <tr> 
+                <th align="left">col 1</th> 
+                <th align="left">col 2</th> 
+        </tr> 
+        <tr> 
+                <td align="center">(0,0)</td> 
+                <td align="center">(0,1)</td> 
+        </tr> 
+        <tr> 
+                <td align="center">(1,0)</td> 
+                <td align="center">(1,1)</td> 
+        </tr> 
+</table> 
+Les balises 
+td
+ et 
+th
+ peuvent elles aussi prendre en argument un attribu
+t 
+width
+. S'il contient 
+un pourcentage, il définit la taille d'une colonne 
+par rapport aux autres. 
+<table witdh="80%"> 
+        <caption>exemple</caption> 
+        <tr>    <th width="70%">col 1</th> <th>col 2</th> 
+   </tr> 
+        <tr>    <td>(0,0)</td>             <td>(0,1)</td> 
+   </tr> 
+        <tr>    <td>(1,0)</td>             <td>(1,1)</td> 
+   </tr> 
+</table> 
+Notez qu'il n'est pas nécessaire de spécifier width
+ sur toutes les cellules d'une colonne, seule 
+la première suffit. 
+Parfois  le  contenu  d'une  cellule  prend  plusieurs  li
+gnes  de  texte.  Dans  ce  cas  les  cellules  se 
+trouvant  sur  la  même  ligne  dans  la  table  se  trouven
+t  élargies  verticalement.  Par  défaut  le 
+navigateur centrera verticalement le texte dans les
+ cellules. Il peut être pratique de changer ce 
+comportement. Ceci est effectué grâce à l'attribut 
+valign 
+des balises 
+td
+ et 
+th
+. Par exemple: 
+<table witdh="200"> 
+        <tr> 
+                <td>Un long texte oblige le navigateur 
+                à passer à la ligne.</td> 
+                <td valign="top">vide</td> 
+        </tr> 
+        <tr> 
+                <td valign="bottom">vide</td> 
+                <td>Une grande cellule élargit toutes 
+                les autres sur sa ligne.</td> 
+        </tr> 
+</table> 
+Il est aussi possible de modifier la couleur de fon
+d d'une table, d'une ligne ou d'une cellule 
+grâce à l'attribut 
+bgcolor
+. Ainsi: 
+
+<hr>
+
+<table witdh="80%" bgcolor="#8888EE"> 
+        <caption>exemple</caption> 
+        <tr bgcolor="#AAAAFF"> 
+                <th>col 1</th> 
+                <th>col 2</th> 
+        </tr> 
+        <tr> 
+                 <td bgcolor="#DDDDCC">(0,0)</td> 
+                <td>(0,1)</td> 
+        </tr> 
+        <tr> 
+                <td>(1,0)</td> 
+                <td bgcolor="#DDDDCC">(1,1)</td> 
+        </tr> 
+</table> 
+
+<hr>
+
+<table > 
+        <caption>exemple</caption> 
+        <tr bgcolor="#AAAAFF"> 
+                <th>City</th> 
+                <th>Points</th> 
+                <th> </th>
+                <th>City</th>
+                <th>Points</th>
+        </tr> 
+        <tr> 
+                 <td align="center">New York</td> 
+                <td align="center">12</td> 
+                <td width="900px"> </td>
+                <td></td>
+        </tr> 
+        <tr> 
+                <td>Chicago</td> 
+                <td>5</td> 
+                <td width="900px"></td>
+        </tr> 
+</table> 
+
+<hr>
+<br>
+<img src="https://s-media-cache-ak0.pinimg.com/originals/a4/b6/75/a4b67567ab692eb1543144f23fed113a.gif">
+
+
+</body> 
+</html> 

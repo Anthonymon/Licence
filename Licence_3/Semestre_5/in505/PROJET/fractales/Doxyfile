@@ -1,0 +1,9 @@
+PROJECT_NAME = "Fractales"
+OUTPUT_DIRECTORY = ./doc/
+EXTRACT_ALL = yes
+EXTRACT_PRIVATE = yes
+EXTRACT_STATIC = yes
+INPUT = ./app/head/ ./app/src/ README.md
+FILE_PATTERNS = 
+RECURSIVE = yes
+OUTPUT_LANGUAGE = French

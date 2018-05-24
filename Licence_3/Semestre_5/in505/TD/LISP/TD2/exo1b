@@ -1,0 +1,14 @@
+(defun diffDo(l)
+	(progn (setf resul t)
+		(loop for x in l
+			  for y in (cdr l)
+				do(if (or(=(- x y) -1)
+						(=(- y x) 1 )
+					  )
+				(setf resul t)
+				(setf resul nil)
+				result)
+		)
+	)
+)
+

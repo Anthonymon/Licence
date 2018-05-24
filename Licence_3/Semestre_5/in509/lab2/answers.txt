@@ -1,0 +1,6 @@
+Code organization CLEMENT CAUMES 21501810
+
+2) Le rôle des fichiers src/ast est de parcourir les éléments d'un Abstract Syntax Tree (AST) 
+   et d'écrire les instructions tiger à partir de celui-ci.
+3) Le rôle de la ligne 122 dans src/parser/tiger_lexer.ll est de renvoyer une erreur si le lexer ne reconnait pas un token,
+   d'où l'affichage du terminal avec "1.1: invalid character".

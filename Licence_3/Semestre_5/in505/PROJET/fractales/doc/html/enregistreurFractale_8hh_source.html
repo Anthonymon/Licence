@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Fractales:  Fichier source de app/head/enregistreurFractale.hh</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Fractales
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_d422163b96683743ed3963d4aac17747.html">app</a></li><li class="navelem"><a class="el" href="dir_b5102c6ec556d9d5555833f0fcbc2722.html">head</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">enregistreurFractale.hh</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="enregistreurFractale_8hh.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div><div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#ifndef ENREGISTREURFRACTALE__HH</span></div><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#define ENREGISTREURFRACTALE__HH</span></div><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;</div><div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;../head/fractale.hh&quot;</span></div><div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;../head/mandelbrot.hh&quot;</span></div><div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;../head/juliaFatou.hh&quot;</span></div><div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &quot;../head/dessinFractaleGL.hh&quot;</span></div><div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &quot;../head/abstractDessin.hh&quot;</span></div><div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;cairommconfig.h&gt;</span></div><div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;cairomm/cairomm.h&gt;</span></div><div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div><div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">using namespace </span><a class="code" href="namespaceCairo.html">Cairo</a>;</div><div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div><div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="classEnregistreurFractale.html">   25</a></span>&#160;<span class="keyword">class </span><a class="code" href="classEnregistreurFractale.html">EnregistreurFractale</a>: <span class="keyword">public</span> <a class="code" href="classAbstractDessin.html">AbstractDessin</a>{</div><div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keyword">private</span>:</div><div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="classEnregistreurFractale.html#abbaf005fa703ee05a79abca7006f3a5e">   27</a></span>&#160;        <span class="keywordtype">double</span> <a class="code" href="classEnregistreurFractale.html#abbaf005fa703ee05a79abca7006f3a5e">largeur</a>; </div><div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="classEnregistreurFractale.html#aa7b368324a887410f6133edfd370fe5c">   28</a></span>&#160;        <span class="keywordtype">double</span> <a class="code" href="classEnregistreurFractale.html#aa7b368324a887410f6133edfd370fe5c">hauteur</a>; </div><div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="classEnregistreurFractale.html#a31b4ca6d0309700e2e6c26087a76d855">   29</a></span>&#160;        <span class="keywordtype">string</span> <a class="code" href="classEnregistreurFractale.html#a31b4ca6d0309700e2e6c26087a76d855">filename</a>; </div><div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="classEnregistreurFractale.html#a4c01839e709dd033364d996aa74bfc01">   30</a></span>&#160;        RefPtr&lt;SvgSurface&gt; <a class="code" href="classEnregistreurFractale.html#a4c01839e709dd033364d996aa74bfc01">surface</a>; </div><div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="classEnregistreurFractale.html#ad7af9f1a310fa61fca30232e655a08cb">   31</a></span>&#160;        RefPtr&lt;Context&gt; <a class="code" href="classEnregistreurFractale.html#ad7af9f1a310fa61fca30232e655a08cb">contexte</a>; </div><div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keyword">public</span>:</div><div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        <a class="code" href="classEnregistreurFractale.html">EnregistreurFractale</a>(<span class="keywordtype">string</span> filename);</div><div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <span class="keywordtype">void</span> enregistrerFractale(<a class="code" href="classDessinFractaleGL.html">DessinFractaleGL</a>&amp; dessin);</div><div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <span class="keywordtype">void</span> dessinePixel(<span class="keywordtype">double</span> x,<span class="keywordtype">double</span> y,<span class="keywordtype">double</span> r,<span class="keywordtype">double</span> g,<span class="keywordtype">double</span> b);</div><div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        ~<a class="code" href="classEnregistreurFractale.html">EnregistreurFractale</a>();</div><div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;};</div><div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div><div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">#endif</span></div><div class="ttc" id="classEnregistreurFractale_html_aa7b368324a887410f6133edfd370fe5c"><div class="ttname"><a href="classEnregistreurFractale.html#aa7b368324a887410f6133edfd370fe5c">EnregistreurFractale::hauteur</a></div><div class="ttdeci">double hauteur</div><div class="ttdef"><b>Definition:</b> enregistreurFractale.hh:28</div></div>
+<div class="ttc" id="classEnregistreurFractale_html_a31b4ca6d0309700e2e6c26087a76d855"><div class="ttname"><a href="classEnregistreurFractale.html#a31b4ca6d0309700e2e6c26087a76d855">EnregistreurFractale::filename</a></div><div class="ttdeci">string filename</div><div class="ttdef"><b>Definition:</b> enregistreurFractale.hh:29</div></div>
+<div class="ttc" id="classEnregistreurFractale_html_abbaf005fa703ee05a79abca7006f3a5e"><div class="ttname"><a href="classEnregistreurFractale.html#abbaf005fa703ee05a79abca7006f3a5e">EnregistreurFractale::largeur</a></div><div class="ttdeci">double largeur</div><div class="ttdef"><b>Definition:</b> enregistreurFractale.hh:27</div></div>
+<div class="ttc" id="classDessinFractaleGL_html"><div class="ttname"><a href="classDessinFractaleGL.html">DessinFractaleGL</a></div><div class="ttdef"><b>Definition:</b> dessinFractaleGL.hh:35</div></div>
+<div class="ttc" id="classAbstractDessin_html"><div class="ttname"><a href="classAbstractDessin.html">AbstractDessin</a></div><div class="ttdef"><b>Definition:</b> abstractDessin.hh:20</div></div>
+<div class="ttc" id="namespaceCairo_html"><div class="ttname"><a href="namespaceCairo.html">Cairo</a></div></div>
+<div class="ttc" id="classEnregistreurFractale_html"><div class="ttname"><a href="classEnregistreurFractale.html">EnregistreurFractale</a></div><div class="ttdef"><b>Definition:</b> enregistreurFractale.hh:25</div></div>
+<div class="ttc" id="classEnregistreurFractale_html_a4c01839e709dd033364d996aa74bfc01"><div class="ttname"><a href="classEnregistreurFractale.html#a4c01839e709dd033364d996aa74bfc01">EnregistreurFractale::surface</a></div><div class="ttdeci">RefPtr&lt; SvgSurface &gt; surface</div><div class="ttdef"><b>Definition:</b> enregistreurFractale.hh:30</div></div>
+<div class="ttc" id="classEnregistreurFractale_html_ad7af9f1a310fa61fca30232e655a08cb"><div class="ttname"><a href="classEnregistreurFractale.html#ad7af9f1a310fa61fca30232e655a08cb">EnregistreurFractale::contexte</a></div><div class="ttdeci">RefPtr&lt; Context &gt; contexte</div><div class="ttdef"><b>Definition:</b> enregistreurFractale.hh:31</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré par &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.13
+</small></address>
+</body>
+</html>

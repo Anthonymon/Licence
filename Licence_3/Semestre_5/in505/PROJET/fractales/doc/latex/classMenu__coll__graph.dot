@@ -1,0 +1,32 @@
+digraph "Menu"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node2 [label="Menu",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node3 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node3 [label="QWidget",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node4 -> Node2 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" fenetreMandelbrot" ];
+  Node4 [label="OngletVide",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classOngletVide.html"];
+  Node3 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node5 -> Node4 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" fenetre" ];
+  Node5 [label="FenetreMandelbrotGL",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classFenetreMandelbrotGL.html"];
+  Node6 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node6 [label="AbstractFenetreGL",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classAbstractFenetreGL.html"];
+  Node3 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node7 -> Node6 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" dessin" ];
+  Node7 [label="DessinFractaleGL",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classDessinFractaleGL.html"];
+  Node8 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node8 [label="QGLWidget",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node9 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node9 [label="AbstractDessin",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classAbstractDessin.html"];
+  Node10 -> Node7 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" fractale" ];
+  Node10 [label="Fractale",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classFractale.html"];
+  Node11 -> Node7 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" camera" ];
+  Node11 [label="PositionCamera",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structPositionCamera.html"];
+  Node12 -> Node2 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" fenetreJuliaFatou" ];
+  Node12 [label="OngletChoix",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classOngletChoix.html"];
+  Node3 -> Node12 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node13 -> Node12 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" fenetre" ];
+  Node13 [label="FenetreJuliaFatouGL",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classFenetreJuliaFatouGL.html"];
+  Node6 -> Node13 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+}

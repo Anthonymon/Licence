@@ -1,0 +1,13 @@
+Clement Caumes uvsq21501810 clement.caumes@ens.uvsq.fr
+
+1)  La méthode qui encapsule le programme dans une fonction principale est 
+	la méthode FunDecl *analyze_program(Expr &) 
+	Elle encapsule le programme dans un principal niveau principal
+	fonction. Ensuite, elle associe chaque identifiant à sa déclaration et 
+	sa profondeur. Cela correspond en effet au rôle du Binder.
+
+2)  Il est nécessaire d'appeler la fonction enter_primitive dans le constructeur du 
+	Binder car certaines méthodes doivent être disponibles dans la portée la plus externe du programme 
+	et ainsi, être reconnu par le langage Tiger. 
+	En effet, ce sont des méthodes prédéfinies du langage Tiger.
+	

@@ -1,0 +1,93 @@
+\hypertarget{classMandelbrot}{}\section{Référence de la classe Mandelbrot}
+\label{classMandelbrot}\index{Mandelbrot@{Mandelbrot}}
+
+
+{\ttfamily \#include $<$mandelbrot.\+hh$>$}
+
+
+
+Graphe d\textquotesingle{}héritage de Mandelbrot\+:
+% FIG 0
+
+
+Graphe de collaboration de Mandelbrot\+:
+% FIG 1
+\subsection*{Fonctions membres publiques}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classMandelbrot_aab7bca81a362bcbfabeae26c3e7fa562}{Mandelbrot} ()
+\item 
+\hyperlink{classMandelbrot_a9c02f4bdf09c40ae7ea17580d5a2a525}{Mandelbrot} (double z)
+\item 
+int \hyperlink{classMandelbrot_afc2cf40855f646200d54c263929d3eca}{calcul\+Fractale} (double x, double y)
+\item 
+void \hyperlink{classMandelbrot_a419baeb8628191ee44f3c82dd3281017}{set\+Partie\+Reelle} (double reel)
+\item 
+void \hyperlink{classMandelbrot_a9649677b1faeff917202845fd697dbe6}{set\+Partie\+Imaginaire} (double img)
+\item 
+\hyperlink{classMandelbrot_a4ffabf508467746a74459b53826504a0}{$\sim$\+Mandelbrot} ()
+\end{DoxyCompactItemize}
+\subsection*{Membres hérités additionnels}
+
+
+\subsection{Description détaillée}
+fractale \hyperlink{classMandelbrot}{Mandelbrot} heritant de \hyperlink{classFractale}{Fractale} auteur\+: Yassin Doudouh 
+
+\subsection{Documentation des constructeurs et destructeur}
+\mbox{\Hypertarget{classMandelbrot_aab7bca81a362bcbfabeae26c3e7fa562}\label{classMandelbrot_aab7bca81a362bcbfabeae26c3e7fa562}} 
+\index{Mandelbrot@{Mandelbrot}!Mandelbrot@{Mandelbrot}}
+\index{Mandelbrot@{Mandelbrot}!Mandelbrot@{Mandelbrot}}
+\subsubsection{\texorpdfstring{Mandelbrot()}{Mandelbrot()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Mandelbrot\+::\+Mandelbrot (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Constructeur sans parametre de \hyperlink{classMandelbrot}{Mandelbrot} \mbox{\Hypertarget{classMandelbrot_a9c02f4bdf09c40ae7ea17580d5a2a525}\label{classMandelbrot_a9c02f4bdf09c40ae7ea17580d5a2a525}} 
+\index{Mandelbrot@{Mandelbrot}!Mandelbrot@{Mandelbrot}}
+\index{Mandelbrot@{Mandelbrot}!Mandelbrot@{Mandelbrot}}
+\subsubsection{\texorpdfstring{Mandelbrot()}{Mandelbrot()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Mandelbrot\+::\+Mandelbrot (\begin{DoxyParamCaption}\item[{double}]{z }\end{DoxyParamCaption})}
+
+Constructeur avec parametre de \hyperlink{classMandelbrot}{Mandelbrot} \mbox{\Hypertarget{classMandelbrot_a4ffabf508467746a74459b53826504a0}\label{classMandelbrot_a4ffabf508467746a74459b53826504a0}} 
+\index{Mandelbrot@{Mandelbrot}!````~Mandelbrot@{$\sim$\+Mandelbrot}}
+\index{````~Mandelbrot@{$\sim$\+Mandelbrot}!Mandelbrot@{Mandelbrot}}
+\subsubsection{\texorpdfstring{$\sim$\+Mandelbrot()}{~Mandelbrot()}}
+{\footnotesize\ttfamily Mandelbrot\+::$\sim$\+Mandelbrot (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Destructeur de \hyperlink{classMandelbrot}{Mandelbrot} Permet de detruire les instances de \hyperlink{classMandelbrot}{Mandelbrot} 
+
+\subsection{Documentation des fonctions membres}
+\mbox{\Hypertarget{classMandelbrot_afc2cf40855f646200d54c263929d3eca}\label{classMandelbrot_afc2cf40855f646200d54c263929d3eca}} 
+\index{Mandelbrot@{Mandelbrot}!calcul\+Fractale@{calcul\+Fractale}}
+\index{calcul\+Fractale@{calcul\+Fractale}!Mandelbrot@{Mandelbrot}}
+\subsubsection{\texorpdfstring{calcul\+Fractale()}{calculFractale()}}
+{\footnotesize\ttfamily int Mandelbrot\+::calcul\+Fractale (\begin{DoxyParamCaption}\item[{double}]{x,  }\item[{double}]{y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Fonction de calcul de \hyperlink{classFractale}{Fractale} en fonction des coordonnees (x,y) 
+
+Implémente \hyperlink{classFractale_a99a54c1b9b847ca24585f469cf03b67a}{Fractale}.
+
+\mbox{\Hypertarget{classMandelbrot_a9649677b1faeff917202845fd697dbe6}\label{classMandelbrot_a9649677b1faeff917202845fd697dbe6}} 
+\index{Mandelbrot@{Mandelbrot}!set\+Partie\+Imaginaire@{set\+Partie\+Imaginaire}}
+\index{set\+Partie\+Imaginaire@{set\+Partie\+Imaginaire}!Mandelbrot@{Mandelbrot}}
+\subsubsection{\texorpdfstring{set\+Partie\+Imaginaire()}{setPartieImaginaire()}}
+{\footnotesize\ttfamily void Mandelbrot\+::set\+Partie\+Imaginaire (\begin{DoxyParamCaption}\item[{double}]{img }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Fonction qui ne sera jamais utilisee \+: creee pour gerer nimporte quel type de fractale 
+
+Implémente \hyperlink{classFractale_ab2dc26f50f2b0a3cbe986986075fe8f5}{Fractale}.
+
+\mbox{\Hypertarget{classMandelbrot_a419baeb8628191ee44f3c82dd3281017}\label{classMandelbrot_a419baeb8628191ee44f3c82dd3281017}} 
+\index{Mandelbrot@{Mandelbrot}!set\+Partie\+Reelle@{set\+Partie\+Reelle}}
+\index{set\+Partie\+Reelle@{set\+Partie\+Reelle}!Mandelbrot@{Mandelbrot}}
+\subsubsection{\texorpdfstring{set\+Partie\+Reelle()}{setPartieReelle()}}
+{\footnotesize\ttfamily void Mandelbrot\+::set\+Partie\+Reelle (\begin{DoxyParamCaption}\item[{double}]{reel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Fonction qui ne sera jamais utilisee \+: creee pour gerer nimporte quel type de fractale 
+
+Implémente \hyperlink{classFractale_a535969c022c88b7968784e160f41e1c3}{Fractale}.
+
+
+
+La documentation de cette classe a été générée à partir des fichiers suivants \+:\begin{DoxyCompactItemize}
+\item 
+app/head/\hyperlink{mandelbrot_8hh}{mandelbrot.\+hh}\item 
+app/src/\hyperlink{mandelbrot_8cc}{mandelbrot.\+cc}\end{DoxyCompactItemize}

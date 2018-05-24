@@ -1,0 +1,333 @@
+\hypertarget{classDessinFractaleGL}{}\section{Référence de la classe Dessin\+Fractale\+GL}
+\label{classDessinFractaleGL}\index{Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}}
+
+
+{\ttfamily \#include $<$dessin\+Fractale\+G\+L.\+hh$>$}
+
+
+
+Graphe d\textquotesingle{}héritage de Dessin\+Fractale\+GL\+:
+% FIG 0
+
+
+Graphe de collaboration de Dessin\+Fractale\+GL\+:
+% FIG 1
+\subsection*{Connecteurs publics}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classDessinFractaleGL_a2ca7a7e0c01a8b1e5b6587b5d087bc8d}{zoom} ()
+\item 
+void \hyperlink{classDessinFractaleGL_ac3eee50451126a4df2476ee86157457a}{dezoom} ()
+\item 
+void \hyperlink{classDessinFractaleGL_ae05d9f2b35e02a5e71ff0a58b382d121}{granul} ()
+\item 
+void \hyperlink{classDessinFractaleGL_ae07214922c9675f6b0a0da825f85bb1d}{degranul} ()
+\item 
+void \hyperlink{classDessinFractaleGL_a0bffca09a6c44bbcc7e4ee7e5d7357fb}{go\+Up} ()
+\item 
+void \hyperlink{classDessinFractaleGL_a429ba25774e220a73e18b60a807a0f98}{go\+Down} ()
+\item 
+void \hyperlink{classDessinFractaleGL_a1be6d62d662d8321fd652a1524eaaffd}{go\+Right} ()
+\item 
+void \hyperlink{classDessinFractaleGL_ac4ac5c40ce706f55629c8b60f23b4082}{go\+Left} ()
+\item 
+void \hyperlink{classDessinFractaleGL_a1c8787f969da8312ba3dbaa82f09ec5a}{change\+Couleur} ()
+\end{DoxyCompactItemize}
+\subsection*{Fonctions membres publiques}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDessinFractaleGL_a20c8b74a98b58180ab241e41fdaa3649}{Dessin\+Fractale\+GL} (Q\+Widget $\ast$parent)
+\item 
+\hyperlink{classDessinFractaleGL_a5a2c37ded5cee601b0b3fec8a1076ee4}{Dessin\+Fractale\+GL} (\hyperlink{classComplex}{Complex} \&complex, Q\+Widget $\ast$parent)
+\item 
+void \hyperlink{classDessinFractaleGL_a9ad221cef5dcba79ba0a3105da2c81fd}{initialize\+GL} ()
+\item 
+void \hyperlink{classDessinFractaleGL_a710489754151a61fce818fab53850f3b}{resize\+GL} (int largeur, int longueur)
+\item 
+void \hyperlink{classDessinFractaleGL_a75f2da3d7df21b06d387f92752cb7c29}{paint\+GL} ()
+\item 
+double \hyperlink{classDessinFractaleGL_ad9f3cfb6509fefc10cd2da6082282fe9}{get\+X\+Min} ()
+\item 
+double \hyperlink{classDessinFractaleGL_a36c057c16f024e4f1cac1500a7c4ae2a}{get\+X\+Max} ()
+\item 
+double \hyperlink{classDessinFractaleGL_a78ee41ef94d377affbbacf4c63b47c85}{get\+Y\+Min} ()
+\item 
+double \hyperlink{classDessinFractaleGL_ade4c6d35f4b7b50b0f3fba0234170e17}{get\+Y\+Max} ()
+\item 
+double \hyperlink{classDessinFractaleGL_ab947d47dccd774fd47e07d221d8fe298}{get\+Granularite} ()
+\item 
+double \hyperlink{classDessinFractaleGL_a65f03f1d92902cf57e088a99f573a93d}{get\+Zoom} ()
+\item 
+int \hyperlink{classDessinFractaleGL_a942a7d978d67fa83885c3b92929e4a7e}{get\+Chromatique} ()
+\item 
+\hyperlink{classFractale}{Fractale} \& \hyperlink{classDessinFractaleGL_a79ab8ed94185b26717dbc73fd428dfce}{get\+Fractale} ()
+\item 
+void \hyperlink{classDessinFractaleGL_a6b797eb0823a66b19cdf9d62bad58a3d}{set\+Z\+Max} (double nouveau\+Z\+Max)
+\item 
+void \hyperlink{classDessinFractaleGL_a0e06c9c77de183536183c4794713b0ea}{set\+Partie\+Reelle} (double nouveau)
+\item 
+void \hyperlink{classDessinFractaleGL_aa8c8e1c831c90d0f669963d18de384fa}{set\+Partie\+Imaginaire} (double nouveau)
+\item 
+void \hyperlink{classDessinFractaleGL_a3f2cb057946af75ae1bb887e984c5a02}{dessine\+Pixel} (double x, double y, double r, double g, double b)
+\item 
+void \hyperlink{classDessinFractaleGL_afe2be363c25420aec109c83890dade6e}{dessine\+Fractale} (\hyperlink{classFractale}{Fractale} \&f)
+\item 
+\hyperlink{classDessinFractaleGL_a9b65d2d37f9b8c615713b9d0cd1b15d3}{$\sim$\+Dessin\+Fractale\+GL} ()
+\end{DoxyCompactItemize}
+\subsection*{Attributs privés}
+\begin{DoxyCompactItemize}
+\item 
+double \hyperlink{classDessinFractaleGL_ada85c1b2e0cc4485d79a60258a422521}{granularite}
+\item 
+\hyperlink{structPositionCamera}{Position\+Camera} \hyperlink{classDessinFractaleGL_acdc8b205dee41342ea84c84ea1ec96cb}{camera}
+\item 
+int \hyperlink{classDessinFractaleGL_a63be7c470d6af10375e6c1fa96c9fbf1}{chromatique}
+\item 
+\hyperlink{classFractale}{Fractale} $\ast$ \hyperlink{classDessinFractaleGL_a71b27433fd38422b0cf4169e8d74f990}{fractale}
+\item 
+double \hyperlink{classDessinFractaleGL_a3905f437ed2de9bfd3b3f2c2d01f8dff}{x\+Min}
+\item 
+double \hyperlink{classDessinFractaleGL_a3f5773ce4bc1f55a69b7b70ef1d7f958}{x\+Max}
+\item 
+double \hyperlink{classDessinFractaleGL_ab5c06a94ea9da9168b17b64f9d0cfe7f}{y\+Min}
+\item 
+double \hyperlink{classDessinFractaleGL_a4b797fc2cb63897aa2006ea2ffd8da56}{y\+Max}
+\end{DoxyCompactItemize}
+
+
+\subsection{Description détaillée}
+la classe Abstract\+Dessin\+GL et Q\+G\+L\+Widget Cette classe correspond au dessin de la fractale 
+
+\subsection{Documentation des constructeurs et destructeur}
+\mbox{\Hypertarget{classDessinFractaleGL_a20c8b74a98b58180ab241e41fdaa3649}\label{classDessinFractaleGL_a20c8b74a98b58180ab241e41fdaa3649}} 
+\index{Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}!Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}}
+\index{Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}!Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}}
+\subsubsection{\texorpdfstring{Dessin\+Fractale\+G\+L()}{DessinFractaleGL()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Dessin\+Fractale\+G\+L\+::\+Dessin\+Fractale\+GL (\begin{DoxyParamCaption}\item[{Q\+Widget $\ast$}]{parent }\end{DoxyParamCaption})}
+
+Constructeur de \hyperlink{classDessinFractaleGL}{Dessin\+Fractale\+GL} Permet de créer le dessin de la fractale Ce constructeur sera uniquement utilise pour dessiner une fractale \hyperlink{classMandelbrot}{Mandelbrot} \mbox{\Hypertarget{classDessinFractaleGL_a5a2c37ded5cee601b0b3fec8a1076ee4}\label{classDessinFractaleGL_a5a2c37ded5cee601b0b3fec8a1076ee4}} 
+\index{Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}!Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}}
+\index{Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}!Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}}
+\subsubsection{\texorpdfstring{Dessin\+Fractale\+G\+L()}{DessinFractaleGL()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Dessin\+Fractale\+G\+L\+::\+Dessin\+Fractale\+GL (\begin{DoxyParamCaption}\item[{\hyperlink{classComplex}{Complex} \&}]{complex,  }\item[{Q\+Widget $\ast$}]{parent }\end{DoxyParamCaption})}
+
+Constructeur de \hyperlink{classDessinFractaleGL}{Dessin\+Fractale\+GL} Permet de créer le dessin de la fractale \hyperlink{classJuliaFatou}{Julia\+Fatou}. Ce constructeur sera uniquement utilise pour dessiner une fractale \hyperlink{classJuliaFatou}{Julia\+Fatou}. \mbox{\Hypertarget{classDessinFractaleGL_a9b65d2d37f9b8c615713b9d0cd1b15d3}\label{classDessinFractaleGL_a9b65d2d37f9b8c615713b9d0cd1b15d3}} 
+\index{Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}!````~Dessin\+Fractale\+GL@{$\sim$\+Dessin\+Fractale\+GL}}
+\index{````~Dessin\+Fractale\+GL@{$\sim$\+Dessin\+Fractale\+GL}!Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}}
+\subsubsection{\texorpdfstring{$\sim$\+Dessin\+Fractale\+G\+L()}{~DessinFractaleGL()}}
+{\footnotesize\ttfamily Dessin\+Fractale\+G\+L\+::$\sim$\+Dessin\+Fractale\+GL (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Destructeur de Dessin\+Mandelbrot\+GL 
+
+\subsection{Documentation des fonctions membres}
+\mbox{\Hypertarget{classDessinFractaleGL_a1c8787f969da8312ba3dbaa82f09ec5a}\label{classDessinFractaleGL_a1c8787f969da8312ba3dbaa82f09ec5a}} 
+\index{Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}!change\+Couleur@{change\+Couleur}}
+\index{change\+Couleur@{change\+Couleur}!Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}}
+\subsubsection{\texorpdfstring{change\+Couleur}{changeCouleur}}
+{\footnotesize\ttfamily void Dessin\+Fractale\+G\+L\+::change\+Couleur (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+Slot lorsque l\textquotesingle{}utilisateur voudra voir en noir et blanc ou en couleur \mbox{\Hypertarget{classDessinFractaleGL_ae07214922c9675f6b0a0da825f85bb1d}\label{classDessinFractaleGL_ae07214922c9675f6b0a0da825f85bb1d}} 
+\index{Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}!degranul@{degranul}}
+\index{degranul@{degranul}!Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}}
+\subsubsection{\texorpdfstring{degranul}{degranul}}
+{\footnotesize\ttfamily void Dessin\+Fractale\+G\+L\+::degranul (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+Slot lorsque l\textquotesingle{}utilisateur voudra augmenter la distance entre les pixels \mbox{\Hypertarget{classDessinFractaleGL_afe2be363c25420aec109c83890dade6e}\label{classDessinFractaleGL_afe2be363c25420aec109c83890dade6e}} 
+\index{Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}!dessine\+Fractale@{dessine\+Fractale}}
+\index{dessine\+Fractale@{dessine\+Fractale}!Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}}
+\subsubsection{\texorpdfstring{dessine\+Fractale()}{dessineFractale()}}
+{\footnotesize\ttfamily void Dessin\+Fractale\+G\+L\+::dessine\+Fractale (\begin{DoxyParamCaption}\item[{\hyperlink{classFractale}{Fractale} \&}]{f }\end{DoxyParamCaption})}
+
+Fonction qui dessine la fractale qui est en parametre \mbox{\Hypertarget{classDessinFractaleGL_a3f2cb057946af75ae1bb887e984c5a02}\label{classDessinFractaleGL_a3f2cb057946af75ae1bb887e984c5a02}} 
+\index{Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}!dessine\+Pixel@{dessine\+Pixel}}
+\index{dessine\+Pixel@{dessine\+Pixel}!Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}}
+\subsubsection{\texorpdfstring{dessine\+Pixel()}{dessinePixel()}}
+{\footnotesize\ttfamily void Dessin\+Fractale\+G\+L\+::dessine\+Pixel (\begin{DoxyParamCaption}\item[{double}]{x,  }\item[{double}]{y,  }\item[{double}]{r,  }\item[{double}]{g,  }\item[{double}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Fonction virtuelle de \hyperlink{classAbstractDessin}{Abstract\+Dessin} redefinie ici pour dessiner un pixel selon Open\+GL 
+
+Implémente \hyperlink{classAbstractDessin_a82983d17a63c236c5ca8f4966195ffe3}{Abstract\+Dessin}.
+
+\mbox{\Hypertarget{classDessinFractaleGL_ac3eee50451126a4df2476ee86157457a}\label{classDessinFractaleGL_ac3eee50451126a4df2476ee86157457a}} 
+\index{Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}!dezoom@{dezoom}}
+\index{dezoom@{dezoom}!Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}}
+\subsubsection{\texorpdfstring{dezoom}{dezoom}}
+{\footnotesize\ttfamily void Dessin\+Fractale\+G\+L\+::dezoom (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+Slot lorsque l\textquotesingle{}utilisateur va dezoomer sur le dessin \mbox{\Hypertarget{classDessinFractaleGL_a942a7d978d67fa83885c3b92929e4a7e}\label{classDessinFractaleGL_a942a7d978d67fa83885c3b92929e4a7e}} 
+\index{Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}!get\+Chromatique@{get\+Chromatique}}
+\index{get\+Chromatique@{get\+Chromatique}!Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}}
+\subsubsection{\texorpdfstring{get\+Chromatique()}{getChromatique()}}
+{\footnotesize\ttfamily int Dessin\+Fractale\+G\+L\+::get\+Chromatique (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Accesseur chromatique \mbox{\Hypertarget{classDessinFractaleGL_a79ab8ed94185b26717dbc73fd428dfce}\label{classDessinFractaleGL_a79ab8ed94185b26717dbc73fd428dfce}} 
+\index{Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}!get\+Fractale@{get\+Fractale}}
+\index{get\+Fractale@{get\+Fractale}!Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}}
+\subsubsection{\texorpdfstring{get\+Fractale()}{getFractale()}}
+{\footnotesize\ttfamily \hyperlink{classFractale}{Fractale} \& Dessin\+Fractale\+G\+L\+::get\+Fractale (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Accesseur de la fractale du dessin \mbox{\Hypertarget{classDessinFractaleGL_ab947d47dccd774fd47e07d221d8fe298}\label{classDessinFractaleGL_ab947d47dccd774fd47e07d221d8fe298}} 
+\index{Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}!get\+Granularite@{get\+Granularite}}
+\index{get\+Granularite@{get\+Granularite}!Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}}
+\subsubsection{\texorpdfstring{get\+Granularite()}{getGranularite()}}
+{\footnotesize\ttfamily double Dessin\+Fractale\+G\+L\+::get\+Granularite (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Accesseur granularite \mbox{\Hypertarget{classDessinFractaleGL_a36c057c16f024e4f1cac1500a7c4ae2a}\label{classDessinFractaleGL_a36c057c16f024e4f1cac1500a7c4ae2a}} 
+\index{Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}!get\+X\+Max@{get\+X\+Max}}
+\index{get\+X\+Max@{get\+X\+Max}!Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}}
+\subsubsection{\texorpdfstring{get\+X\+Max()}{getXMax()}}
+{\footnotesize\ttfamily double Dessin\+Fractale\+G\+L\+::get\+X\+Max (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Accesseur x\+Max \mbox{\Hypertarget{classDessinFractaleGL_ad9f3cfb6509fefc10cd2da6082282fe9}\label{classDessinFractaleGL_ad9f3cfb6509fefc10cd2da6082282fe9}} 
+\index{Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}!get\+X\+Min@{get\+X\+Min}}
+\index{get\+X\+Min@{get\+X\+Min}!Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}}
+\subsubsection{\texorpdfstring{get\+X\+Min()}{getXMin()}}
+{\footnotesize\ttfamily double Dessin\+Fractale\+G\+L\+::get\+X\+Min (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Accesseur x\+Min \mbox{\Hypertarget{classDessinFractaleGL_ade4c6d35f4b7b50b0f3fba0234170e17}\label{classDessinFractaleGL_ade4c6d35f4b7b50b0f3fba0234170e17}} 
+\index{Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}!get\+Y\+Max@{get\+Y\+Max}}
+\index{get\+Y\+Max@{get\+Y\+Max}!Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}}
+\subsubsection{\texorpdfstring{get\+Y\+Max()}{getYMax()}}
+{\footnotesize\ttfamily double Dessin\+Fractale\+G\+L\+::get\+Y\+Max (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Accesseur y\+Max \mbox{\Hypertarget{classDessinFractaleGL_a78ee41ef94d377affbbacf4c63b47c85}\label{classDessinFractaleGL_a78ee41ef94d377affbbacf4c63b47c85}} 
+\index{Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}!get\+Y\+Min@{get\+Y\+Min}}
+\index{get\+Y\+Min@{get\+Y\+Min}!Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}}
+\subsubsection{\texorpdfstring{get\+Y\+Min()}{getYMin()}}
+{\footnotesize\ttfamily double Dessin\+Fractale\+G\+L\+::get\+Y\+Min (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Accesseur y\+Min \mbox{\Hypertarget{classDessinFractaleGL_a65f03f1d92902cf57e088a99f573a93d}\label{classDessinFractaleGL_a65f03f1d92902cf57e088a99f573a93d}} 
+\index{Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}!get\+Zoom@{get\+Zoom}}
+\index{get\+Zoom@{get\+Zoom}!Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}}
+\subsubsection{\texorpdfstring{get\+Zoom()}{getZoom()}}
+{\footnotesize\ttfamily double Dessin\+Fractale\+G\+L\+::get\+Zoom (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Accesseur du zoom de la camera \mbox{\Hypertarget{classDessinFractaleGL_a429ba25774e220a73e18b60a807a0f98}\label{classDessinFractaleGL_a429ba25774e220a73e18b60a807a0f98}} 
+\index{Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}!go\+Down@{go\+Down}}
+\index{go\+Down@{go\+Down}!Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}}
+\subsubsection{\texorpdfstring{go\+Down}{goDown}}
+{\footnotesize\ttfamily void Dessin\+Fractale\+G\+L\+::go\+Down (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+Slot lorsque l\textquotesingle{}utilisateur voudra descendre sur l\textquotesingle{}image \mbox{\Hypertarget{classDessinFractaleGL_ac4ac5c40ce706f55629c8b60f23b4082}\label{classDessinFractaleGL_ac4ac5c40ce706f55629c8b60f23b4082}} 
+\index{Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}!go\+Left@{go\+Left}}
+\index{go\+Left@{go\+Left}!Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}}
+\subsubsection{\texorpdfstring{go\+Left}{goLeft}}
+{\footnotesize\ttfamily void Dessin\+Fractale\+G\+L\+::go\+Left (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+Slot lorsque l\textquotesingle{}utilisateur voudra aller a gauche sur l\textquotesingle{}image \mbox{\Hypertarget{classDessinFractaleGL_a1be6d62d662d8321fd652a1524eaaffd}\label{classDessinFractaleGL_a1be6d62d662d8321fd652a1524eaaffd}} 
+\index{Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}!go\+Right@{go\+Right}}
+\index{go\+Right@{go\+Right}!Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}}
+\subsubsection{\texorpdfstring{go\+Right}{goRight}}
+{\footnotesize\ttfamily void Dessin\+Fractale\+G\+L\+::go\+Right (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+Slot lorsque l\textquotesingle{}utilisateur voudra aller a droite sur l\textquotesingle{}image \mbox{\Hypertarget{classDessinFractaleGL_a0bffca09a6c44bbcc7e4ee7e5d7357fb}\label{classDessinFractaleGL_a0bffca09a6c44bbcc7e4ee7e5d7357fb}} 
+\index{Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}!go\+Up@{go\+Up}}
+\index{go\+Up@{go\+Up}!Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}}
+\subsubsection{\texorpdfstring{go\+Up}{goUp}}
+{\footnotesize\ttfamily void Dessin\+Fractale\+G\+L\+::go\+Up (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+Slot lorsque l\textquotesingle{}utilisateur voudra monter sur l\textquotesingle{}image \mbox{\Hypertarget{classDessinFractaleGL_ae05d9f2b35e02a5e71ff0a58b382d121}\label{classDessinFractaleGL_ae05d9f2b35e02a5e71ff0a58b382d121}} 
+\index{Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}!granul@{granul}}
+\index{granul@{granul}!Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}}
+\subsubsection{\texorpdfstring{granul}{granul}}
+{\footnotesize\ttfamily void Dessin\+Fractale\+G\+L\+::granul (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+Slot lorsque l\textquotesingle{}utilisateur voudra diminuer la distance entre les pixels \mbox{\Hypertarget{classDessinFractaleGL_a9ad221cef5dcba79ba0a3105da2c81fd}\label{classDessinFractaleGL_a9ad221cef5dcba79ba0a3105da2c81fd}} 
+\index{Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}!initialize\+GL@{initialize\+GL}}
+\index{initialize\+GL@{initialize\+GL}!Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}}
+\subsubsection{\texorpdfstring{initialize\+G\+L()}{initializeGL()}}
+{\footnotesize\ttfamily void Dessin\+Fractale\+G\+L\+::initialize\+GL (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Fonction qui initialise \hyperlink{classDessinFractaleGL}{Dessin\+Fractale\+GL} afin de pouvoir dessiner ensuite la fractale \mbox{\Hypertarget{classDessinFractaleGL_a75f2da3d7df21b06d387f92752cb7c29}\label{classDessinFractaleGL_a75f2da3d7df21b06d387f92752cb7c29}} 
+\index{Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}!paint\+GL@{paint\+GL}}
+\index{paint\+GL@{paint\+GL}!Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}}
+\subsubsection{\texorpdfstring{paint\+G\+L()}{paintGL()}}
+{\footnotesize\ttfamily void Dessin\+Fractale\+G\+L\+::paint\+GL (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Fonction qui va replacer la \char`\"{}camera\char`\"{} au centre, dessiner la fractale puis dessiner les axes X et Y \mbox{\Hypertarget{classDessinFractaleGL_a710489754151a61fce818fab53850f3b}\label{classDessinFractaleGL_a710489754151a61fce818fab53850f3b}} 
+\index{Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}!resize\+GL@{resize\+GL}}
+\index{resize\+GL@{resize\+GL}!Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}}
+\subsubsection{\texorpdfstring{resize\+G\+L()}{resizeGL()}}
+{\footnotesize\ttfamily void Dessin\+Fractale\+G\+L\+::resize\+GL (\begin{DoxyParamCaption}\item[{int}]{width,  }\item[{int}]{height }\end{DoxyParamCaption})}
+
+Fonction qui permet de redimensionner le dessin en fonction de la nouvelle taille choisie. Utile pour le Zoom et le De\+Zoom \mbox{\Hypertarget{classDessinFractaleGL_aa8c8e1c831c90d0f669963d18de384fa}\label{classDessinFractaleGL_aa8c8e1c831c90d0f669963d18de384fa}} 
+\index{Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}!set\+Partie\+Imaginaire@{set\+Partie\+Imaginaire}}
+\index{set\+Partie\+Imaginaire@{set\+Partie\+Imaginaire}!Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}}
+\subsubsection{\texorpdfstring{set\+Partie\+Imaginaire()}{setPartieImaginaire()}}
+{\footnotesize\ttfamily void Dessin\+Fractale\+G\+L\+::set\+Partie\+Imaginaire (\begin{DoxyParamCaption}\item[{double}]{nouveau }\end{DoxyParamCaption})}
+
+Modifie la partie imaginaire du complexe de la fractale \mbox{\Hypertarget{classDessinFractaleGL_a0e06c9c77de183536183c4794713b0ea}\label{classDessinFractaleGL_a0e06c9c77de183536183c4794713b0ea}} 
+\index{Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}!set\+Partie\+Reelle@{set\+Partie\+Reelle}}
+\index{set\+Partie\+Reelle@{set\+Partie\+Reelle}!Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}}
+\subsubsection{\texorpdfstring{set\+Partie\+Reelle()}{setPartieReelle()}}
+{\footnotesize\ttfamily void Dessin\+Fractale\+G\+L\+::set\+Partie\+Reelle (\begin{DoxyParamCaption}\item[{double}]{nouveau }\end{DoxyParamCaption})}
+
+Modifie la partie reelle du complexe de la fractale \mbox{\Hypertarget{classDessinFractaleGL_a6b797eb0823a66b19cdf9d62bad58a3d}\label{classDessinFractaleGL_a6b797eb0823a66b19cdf9d62bad58a3d}} 
+\index{Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}!set\+Z\+Max@{set\+Z\+Max}}
+\index{set\+Z\+Max@{set\+Z\+Max}!Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}}
+\subsubsection{\texorpdfstring{set\+Z\+Max()}{setZMax()}}
+{\footnotesize\ttfamily void Dessin\+Fractale\+G\+L\+::set\+Z\+Max (\begin{DoxyParamCaption}\item[{double}]{nouveau\+Z\+Max }\end{DoxyParamCaption})}
+
+Change la valeur de z\+Max pour la fractale en parametre \mbox{\Hypertarget{classDessinFractaleGL_a2ca7a7e0c01a8b1e5b6587b5d087bc8d}\label{classDessinFractaleGL_a2ca7a7e0c01a8b1e5b6587b5d087bc8d}} 
+\index{Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}!zoom@{zoom}}
+\index{zoom@{zoom}!Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}}
+\subsubsection{\texorpdfstring{zoom}{zoom}}
+{\footnotesize\ttfamily void Dessin\+Fractale\+G\+L\+::zoom (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+Slot lorsque l\textquotesingle{}utilisateur va zoomer sur le dessin 
+
+\subsection{Documentation des données membres}
+\mbox{\Hypertarget{classDessinFractaleGL_acdc8b205dee41342ea84c84ea1ec96cb}\label{classDessinFractaleGL_acdc8b205dee41342ea84c84ea1ec96cb}} 
+\index{Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}!camera@{camera}}
+\index{camera@{camera}!Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}}
+\subsubsection{\texorpdfstring{camera}{camera}}
+{\footnotesize\ttfamily \hyperlink{structPositionCamera}{Position\+Camera} Dessin\+Fractale\+G\+L\+::camera\hspace{0.3cm}{\ttfamily [private]}}
+
+Variable de la position de la camera \mbox{\Hypertarget{classDessinFractaleGL_a63be7c470d6af10375e6c1fa96c9fbf1}\label{classDessinFractaleGL_a63be7c470d6af10375e6c1fa96c9fbf1}} 
+\index{Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}!chromatique@{chromatique}}
+\index{chromatique@{chromatique}!Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}}
+\subsubsection{\texorpdfstring{chromatique}{chromatique}}
+{\footnotesize\ttfamily int Dessin\+Fractale\+G\+L\+::chromatique\hspace{0.3cm}{\ttfamily [private]}}
+
+Variable representant en quelles couleurs est dessine la fractale \mbox{\Hypertarget{classDessinFractaleGL_a71b27433fd38422b0cf4169e8d74f990}\label{classDessinFractaleGL_a71b27433fd38422b0cf4169e8d74f990}} 
+\index{Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}!fractale@{fractale}}
+\index{fractale@{fractale}!Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}}
+\subsubsection{\texorpdfstring{fractale}{fractale}}
+{\footnotesize\ttfamily \hyperlink{classFractale}{Fractale}$\ast$ Dessin\+Fractale\+G\+L\+::fractale\hspace{0.3cm}{\ttfamily [private]}}
+
+\hyperlink{classFractale}{Fractale} dessine dans le dessin Open\+GL \mbox{\Hypertarget{classDessinFractaleGL_ada85c1b2e0cc4485d79a60258a422521}\label{classDessinFractaleGL_ada85c1b2e0cc4485d79a60258a422521}} 
+\index{Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}!granularite@{granularite}}
+\index{granularite@{granularite}!Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}}
+\subsubsection{\texorpdfstring{granularite}{granularite}}
+{\footnotesize\ttfamily double Dessin\+Fractale\+G\+L\+::granularite\hspace{0.3cm}{\ttfamily [private]}}
+
+Variable representant la granluarite a un temps donne \mbox{\Hypertarget{classDessinFractaleGL_a3f5773ce4bc1f55a69b7b70ef1d7f958}\label{classDessinFractaleGL_a3f5773ce4bc1f55a69b7b70ef1d7f958}} 
+\index{Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}!x\+Max@{x\+Max}}
+\index{x\+Max@{x\+Max}!Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}}
+\subsubsection{\texorpdfstring{x\+Max}{xMax}}
+{\footnotesize\ttfamily double Dessin\+Fractale\+G\+L\+::x\+Max\hspace{0.3cm}{\ttfamily [private]}}
+
+x\+Max de la fenetre \mbox{\Hypertarget{classDessinFractaleGL_a3905f437ed2de9bfd3b3f2c2d01f8dff}\label{classDessinFractaleGL_a3905f437ed2de9bfd3b3f2c2d01f8dff}} 
+\index{Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}!x\+Min@{x\+Min}}
+\index{x\+Min@{x\+Min}!Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}}
+\subsubsection{\texorpdfstring{x\+Min}{xMin}}
+{\footnotesize\ttfamily double Dessin\+Fractale\+G\+L\+::x\+Min\hspace{0.3cm}{\ttfamily [private]}}
+
+x\+Min de la fenetre \mbox{\Hypertarget{classDessinFractaleGL_a4b797fc2cb63897aa2006ea2ffd8da56}\label{classDessinFractaleGL_a4b797fc2cb63897aa2006ea2ffd8da56}} 
+\index{Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}!y\+Max@{y\+Max}}
+\index{y\+Max@{y\+Max}!Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}}
+\subsubsection{\texorpdfstring{y\+Max}{yMax}}
+{\footnotesize\ttfamily double Dessin\+Fractale\+G\+L\+::y\+Max\hspace{0.3cm}{\ttfamily [private]}}
+
+y\+Max de la fenetre \mbox{\Hypertarget{classDessinFractaleGL_ab5c06a94ea9da9168b17b64f9d0cfe7f}\label{classDessinFractaleGL_ab5c06a94ea9da9168b17b64f9d0cfe7f}} 
+\index{Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}!y\+Min@{y\+Min}}
+\index{y\+Min@{y\+Min}!Dessin\+Fractale\+GL@{Dessin\+Fractale\+GL}}
+\subsubsection{\texorpdfstring{y\+Min}{yMin}}
+{\footnotesize\ttfamily double Dessin\+Fractale\+G\+L\+::y\+Min\hspace{0.3cm}{\ttfamily [private]}}
+
+y\+Min de la fenetre 
+
+La documentation de cette classe a été générée à partir des fichiers suivants \+:\begin{DoxyCompactItemize}
+\item 
+app/head/\hyperlink{dessinFractaleGL_8hh}{dessin\+Fractale\+G\+L.\+hh}\item 
+app/src/\hyperlink{dessinFractaleGL_8cc}{dessin\+Fractale\+G\+L.\+cc}\end{DoxyCompactItemize}

@@ -1,0 +1,121 @@
+\hypertarget{classAbstractFenetreGL}{}\section{Référence de la classe Abstract\+Fenetre\+GL}
+\label{classAbstractFenetreGL}\index{Abstract\+Fenetre\+GL@{Abstract\+Fenetre\+GL}}
+
+
+{\ttfamily \#include $<$abstract\+Fenetre\+G\+L.\+hh$>$}
+
+
+
+Graphe d\textquotesingle{}héritage de Abstract\+Fenetre\+GL\+:
+% FIG 0
+
+
+Graphe de collaboration de Abstract\+Fenetre\+GL\+:
+% FIG 1
+\subsection*{Connecteurs publics}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classAbstractFenetreGL_a97c30b1012a2eaa09bb3aed0403ff595}{choix\+Z\+Max} (double nouveau)
+\item 
+void \hyperlink{classAbstractFenetreGL_a797d71f2fa925e48139acb92a3f65ad6}{enregistrer\+Cairo} ()
+\end{DoxyCompactItemize}
+\subsection*{Fonctions membres publiques}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classAbstractFenetreGL_a48a1ccd1d08fb471401b37cebed8fd74}{Abstract\+Fenetre\+GL} ()
+\item 
+void \hyperlink{classAbstractFenetreGL_a22c2d178dafd49d27bc4a46f5b7fca3a}{key\+Press\+Event} (Q\+Key\+Event $\ast$event)
+\item 
+\hyperlink{classAbstractFenetreGL_a848254ecf6e365f84bec581900b17d65}{$\sim$\+Abstract\+Fenetre\+GL} ()
+\end{DoxyCompactItemize}
+\subsection*{Attributs protégés}
+\begin{DoxyCompactItemize}
+\item 
+Q\+Push\+Button $\ast$ \hyperlink{classAbstractFenetreGL_a9a6afd314ca26783a174dbbf7e971663}{quitter}
+\item 
+Q\+Push\+Button $\ast$ \hyperlink{classAbstractFenetreGL_abedb0e82fbaa31bd23d7c492f2127569}{enregistrer}
+\item 
+Q\+Double\+Spin\+Box $\ast$ \hyperlink{classAbstractFenetreGL_ac498e1d44e943dd727a10d949056f2d3}{z\+Max}
+\item 
+double \hyperlink{classAbstractFenetreGL_a9cae32dc34af644ca71cdc80d0e77558}{z\+Max\+Choix}
+\item 
+\hyperlink{classDessinFractaleGL}{Dessin\+Fractale\+GL} $\ast$ \hyperlink{classAbstractFenetreGL_aeff85358aaa43260f9af20e40394ea68}{dessin}
+\end{DoxyCompactItemize}
+
+
+\subsection{Description détaillée}
+la classe Q\+Widget (Qt) Cette classe correspond a la classe abstraite des fenetres de l\textquotesingle{}application. auteur\+: Clement Caumes. 
+
+\subsection{Documentation des constructeurs et destructeur}
+\mbox{\Hypertarget{classAbstractFenetreGL_a48a1ccd1d08fb471401b37cebed8fd74}\label{classAbstractFenetreGL_a48a1ccd1d08fb471401b37cebed8fd74}} 
+\index{Abstract\+Fenetre\+GL@{Abstract\+Fenetre\+GL}!Abstract\+Fenetre\+GL@{Abstract\+Fenetre\+GL}}
+\index{Abstract\+Fenetre\+GL@{Abstract\+Fenetre\+GL}!Abstract\+Fenetre\+GL@{Abstract\+Fenetre\+GL}}
+\subsubsection{\texorpdfstring{Abstract\+Fenetre\+G\+L()}{AbstractFenetreGL()}}
+{\footnotesize\ttfamily Abstract\+Fenetre\+G\+L\+::\+Abstract\+Fenetre\+GL (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Constructeur de \hyperlink{classAbstractFenetreGL}{Abstract\+Fenetre\+GL} \mbox{\Hypertarget{classAbstractFenetreGL_a848254ecf6e365f84bec581900b17d65}\label{classAbstractFenetreGL_a848254ecf6e365f84bec581900b17d65}} 
+\index{Abstract\+Fenetre\+GL@{Abstract\+Fenetre\+GL}!````~Abstract\+Fenetre\+GL@{$\sim$\+Abstract\+Fenetre\+GL}}
+\index{````~Abstract\+Fenetre\+GL@{$\sim$\+Abstract\+Fenetre\+GL}!Abstract\+Fenetre\+GL@{Abstract\+Fenetre\+GL}}
+\subsubsection{\texorpdfstring{$\sim$\+Abstract\+Fenetre\+G\+L()}{~AbstractFenetreGL()}}
+{\footnotesize\ttfamily Abstract\+Fenetre\+G\+L\+::$\sim$\+Abstract\+Fenetre\+GL (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Permet de détruire la fenetre 
+
+\subsection{Documentation des fonctions membres}
+\mbox{\Hypertarget{classAbstractFenetreGL_a97c30b1012a2eaa09bb3aed0403ff595}\label{classAbstractFenetreGL_a97c30b1012a2eaa09bb3aed0403ff595}} 
+\index{Abstract\+Fenetre\+GL@{Abstract\+Fenetre\+GL}!choix\+Z\+Max@{choix\+Z\+Max}}
+\index{choix\+Z\+Max@{choix\+Z\+Max}!Abstract\+Fenetre\+GL@{Abstract\+Fenetre\+GL}}
+\subsubsection{\texorpdfstring{choix\+Z\+Max}{choixZMax}}
+{\footnotesize\ttfamily void Abstract\+Fenetre\+G\+L\+::choix\+Z\+Max (\begin{DoxyParamCaption}\item[{double}]{nouveau }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+Change la valeur z\+Max pour la fractale (qui sera de nouveau dessine) \mbox{\Hypertarget{classAbstractFenetreGL_a797d71f2fa925e48139acb92a3f65ad6}\label{classAbstractFenetreGL_a797d71f2fa925e48139acb92a3f65ad6}} 
+\index{Abstract\+Fenetre\+GL@{Abstract\+Fenetre\+GL}!enregistrer\+Cairo@{enregistrer\+Cairo}}
+\index{enregistrer\+Cairo@{enregistrer\+Cairo}!Abstract\+Fenetre\+GL@{Abstract\+Fenetre\+GL}}
+\subsubsection{\texorpdfstring{enregistrer\+Cairo}{enregistrerCairo}}
+{\footnotesize\ttfamily void Abstract\+Fenetre\+G\+L\+::enregistrer\+Cairo (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+Au clic \char`\"{}\+Enregistrer\char`\"{}, la fractale est enregistre avec Cairo sous forme de fichier S\+VG \mbox{\Hypertarget{classAbstractFenetreGL_a22c2d178dafd49d27bc4a46f5b7fca3a}\label{classAbstractFenetreGL_a22c2d178dafd49d27bc4a46f5b7fca3a}} 
+\index{Abstract\+Fenetre\+GL@{Abstract\+Fenetre\+GL}!key\+Press\+Event@{key\+Press\+Event}}
+\index{key\+Press\+Event@{key\+Press\+Event}!Abstract\+Fenetre\+GL@{Abstract\+Fenetre\+GL}}
+\subsubsection{\texorpdfstring{key\+Press\+Event()}{keyPressEvent()}}
+{\footnotesize\ttfamily void Abstract\+Fenetre\+G\+L\+::key\+Press\+Event (\begin{DoxyParamCaption}\item[{Q\+Key\+Event $\ast$}]{event }\end{DoxyParamCaption})}
+
+En fonction de la touche pressee par l\textquotesingle{}utilisateur, cela change la vue de la fractale 
+
+\subsection{Documentation des données membres}
+\mbox{\Hypertarget{classAbstractFenetreGL_aeff85358aaa43260f9af20e40394ea68}\label{classAbstractFenetreGL_aeff85358aaa43260f9af20e40394ea68}} 
+\index{Abstract\+Fenetre\+GL@{Abstract\+Fenetre\+GL}!dessin@{dessin}}
+\index{dessin@{dessin}!Abstract\+Fenetre\+GL@{Abstract\+Fenetre\+GL}}
+\subsubsection{\texorpdfstring{dessin}{dessin}}
+{\footnotesize\ttfamily \hyperlink{classDessinFractaleGL}{Dessin\+Fractale\+GL}$\ast$ Abstract\+Fenetre\+G\+L\+::dessin\hspace{0.3cm}{\ttfamily [protected]}}
+
+Dessin de la fractale avec Open\+GL \mbox{\Hypertarget{classAbstractFenetreGL_abedb0e82fbaa31bd23d7c492f2127569}\label{classAbstractFenetreGL_abedb0e82fbaa31bd23d7c492f2127569}} 
+\index{Abstract\+Fenetre\+GL@{Abstract\+Fenetre\+GL}!enregistrer@{enregistrer}}
+\index{enregistrer@{enregistrer}!Abstract\+Fenetre\+GL@{Abstract\+Fenetre\+GL}}
+\subsubsection{\texorpdfstring{enregistrer}{enregistrer}}
+{\footnotesize\ttfamily Q\+Push\+Button$\ast$ Abstract\+Fenetre\+G\+L\+::enregistrer\hspace{0.3cm}{\ttfamily [protected]}}
+
+Bouton enregistrer \mbox{\Hypertarget{classAbstractFenetreGL_a9a6afd314ca26783a174dbbf7e971663}\label{classAbstractFenetreGL_a9a6afd314ca26783a174dbbf7e971663}} 
+\index{Abstract\+Fenetre\+GL@{Abstract\+Fenetre\+GL}!quitter@{quitter}}
+\index{quitter@{quitter}!Abstract\+Fenetre\+GL@{Abstract\+Fenetre\+GL}}
+\subsubsection{\texorpdfstring{quitter}{quitter}}
+{\footnotesize\ttfamily Q\+Push\+Button$\ast$ Abstract\+Fenetre\+G\+L\+::quitter\hspace{0.3cm}{\ttfamily [protected]}}
+
+Bouton quitter \mbox{\Hypertarget{classAbstractFenetreGL_ac498e1d44e943dd727a10d949056f2d3}\label{classAbstractFenetreGL_ac498e1d44e943dd727a10d949056f2d3}} 
+\index{Abstract\+Fenetre\+GL@{Abstract\+Fenetre\+GL}!z\+Max@{z\+Max}}
+\index{z\+Max@{z\+Max}!Abstract\+Fenetre\+GL@{Abstract\+Fenetre\+GL}}
+\subsubsection{\texorpdfstring{z\+Max}{zMax}}
+{\footnotesize\ttfamily Q\+Double\+Spin\+Box$\ast$ Abstract\+Fenetre\+G\+L\+::z\+Max\hspace{0.3cm}{\ttfamily [protected]}}
+
+Endroit pour choisir z\+Max \mbox{\Hypertarget{classAbstractFenetreGL_a9cae32dc34af644ca71cdc80d0e77558}\label{classAbstractFenetreGL_a9cae32dc34af644ca71cdc80d0e77558}} 
+\index{Abstract\+Fenetre\+GL@{Abstract\+Fenetre\+GL}!z\+Max\+Choix@{z\+Max\+Choix}}
+\index{z\+Max\+Choix@{z\+Max\+Choix}!Abstract\+Fenetre\+GL@{Abstract\+Fenetre\+GL}}
+\subsubsection{\texorpdfstring{z\+Max\+Choix}{zMaxChoix}}
+{\footnotesize\ttfamily double Abstract\+Fenetre\+G\+L\+::z\+Max\+Choix\hspace{0.3cm}{\ttfamily [protected]}}
+
+Variable qui va contenir le choix de l\textquotesingle{}utilisateur 
+
+La documentation de cette classe a été générée à partir des fichiers suivants \+:\begin{DoxyCompactItemize}
+\item 
+app/head/\hyperlink{abstractFenetreGL_8hh}{abstract\+Fenetre\+G\+L.\+hh}\item 
+app/src/\hyperlink{abstractFenetreGL_8cc}{abstract\+Fenetre\+G\+L.\+cc}\end{DoxyCompactItemize}

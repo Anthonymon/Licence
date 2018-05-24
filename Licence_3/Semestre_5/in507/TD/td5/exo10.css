@@ -1,0 +1,18 @@
+.tableaux{
+  display:inline-block;
+  vertical-align:top;
+}
+
+div.bloc1 {
+background-color: blue;
+height: 50px;
+width: 100px;
+float: left;
+}
+div.bloc2 {
+background-color: green;
+height: 50px;
+width: 100px;
+float: left;
+margin-left: 20px;
+}

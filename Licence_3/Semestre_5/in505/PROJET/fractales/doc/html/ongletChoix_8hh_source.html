@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Fractales:  Fichier source de app/head/ongletChoix.hh</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Fractales
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_d422163b96683743ed3963d4aac17747.html">app</a></li><li class="navelem"><a class="el" href="dir_b5102c6ec556d9d5555833f0fcbc2722.html">head</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">ongletChoix.hh</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="ongletChoix_8hh.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div><div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#ifndef ONGLETCHOIX__HH</span></div><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#define ONGLETCHOIX__HH</span></div><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;</div><div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;../head/ongletVide.hh&quot;</span></div><div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;../head/fenetreJuliaFatouGL.hh&quot;</span></div><div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;QApplication&gt;</span></div><div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;QWidget&gt;</span></div><div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;QPushButton&gt;</span></div><div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;QTabWidget&gt;</span></div><div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;QLabel&gt;</span></div><div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;QGroupBox&gt;</span></div><div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &lt;QRadioButton&gt;</span></div><div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &lt;QVBoxLayout&gt;</span></div><div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &lt;QHBoxLayout&gt;</span></div><div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &lt;QDoubleSpinBox&gt;</span></div><div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div><div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="classOngletChoix.html">   29</a></span>&#160;<span class="keyword">class </span><a class="code" href="classOngletChoix.html">OngletChoix</a>:<span class="keyword">public</span> QWidget{</div><div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    Q_OBJECT</div><div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    </div><div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keyword">private</span>:</div><div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="classOngletChoix.html#a184324fb8c1620faad40c00d1f79e8f2">   33</a></span>&#160;        <span class="keywordtype">int</span> <a class="code" href="classOngletChoix.html#a184324fb8c1620faad40c00d1f79e8f2">decisionConstante</a>; </div><div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="classOngletChoix.html#a29c93f2a3b2c5a3c77df221706b9f038">   34</a></span>&#160;        <span class="keywordtype">bool</span> <a class="code" href="classOngletChoix.html#a29c93f2a3b2c5a3c77df221706b9f038">activation</a>; </div><div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="classOngletChoix.html#aa2baa10f52ae85feef9d1e52e0e37109">   35</a></span>&#160;        <span class="keywordtype">double</span> <a class="code" href="classOngletChoix.html#aa2baa10f52ae85feef9d1e52e0e37109">choixReel</a>; </div><div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="classOngletChoix.html#aa33e3bfaff29c28b69fd9ec5cc95b45c">   36</a></span>&#160;        <span class="keywordtype">double</span> <a class="code" href="classOngletChoix.html#aa33e3bfaff29c28b69fd9ec5cc95b45c">choixImagi</a>; </div><div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="classOngletChoix.html#a7a71fce7b0e4167c7aaf96ddd863dce0">   37</a></span>&#160;        <a class="code" href="classFenetreJuliaFatouGL.html">FenetreJuliaFatouGL</a>* <a class="code" href="classOngletChoix.html#a7a71fce7b0e4167c7aaf96ddd863dce0">fenetre</a>; </div><div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="classOngletChoix.html#a4e7f94f9b6287dd0d75f78d1074aa57f">   38</a></span>&#160;        QPushButton* <a class="code" href="classOngletChoix.html#a4e7f94f9b6287dd0d75f78d1074aa57f">boutonValider2</a>; </div><div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="classOngletChoix.html#a81223bf8a97a8361bf69f8b39de98477">   39</a></span>&#160;        QGroupBox* <a class="code" href="classOngletChoix.html#a81223bf8a97a8361bf69f8b39de98477">choixConstante</a>; </div><div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="classOngletChoix.html#ab27daac5b741b88a2e952f098f01436c">   40</a></span>&#160;        QRadioButton* <a class="code" href="classOngletChoix.html#ab27daac5b741b88a2e952f098f01436c">constante1</a>; </div><div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="classOngletChoix.html#aa2dcda0ff628b623d799d11e85966587">   41</a></span>&#160;        QRadioButton* <a class="code" href="classOngletChoix.html#aa2dcda0ff628b623d799d11e85966587">constante2</a>; </div><div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="classOngletChoix.html#a4161297e6349dce61541d0375fcf6071">   42</a></span>&#160;        QRadioButton* <a class="code" href="classOngletChoix.html#a4161297e6349dce61541d0375fcf6071">constante3</a>; </div><div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="classOngletChoix.html#aaa7381931138a3b546b87c40351422be">   43</a></span>&#160;        QDoubleSpinBox* <a class="code" href="classOngletChoix.html#aaa7381931138a3b546b87c40351422be">partieReelle</a>; </div><div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="classOngletChoix.html#a32bb19f4786c98b681f2476a0c214465">   44</a></span>&#160;        QDoubleSpinBox* <a class="code" href="classOngletChoix.html#a32bb19f4786c98b681f2476a0c214465">partieImaginaire</a>; </div><div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="classOngletChoix.html#a8a0459cfcd7ef21e702dfe35b6727831">   45</a></span>&#160;        QHBoxLayout* <a class="code" href="classOngletChoix.html#a8a0459cfcd7ef21e702dfe35b6727831">layoutComplexe</a>; </div><div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="classOngletChoix.html#abd71bbe403300b04b30911273987757d">   46</a></span>&#160;        QVBoxLayout* <a class="code" href="classOngletChoix.html#abd71bbe403300b04b30911273987757d">layoutConstante</a>; </div><div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keyword">public</span> slots:</div><div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classOngletChoix.html#ad3cd10f4288ef90f79088e2242d04930">validation</a>(); </div><div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classOngletChoix.html#a64dcaf259b31c0f0cbe913f3aaa5c501">changementConstante1</a>();</div><div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classOngletChoix.html#a015b22df95995cc3bcec783dc62d5af0">changementConstante2</a>();</div><div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classOngletChoix.html#a67fe19298a58a01c36415466597ddb74">changementConstante3</a>();</div><div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classOngletChoix.html#ab9c4d2a0468d54825de329606731b676">choixPartieReelle</a>(<span class="keywordtype">double</span> reelle);</div><div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classOngletChoix.html#ac3e007ccd43b21ab632cb4fe270e5ef6">choixPartieImaginaire</a>(<span class="keywordtype">double</span> imaginaire);</div><div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;</div><div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keyword">public</span>:</div><div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <a class="code" href="classOngletChoix.html#a9045157d6876f0259e8282c34d00bbe1">OngletChoix</a>();</div><div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        <a class="code" href="classOngletChoix.html#ad309587d49a904c8def659b733862085">~OngletChoix</a>();</div><div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;};</div><div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;</div><div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="preprocessor">#endif</span></div><div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div><div class="ttc" id="classOngletChoix_html_a184324fb8c1620faad40c00d1f79e8f2"><div class="ttname"><a href="classOngletChoix.html#a184324fb8c1620faad40c00d1f79e8f2">OngletChoix::decisionConstante</a></div><div class="ttdeci">int decisionConstante</div><div class="ttdef"><b>Definition:</b> ongletChoix.hh:33</div></div>
+<div class="ttc" id="classFenetreJuliaFatouGL_html"><div class="ttname"><a href="classFenetreJuliaFatouGL.html">FenetreJuliaFatouGL</a></div><div class="ttdef"><b>Definition:</b> fenetreJuliaFatouGL.hh:26</div></div>
+<div class="ttc" id="classOngletChoix_html_a4161297e6349dce61541d0375fcf6071"><div class="ttname"><a href="classOngletChoix.html#a4161297e6349dce61541d0375fcf6071">OngletChoix::constante3</a></div><div class="ttdeci">QRadioButton * constante3</div><div class="ttdef"><b>Definition:</b> ongletChoix.hh:42</div></div>
+<div class="ttc" id="classOngletChoix_html_ad3cd10f4288ef90f79088e2242d04930"><div class="ttname"><a href="classOngletChoix.html#ad3cd10f4288ef90f79088e2242d04930">OngletChoix::validation</a></div><div class="ttdeci">void validation()</div><div class="ttdef"><b>Definition:</b> ongletChoix.cc:124</div></div>
+<div class="ttc" id="classOngletChoix_html_ab9c4d2a0468d54825de329606731b676"><div class="ttname"><a href="classOngletChoix.html#ab9c4d2a0468d54825de329606731b676">OngletChoix::choixPartieReelle</a></div><div class="ttdeci">void choixPartieReelle(double reelle)</div><div class="ttdef"><b>Definition:</b> ongletChoix.cc:108</div></div>
+<div class="ttc" id="classOngletChoix_html_a64dcaf259b31c0f0cbe913f3aaa5c501"><div class="ttname"><a href="classOngletChoix.html#a64dcaf259b31c0f0cbe913f3aaa5c501">OngletChoix::changementConstante1</a></div><div class="ttdeci">void changementConstante1()</div><div class="ttdef"><b>Definition:</b> ongletChoix.cc:84</div></div>
+<div class="ttc" id="classOngletChoix_html_a8a0459cfcd7ef21e702dfe35b6727831"><div class="ttname"><a href="classOngletChoix.html#a8a0459cfcd7ef21e702dfe35b6727831">OngletChoix::layoutComplexe</a></div><div class="ttdeci">QHBoxLayout * layoutComplexe</div><div class="ttdef"><b>Definition:</b> ongletChoix.hh:45</div></div>
+<div class="ttc" id="classOngletChoix_html_aa33e3bfaff29c28b69fd9ec5cc95b45c"><div class="ttname"><a href="classOngletChoix.html#aa33e3bfaff29c28b69fd9ec5cc95b45c">OngletChoix::choixImagi</a></div><div class="ttdeci">double choixImagi</div><div class="ttdef"><b>Definition:</b> ongletChoix.hh:36</div></div>
+<div class="ttc" id="classOngletChoix_html_ac3e007ccd43b21ab632cb4fe270e5ef6"><div class="ttname"><a href="classOngletChoix.html#ac3e007ccd43b21ab632cb4fe270e5ef6">OngletChoix::choixPartieImaginaire</a></div><div class="ttdeci">void choixPartieImaginaire(double imaginaire)</div><div class="ttdef"><b>Definition:</b> ongletChoix.cc:116</div></div>
+<div class="ttc" id="classOngletChoix_html_aaa7381931138a3b546b87c40351422be"><div class="ttname"><a href="classOngletChoix.html#aaa7381931138a3b546b87c40351422be">OngletChoix::partieReelle</a></div><div class="ttdeci">QDoubleSpinBox * partieReelle</div><div class="ttdef"><b>Definition:</b> ongletChoix.hh:43</div></div>
+<div class="ttc" id="classOngletChoix_html_a015b22df95995cc3bcec783dc62d5af0"><div class="ttname"><a href="classOngletChoix.html#a015b22df95995cc3bcec783dc62d5af0">OngletChoix::changementConstante2</a></div><div class="ttdeci">void changementConstante2()</div><div class="ttdef"><b>Definition:</b> ongletChoix.cc:92</div></div>
+<div class="ttc" id="classOngletChoix_html_a4e7f94f9b6287dd0d75f78d1074aa57f"><div class="ttname"><a href="classOngletChoix.html#a4e7f94f9b6287dd0d75f78d1074aa57f">OngletChoix::boutonValider2</a></div><div class="ttdeci">QPushButton * boutonValider2</div><div class="ttdef"><b>Definition:</b> ongletChoix.hh:38</div></div>
+<div class="ttc" id="classOngletChoix_html_a81223bf8a97a8361bf69f8b39de98477"><div class="ttname"><a href="classOngletChoix.html#a81223bf8a97a8361bf69f8b39de98477">OngletChoix::choixConstante</a></div><div class="ttdeci">QGroupBox * choixConstante</div><div class="ttdef"><b>Definition:</b> ongletChoix.hh:39</div></div>
+<div class="ttc" id="classOngletChoix_html_abd71bbe403300b04b30911273987757d"><div class="ttname"><a href="classOngletChoix.html#abd71bbe403300b04b30911273987757d">OngletChoix::layoutConstante</a></div><div class="ttdeci">QVBoxLayout * layoutConstante</div><div class="ttdef"><b>Definition:</b> ongletChoix.hh:46</div></div>
+<div class="ttc" id="classOngletChoix_html_ab27daac5b741b88a2e952f098f01436c"><div class="ttname"><a href="classOngletChoix.html#ab27daac5b741b88a2e952f098f01436c">OngletChoix::constante1</a></div><div class="ttdeci">QRadioButton * constante1</div><div class="ttdef"><b>Definition:</b> ongletChoix.hh:40</div></div>
+<div class="ttc" id="classOngletChoix_html_a67fe19298a58a01c36415466597ddb74"><div class="ttname"><a href="classOngletChoix.html#a67fe19298a58a01c36415466597ddb74">OngletChoix::changementConstante3</a></div><div class="ttdeci">void changementConstante3()</div><div class="ttdef"><b>Definition:</b> ongletChoix.cc:100</div></div>
+<div class="ttc" id="classOngletChoix_html"><div class="ttname"><a href="classOngletChoix.html">OngletChoix</a></div><div class="ttdef"><b>Definition:</b> ongletChoix.hh:29</div></div>
+<div class="ttc" id="classOngletChoix_html_a7a71fce7b0e4167c7aaf96ddd863dce0"><div class="ttname"><a href="classOngletChoix.html#a7a71fce7b0e4167c7aaf96ddd863dce0">OngletChoix::fenetre</a></div><div class="ttdeci">FenetreJuliaFatouGL * fenetre</div><div class="ttdef"><b>Definition:</b> ongletChoix.hh:37</div></div>
+<div class="ttc" id="classOngletChoix_html_ad309587d49a904c8def659b733862085"><div class="ttname"><a href="classOngletChoix.html#ad309587d49a904c8def659b733862085">OngletChoix::~OngletChoix</a></div><div class="ttdeci">~OngletChoix()</div><div class="ttdef"><b>Definition:</b> ongletChoix.cc:146</div></div>
+<div class="ttc" id="classOngletChoix_html_aa2baa10f52ae85feef9d1e52e0e37109"><div class="ttname"><a href="classOngletChoix.html#aa2baa10f52ae85feef9d1e52e0e37109">OngletChoix::choixReel</a></div><div class="ttdeci">double choixReel</div><div class="ttdef"><b>Definition:</b> ongletChoix.hh:35</div></div>
+<div class="ttc" id="classOngletChoix_html_a32bb19f4786c98b681f2476a0c214465"><div class="ttname"><a href="classOngletChoix.html#a32bb19f4786c98b681f2476a0c214465">OngletChoix::partieImaginaire</a></div><div class="ttdeci">QDoubleSpinBox * partieImaginaire</div><div class="ttdef"><b>Definition:</b> ongletChoix.hh:44</div></div>
+<div class="ttc" id="classOngletChoix_html_aa2dcda0ff628b623d799d11e85966587"><div class="ttname"><a href="classOngletChoix.html#aa2dcda0ff628b623d799d11e85966587">OngletChoix::constante2</a></div><div class="ttdeci">QRadioButton * constante2</div><div class="ttdef"><b>Definition:</b> ongletChoix.hh:41</div></div>
+<div class="ttc" id="classOngletChoix_html_a9045157d6876f0259e8282c34d00bbe1"><div class="ttname"><a href="classOngletChoix.html#a9045157d6876f0259e8282c34d00bbe1">OngletChoix::OngletChoix</a></div><div class="ttdeci">OngletChoix()</div><div class="ttdef"><b>Definition:</b> ongletChoix.cc:22</div></div>
+<div class="ttc" id="classOngletChoix_html_a29c93f2a3b2c5a3c77df221706b9f038"><div class="ttname"><a href="classOngletChoix.html#a29c93f2a3b2c5a3c77df221706b9f038">OngletChoix::activation</a></div><div class="ttdeci">bool activation</div><div class="ttdef"><b>Definition:</b> ongletChoix.hh:34</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré par &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.13
+</small></address>
+</body>
+</html>

@@ -1,0 +1,5 @@
+let 
+	var a := 10 
+in 
+	while a do (a := a - 1; print_int(a)) 
+end

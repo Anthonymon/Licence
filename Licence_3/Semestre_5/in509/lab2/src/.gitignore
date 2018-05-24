@@ -1,0 +1,15 @@
+**/*.o
+**/Makefile
+**/Makefile.in
+**/*.a
+**/.deps
+**/.clang_complete
+**/*.dwo
+parser/tiger_lexer.cc
+parser/tiger_parser.cc
+parser/tiger_parser.hh
+parser/stack.hh
+parser/position.hh
+parser/location.hh
+driver/dtiger
+ast/nodes.hh

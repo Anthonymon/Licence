@@ -1,0 +1,375 @@
+p.bordure
+{
+	padding: 5% 5% 0% 5%;
+	background-color: #002E6C;
+	text-align: justify;
+	text-align: right;
+}
+
+div.button
+{
+	width:110px;
+	cursor:pointer;
+	text-transform:capitalize;
+	padding:6px 0 6px 0;
+	font:Bold 13px Arial;
+	background:#d34836;
+	color:#fff;
+	width:90px;
+	border-radius:2px;
+	border:none;
+}
+
+div.player
+{
+	font-style: bold;
+	font-size: 100%;
+}
+
+img.logo
+{  
+	position: absolute;
+	top: 20px;
+	left: 50px;
+	width:75px;
+	height:39px;
+}
+
+.boutonStats
+{  
+	position: absolute;
+	top: 25px;
+	left: 300px;
+}
+
+.boutonScores
+{  
+	position: absolute;
+	top: 25px;
+	left: 600px;
+}
+
+.boutonTeams
+{  
+	position: absolute;
+	top: 25px;
+	left: 900px;
+}
+
+.boutonQuitter
+{
+	position: absolute;
+	top: 25px;
+	left: 1270px;
+}
+
+img.gifPresentation
+{
+	position: absolute;
+	top: 150px;
+	left: 300px;
+	width: 681px;
+	height: 387px;
+
+}
+
+img.championnat
+{
+	position: absolute;
+	left: 480px;
+	width: 310px;
+	height: 514px;
+}
+
+img.photoJoueur
+{
+	width: 33px;
+	height: 50px;
+}
+
+img.imageEquipe
+{
+	width: 100px;
+	height: 100px;
+}
+
+p.classementNational
+{
+	margin: 8 800 0 0; 
+	padding: 5 5 5 5; 
+	background-color: white; 
+	text-align: justify; 
+	border-style: solid; 
+	border-width: 3px; 
+	border-color: red;
+
+}
+
+img.premierNational
+{
+	position: absolute;
+	top: 338px;
+	left: 516px;
+	width: 66px;
+	height: 66px;
+}
+
+img.deuxiemeNational
+{
+	position: absolute;
+	top: 533px;
+	left: 531px;
+	width: 56px;
+	height: 55px;
+}
+
+img.premierAmerican
+{
+	position: absolute;
+	top: 341px;
+	left: 687px;
+	width: 62px;
+	height: 62px;
+}
+
+img.deuxiemeAmerican
+{
+	position: absolute;
+	top: 534px;
+	left: 680px;
+	width: 56px;
+	height: 54px;
+}
+
+img.premierClassement
+{
+	position: absolute;
+	top: 213px;
+	left: 601px;
+	width: 62px;
+	height: 62px;
+}
+
+img.troisiemeClassement
+{
+	position: absolute;
+	top: 440px;
+	left: 603px;
+	width: 56px;
+	height: 55px;
+}
+
+img.boutons
+{
+	width: 100px;
+	height: 100px;
+}
+
+img.presentationEquipe
+{
+	position: absolute;
+	left: 20px;
+	width: 100px;
+	height: 100px;
+}
+
+img.roaster
+{
+	position: absolute;
+	top: 130px;
+	left: 420px;
+	
+}
+
+img.catcher
+{
+	position: absolute;
+	width: 33px;
+	height: 50px;
+	top: 465px;
+	left: 626px;
+}
+
+img.pitcher
+{
+	position: absolute;
+	width: 33px;
+	height: 50px;
+	top: 380px;
+	left: 626px;
+}
+
+
+img.firstBase
+{
+	position: absolute;
+	width: 33px;
+	height: 50px;
+	top: 370px;
+	left: 720px;
+}
+
+img.secondBase
+{
+	position: absolute;
+	width: 33px;
+	height: 50px;
+	top: 305px;
+	left: 670px;
+}
+
+img.thirdBase
+{
+	position: absolute;
+	width: 33px;
+	height: 50px;
+	top: 370px;
+	left: 540px;
+}
+
+img.shortStop
+{
+	position: absolute;
+	width: 33px;
+	height: 50px;
+	top: 305px;
+	left: 580px;
+}
+
+img.leftField
+{
+	position: absolute;
+	width: 33px;
+	height: 50px;
+	top: 260px;
+	left: 480px;
+}
+
+img.centerField
+{
+	position: absolute;
+	width: 33px;
+	height: 50px;
+	top: 180px;
+	left: 626px;
+}
+
+img.rightField
+{
+	position: absolute;
+	width: 33px;
+	height: 50px;
+	top: 260px;
+	left: 760px;
+}
+
+img.coach
+{
+	position: absolute;
+	top: 300px;
+	left: 180px;
+}
+
+img.modifEquipe
+{
+	position: absolute;
+	left: 1000px;
+	width: 100px;
+	height: 100px;
+}
+
+img.player
+{
+	position: absolute;
+	top: 150px;
+	left: 1000px;
+	width: 180px;
+	height: 270px;
+}
+
+h2.titre
+{
+	text-align: center; 
+
+}
+
+th.teamsEcart
+{
+	width: 100px;
+}
+
+th.roasterEcart
+{
+	width: 900px;
+}
+
+th.teamsTabInfos
+{
+	background-color:#AAAAFF;
+	width:350px;
+}
+
+th.teamsTabBoutons
+{
+	background-color:#AAAAFF;
+	width:100px;
+}
+
+td.alignement
+{
+	text-align: center;
+}
+
+td.alignementCoach
+{
+	width:100px;
+}
+
+tr.coulStats
+{
+	background-color:#AAAAFF;
+}
+
+th.tailleTabStats
+{
+	width:200px;
+}
+
+th.tailleTabMatchs
+{
+	width:50;
+}
+
+th.roasterTabMatchs
+{
+	background-color:#AAAAFF;
+	width:200px;
+}
+
+th.tailleTabStatsRoaster
+{
+	width:300;
+}
+
+th.scoresLeagueTab
+{
+	background-color:#AAAAFF;
+	width:350px;
+}
+
+th.scoresPointsTab
+{
+	background-color:#AAAAFF;
+	width:100px;
+}
+
+th.tailleEspaceScores
+{
+	width:600px;
+}
+
+th.espaceMatchsScores
+{
+	width:100;
+}
+

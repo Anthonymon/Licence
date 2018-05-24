@@ -1,0 +1,1 @@
+(defun dessine(entier) (if(> entier 0)(progn (format t ".")(dessine (- entier 1)))(format t " ")))

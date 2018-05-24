@@ -1,0 +1,6 @@
+/gmp-6.1.2/*
+*.o
+primalite
+test
+/doc/*
+gmp-6.1.2.tar.xz

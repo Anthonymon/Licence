@@ -1,0 +1,10 @@
+PROJECT_NAME = "Solovay-Strassen"
+OUTPUT_DIRECTORY = ./doc/
+EXTRACT_ALL = yes
+EXTRACT_PRIVATE = yes
+EXTRACT_STATIC = yes
+INPUT = ./app/inc/ ./app/src/ README.md
+FILE_PATTERNS = 
+RECURSIVE = yes
+DOT_PATH = ${DOXYGEN_DOT_PATH}
+OUTPUT_LANGUAGE = French

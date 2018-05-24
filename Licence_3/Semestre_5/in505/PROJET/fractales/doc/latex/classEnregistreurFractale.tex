@@ -1,0 +1,114 @@
+\hypertarget{classEnregistreurFractale}{}\section{Référence de la classe Enregistreur\+Fractale}
+\label{classEnregistreurFractale}\index{Enregistreur\+Fractale@{Enregistreur\+Fractale}}
+
+
+{\ttfamily \#include $<$enregistreur\+Fractale.\+hh$>$}
+
+
+
+Graphe d\textquotesingle{}héritage de Enregistreur\+Fractale\+:
+% FIG 0
+
+
+Graphe de collaboration de Enregistreur\+Fractale\+:
+% FIG 1
+\subsection*{Fonctions membres publiques}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classEnregistreurFractale_a41e2b5d991a102bf7af1491b986ab8fb}{Enregistreur\+Fractale} (string \hyperlink{classEnregistreurFractale_a31b4ca6d0309700e2e6c26087a76d855}{filename})
+\item 
+void \hyperlink{classEnregistreurFractale_aa6ad605b775a79d8ea96a5bc8008070a}{enregistrer\+Fractale} (\hyperlink{classDessinFractaleGL}{Dessin\+Fractale\+GL} \&dessin)
+\item 
+void \hyperlink{classEnregistreurFractale_a594fe98fad6fe07acee198fb5de013ab}{dessine\+Pixel} (double x, double y, double r, double g, double b)
+\item 
+\hyperlink{classEnregistreurFractale_a5cb00738a4526c7bf1c93a84077cdb42}{$\sim$\+Enregistreur\+Fractale} ()
+\end{DoxyCompactItemize}
+\subsection*{Attributs privés}
+\begin{DoxyCompactItemize}
+\item 
+double \hyperlink{classEnregistreurFractale_abbaf005fa703ee05a79abca7006f3a5e}{largeur}
+\item 
+double \hyperlink{classEnregistreurFractale_aa7b368324a887410f6133edfd370fe5c}{hauteur}
+\item 
+string \hyperlink{classEnregistreurFractale_a31b4ca6d0309700e2e6c26087a76d855}{filename}
+\item 
+Ref\+Ptr$<$ Svg\+Surface $>$ \hyperlink{classEnregistreurFractale_a4c01839e709dd033364d996aa74bfc01}{surface}
+\item 
+Ref\+Ptr$<$ Context $>$ \hyperlink{classEnregistreurFractale_ad7af9f1a310fa61fca30232e655a08cb}{contexte}
+\end{DoxyCompactItemize}
+
+
+\subsection{Description détaillée}
+\textquotesingle{}enregistrement vectoriel svg auteur\+: Yassin Doudouh 
+
+\subsection{Documentation des constructeurs et destructeur}
+\mbox{\Hypertarget{classEnregistreurFractale_a41e2b5d991a102bf7af1491b986ab8fb}\label{classEnregistreurFractale_a41e2b5d991a102bf7af1491b986ab8fb}} 
+\index{Enregistreur\+Fractale@{Enregistreur\+Fractale}!Enregistreur\+Fractale@{Enregistreur\+Fractale}}
+\index{Enregistreur\+Fractale@{Enregistreur\+Fractale}!Enregistreur\+Fractale@{Enregistreur\+Fractale}}
+\subsubsection{\texorpdfstring{Enregistreur\+Fractale()}{EnregistreurFractale()}}
+{\footnotesize\ttfamily Enregistreur\+Fractale\+::\+Enregistreur\+Fractale (\begin{DoxyParamCaption}\item[{string}]{filename }\end{DoxyParamCaption})}
+
+Constructeur de \hyperlink{classEnregistreurFractale}{Enregistreur\+Fractale} \mbox{\Hypertarget{classEnregistreurFractale_a5cb00738a4526c7bf1c93a84077cdb42}\label{classEnregistreurFractale_a5cb00738a4526c7bf1c93a84077cdb42}} 
+\index{Enregistreur\+Fractale@{Enregistreur\+Fractale}!````~Enregistreur\+Fractale@{$\sim$\+Enregistreur\+Fractale}}
+\index{````~Enregistreur\+Fractale@{$\sim$\+Enregistreur\+Fractale}!Enregistreur\+Fractale@{Enregistreur\+Fractale}}
+\subsubsection{\texorpdfstring{$\sim$\+Enregistreur\+Fractale()}{~EnregistreurFractale()}}
+{\footnotesize\ttfamily Enregistreur\+Fractale\+::$\sim$\+Enregistreur\+Fractale (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Destructeur de \hyperlink{classEnregistreurFractale}{Enregistreur\+Fractale} 
+
+\subsection{Documentation des fonctions membres}
+\mbox{\Hypertarget{classEnregistreurFractale_a594fe98fad6fe07acee198fb5de013ab}\label{classEnregistreurFractale_a594fe98fad6fe07acee198fb5de013ab}} 
+\index{Enregistreur\+Fractale@{Enregistreur\+Fractale}!dessine\+Pixel@{dessine\+Pixel}}
+\index{dessine\+Pixel@{dessine\+Pixel}!Enregistreur\+Fractale@{Enregistreur\+Fractale}}
+\subsubsection{\texorpdfstring{dessine\+Pixel()}{dessinePixel()}}
+{\footnotesize\ttfamily void Enregistreur\+Fractale\+::dessine\+Pixel (\begin{DoxyParamCaption}\item[{double}]{x,  }\item[{double}]{y,  }\item[{double}]{r,  }\item[{double}]{g,  }\item[{double}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Fonction qui dessine un pixel Redfinition de la methode de \hyperlink{classAbstractDessin}{Abstract\+Dessin} pour dessiner un pixel selon Cairo 
+
+Implémente \hyperlink{classAbstractDessin_a82983d17a63c236c5ca8f4966195ffe3}{Abstract\+Dessin}.
+
+\mbox{\Hypertarget{classEnregistreurFractale_aa6ad605b775a79d8ea96a5bc8008070a}\label{classEnregistreurFractale_aa6ad605b775a79d8ea96a5bc8008070a}} 
+\index{Enregistreur\+Fractale@{Enregistreur\+Fractale}!enregistrer\+Fractale@{enregistrer\+Fractale}}
+\index{enregistrer\+Fractale@{enregistrer\+Fractale}!Enregistreur\+Fractale@{Enregistreur\+Fractale}}
+\subsubsection{\texorpdfstring{enregistrer\+Fractale()}{enregistrerFractale()}}
+{\footnotesize\ttfamily void Enregistreur\+Fractale\+::enregistrer\+Fractale (\begin{DoxyParamCaption}\item[{\hyperlink{classDessinFractaleGL}{Dessin\+Fractale\+GL} \&}]{dessin }\end{DoxyParamCaption})}
+
+Fonction qui enregistre la fractale, cad qui cree un fichier S\+VG afin de la dessiner 
+
+\subsection{Documentation des données membres}
+\mbox{\Hypertarget{classEnregistreurFractale_ad7af9f1a310fa61fca30232e655a08cb}\label{classEnregistreurFractale_ad7af9f1a310fa61fca30232e655a08cb}} 
+\index{Enregistreur\+Fractale@{Enregistreur\+Fractale}!contexte@{contexte}}
+\index{contexte@{contexte}!Enregistreur\+Fractale@{Enregistreur\+Fractale}}
+\subsubsection{\texorpdfstring{contexte}{contexte}}
+{\footnotesize\ttfamily Ref\+Ptr$<$Context$>$ Enregistreur\+Fractale\+::contexte\hspace{0.3cm}{\ttfamily [private]}}
+
+Pour dessiner sur cette image S\+VG \mbox{\Hypertarget{classEnregistreurFractale_a31b4ca6d0309700e2e6c26087a76d855}\label{classEnregistreurFractale_a31b4ca6d0309700e2e6c26087a76d855}} 
+\index{Enregistreur\+Fractale@{Enregistreur\+Fractale}!filename@{filename}}
+\index{filename@{filename}!Enregistreur\+Fractale@{Enregistreur\+Fractale}}
+\subsubsection{\texorpdfstring{filename}{filename}}
+{\footnotesize\ttfamily string Enregistreur\+Fractale\+::filename\hspace{0.3cm}{\ttfamily [private]}}
+
+Nom du fichier svg \mbox{\Hypertarget{classEnregistreurFractale_aa7b368324a887410f6133edfd370fe5c}\label{classEnregistreurFractale_aa7b368324a887410f6133edfd370fe5c}} 
+\index{Enregistreur\+Fractale@{Enregistreur\+Fractale}!hauteur@{hauteur}}
+\index{hauteur@{hauteur}!Enregistreur\+Fractale@{Enregistreur\+Fractale}}
+\subsubsection{\texorpdfstring{hauteur}{hauteur}}
+{\footnotesize\ttfamily double Enregistreur\+Fractale\+::hauteur\hspace{0.3cm}{\ttfamily [private]}}
+
+Hauteur de l\textquotesingle{}image svg construite \mbox{\Hypertarget{classEnregistreurFractale_abbaf005fa703ee05a79abca7006f3a5e}\label{classEnregistreurFractale_abbaf005fa703ee05a79abca7006f3a5e}} 
+\index{Enregistreur\+Fractale@{Enregistreur\+Fractale}!largeur@{largeur}}
+\index{largeur@{largeur}!Enregistreur\+Fractale@{Enregistreur\+Fractale}}
+\subsubsection{\texorpdfstring{largeur}{largeur}}
+{\footnotesize\ttfamily double Enregistreur\+Fractale\+::largeur\hspace{0.3cm}{\ttfamily [private]}}
+
+Largeur de l\textquotesingle{}image svg construite \mbox{\Hypertarget{classEnregistreurFractale_a4c01839e709dd033364d996aa74bfc01}\label{classEnregistreurFractale_a4c01839e709dd033364d996aa74bfc01}} 
+\index{Enregistreur\+Fractale@{Enregistreur\+Fractale}!surface@{surface}}
+\index{surface@{surface}!Enregistreur\+Fractale@{Enregistreur\+Fractale}}
+\subsubsection{\texorpdfstring{surface}{surface}}
+{\footnotesize\ttfamily Ref\+Ptr$<$Svg\+Surface$>$ Enregistreur\+Fractale\+::surface\hspace{0.3cm}{\ttfamily [private]}}
+
+Pour creer une image S\+VG 
+
+La documentation de cette classe a été générée à partir des fichiers suivants \+:\begin{DoxyCompactItemize}
+\item 
+app/head/\hyperlink{enregistreurFractale_8hh}{enregistreur\+Fractale.\+hh}\item 
+app/src/\hyperlink{enregistreurFractale_8cc}{enregistreur\+Fractale.\+cc}\end{DoxyCompactItemize}

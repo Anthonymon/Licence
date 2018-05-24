@@ -1,0 +1,6 @@
+let 
+	var a := 2
+in
+	if a=2 then a:=3 else a:=4
+end
+

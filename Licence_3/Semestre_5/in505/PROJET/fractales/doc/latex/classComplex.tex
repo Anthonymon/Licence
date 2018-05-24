@@ -1,0 +1,172 @@
+\hypertarget{classComplex}{}\section{Référence de la classe Complex}
+\label{classComplex}\index{Complex@{Complex}}
+
+
+{\ttfamily \#include $<$complex.\+hh$>$}
+
+\subsection*{Fonctions membres publiques}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classComplex_a43b9f07cdf697c71b5fd506a6cc80b8f}{Complex} ()
+\item 
+\hyperlink{classComplex_af56593c9b976452fd1480c1cc9e7a8c7}{Complex} (double r, double i)
+\item 
+\hyperlink{classComplex_a70e14b17c92e3da779686b98f9f3bb2d}{$\sim$\+Complex} ()
+\item 
+double \hyperlink{classComplex_a5e43de61a58eab8420b70eb2974e6b0b}{get\+Re} ()
+\item 
+double \hyperlink{classComplex_adb777696a6536bae109ce0b1380493cb}{get\+Im} ()
+\item 
+double \hyperlink{classComplex_a5d7b502023f614df92f597f65b081de0}{get\+Module} ()
+\item 
+double \hyperlink{classComplex_a6d0e1c55b4986f03850adaace198824e}{get\+Module\+Carre} ()
+\item 
+void \hyperlink{classComplex_abb500a2eaeb93c489fbc38506fdd0750}{set\+Re} (double nb)
+\item 
+void \hyperlink{classComplex_aac52bfc17e87be68433b2bca83bb96f0}{set\+Im} (double nb)
+\item 
+void \hyperlink{classComplex_a6a8847542b73f8af12ae3c1f51fec64f}{set\+Complex} (double \hyperlink{classComplex_a843ce2f85af4c57db9063c86f3cd9607}{re}, double \hyperlink{classComplex_a776d595d5a1b576e9136cbc6bac0589c}{im})
+\item 
+\hyperlink{classComplex}{Complex} \& \hyperlink{classComplex_a77d1c64c8a3e4fe5d7c3e9ffcd666c7e}{operator=} (\hyperlink{classComplex}{Complex} \&s)
+\item 
+\hyperlink{classComplex}{Complex} \& \hyperlink{classComplex_ae567e20c39745c1bfe8f07be126a5fff}{operator+=} (const \hyperlink{classComplex}{Complex} \&c)
+\item 
+\hyperlink{classComplex}{Complex} \& \hyperlink{classComplex_a2f5beb61c61de440c20e69decc584952}{operator$\ast$=} (const \hyperlink{classComplex}{Complex} \&c)
+\end{DoxyCompactItemize}
+\subsection*{Attributs privés}
+\begin{DoxyCompactItemize}
+\item 
+double \hyperlink{classComplex_a843ce2f85af4c57db9063c86f3cd9607}{re}
+\item 
+double \hyperlink{classComplex_a776d595d5a1b576e9136cbc6bac0589c}{im}
+\end{DoxyCompactItemize}
+\subsection*{Amis}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classComplex}{Complex} \hyperlink{classComplex_a3946e00b31192f0b4628357b86131044}{operator+} (const \hyperlink{classComplex}{Complex} \&c1, const \hyperlink{classComplex}{Complex} \&c2)
+\item 
+\hyperlink{classComplex}{Complex} \hyperlink{classComplex_aadf4af6aafa8eea50ea802bce62c954c}{operator$\ast$} (const \hyperlink{classComplex}{Complex} \&c1, const \hyperlink{classComplex}{Complex} \&c2)
+\end{DoxyCompactItemize}
+
+
+\subsection{Description détaillée}
+Cette classe correspond a un complexe avec une partie reelle et une partie imaginaire x+iy auteur\+: Clement Caumes 
+
+\subsection{Documentation des constructeurs et destructeur}
+\mbox{\Hypertarget{classComplex_a43b9f07cdf697c71b5fd506a6cc80b8f}\label{classComplex_a43b9f07cdf697c71b5fd506a6cc80b8f}} 
+\index{Complex@{Complex}!Complex@{Complex}}
+\index{Complex@{Complex}!Complex@{Complex}}
+\subsubsection{\texorpdfstring{Complex()}{Complex()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Complex\+::\+Complex (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Constructeur par defaut de \hyperlink{classComplex}{Complex} \mbox{\Hypertarget{classComplex_af56593c9b976452fd1480c1cc9e7a8c7}\label{classComplex_af56593c9b976452fd1480c1cc9e7a8c7}} 
+\index{Complex@{Complex}!Complex@{Complex}}
+\index{Complex@{Complex}!Complex@{Complex}}
+\subsubsection{\texorpdfstring{Complex()}{Complex()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Complex\+::\+Complex (\begin{DoxyParamCaption}\item[{double}]{r,  }\item[{double}]{i }\end{DoxyParamCaption})}
+
+Constructeur avec parametre de Complexe \mbox{\Hypertarget{classComplex_a70e14b17c92e3da779686b98f9f3bb2d}\label{classComplex_a70e14b17c92e3da779686b98f9f3bb2d}} 
+\index{Complex@{Complex}!````~Complex@{$\sim$\+Complex}}
+\index{````~Complex@{$\sim$\+Complex}!Complex@{Complex}}
+\subsubsection{\texorpdfstring{$\sim$\+Complex()}{~Complex()}}
+{\footnotesize\ttfamily Complex\+::$\sim$\+Complex (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Destructeur de \hyperlink{classComplex}{Complex} 
+
+\subsection{Documentation des fonctions membres}
+\mbox{\Hypertarget{classComplex_adb777696a6536bae109ce0b1380493cb}\label{classComplex_adb777696a6536bae109ce0b1380493cb}} 
+\index{Complex@{Complex}!get\+Im@{get\+Im}}
+\index{get\+Im@{get\+Im}!Complex@{Complex}}
+\subsubsection{\texorpdfstring{get\+Im()}{getIm()}}
+{\footnotesize\ttfamily double Complex\+::get\+Im (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Accesseur de la partie imaginaire \mbox{\Hypertarget{classComplex_a5d7b502023f614df92f597f65b081de0}\label{classComplex_a5d7b502023f614df92f597f65b081de0}} 
+\index{Complex@{Complex}!get\+Module@{get\+Module}}
+\index{get\+Module@{get\+Module}!Complex@{Complex}}
+\subsubsection{\texorpdfstring{get\+Module()}{getModule()}}
+{\footnotesize\ttfamily double Complex\+::get\+Module (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Retourne le module du complexe \mbox{\Hypertarget{classComplex_a6d0e1c55b4986f03850adaace198824e}\label{classComplex_a6d0e1c55b4986f03850adaace198824e}} 
+\index{Complex@{Complex}!get\+Module\+Carre@{get\+Module\+Carre}}
+\index{get\+Module\+Carre@{get\+Module\+Carre}!Complex@{Complex}}
+\subsubsection{\texorpdfstring{get\+Module\+Carre()}{getModuleCarre()}}
+{\footnotesize\ttfamily double Complex\+::get\+Module\+Carre (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Retourne le module au carre du complexe (utile pour l\textquotesingle{}optimisation) \mbox{\Hypertarget{classComplex_a5e43de61a58eab8420b70eb2974e6b0b}\label{classComplex_a5e43de61a58eab8420b70eb2974e6b0b}} 
+\index{Complex@{Complex}!get\+Re@{get\+Re}}
+\index{get\+Re@{get\+Re}!Complex@{Complex}}
+\subsubsection{\texorpdfstring{get\+Re()}{getRe()}}
+{\footnotesize\ttfamily double Complex\+::get\+Re (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Accesseur de la partie reelle \mbox{\Hypertarget{classComplex_a2f5beb61c61de440c20e69decc584952}\label{classComplex_a2f5beb61c61de440c20e69decc584952}} 
+\index{Complex@{Complex}!operator$\ast$=@{operator$\ast$=}}
+\index{operator$\ast$=@{operator$\ast$=}!Complex@{Complex}}
+\subsubsection{\texorpdfstring{operator$\ast$=()}{operator*=()}}
+{\footnotesize\ttfamily \hyperlink{classComplex}{Complex} \& Complex\+::operator$\ast$= (\begin{DoxyParamCaption}\item[{const \hyperlink{classComplex}{Complex} \&}]{c }\end{DoxyParamCaption})}
+
+Surcharge de l\textquotesingle{}operateur $\ast$= \mbox{\Hypertarget{classComplex_ae567e20c39745c1bfe8f07be126a5fff}\label{classComplex_ae567e20c39745c1bfe8f07be126a5fff}} 
+\index{Complex@{Complex}!operator+=@{operator+=}}
+\index{operator+=@{operator+=}!Complex@{Complex}}
+\subsubsection{\texorpdfstring{operator+=()}{operator+=()}}
+{\footnotesize\ttfamily \hyperlink{classComplex}{Complex} \& Complex\+::operator+= (\begin{DoxyParamCaption}\item[{const \hyperlink{classComplex}{Complex} \&}]{c }\end{DoxyParamCaption})}
+
+Surcharge de l\textquotesingle{}operateur += \mbox{\Hypertarget{classComplex_a77d1c64c8a3e4fe5d7c3e9ffcd666c7e}\label{classComplex_a77d1c64c8a3e4fe5d7c3e9ffcd666c7e}} 
+\index{Complex@{Complex}!operator=@{operator=}}
+\index{operator=@{operator=}!Complex@{Complex}}
+\subsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \hyperlink{classComplex}{Complex} \& Complex\+::operator= (\begin{DoxyParamCaption}\item[{\hyperlink{classComplex}{Complex} \&}]{c }\end{DoxyParamCaption})}
+
+Surcharge de l\textquotesingle{}operateur = \mbox{\Hypertarget{classComplex_a6a8847542b73f8af12ae3c1f51fec64f}\label{classComplex_a6a8847542b73f8af12ae3c1f51fec64f}} 
+\index{Complex@{Complex}!set\+Complex@{set\+Complex}}
+\index{set\+Complex@{set\+Complex}!Complex@{Complex}}
+\subsubsection{\texorpdfstring{set\+Complex()}{setComplex()}}
+{\footnotesize\ttfamily void Complex\+::set\+Complex (\begin{DoxyParamCaption}\item[{double}]{re,  }\item[{double}]{im }\end{DoxyParamCaption})}
+
+Modifie le complexe \mbox{\Hypertarget{classComplex_aac52bfc17e87be68433b2bca83bb96f0}\label{classComplex_aac52bfc17e87be68433b2bca83bb96f0}} 
+\index{Complex@{Complex}!set\+Im@{set\+Im}}
+\index{set\+Im@{set\+Im}!Complex@{Complex}}
+\subsubsection{\texorpdfstring{set\+Im()}{setIm()}}
+{\footnotesize\ttfamily void Complex\+::set\+Im (\begin{DoxyParamCaption}\item[{double}]{nb }\end{DoxyParamCaption})}
+
+Modifie la partie imaginaire du complexe \mbox{\Hypertarget{classComplex_abb500a2eaeb93c489fbc38506fdd0750}\label{classComplex_abb500a2eaeb93c489fbc38506fdd0750}} 
+\index{Complex@{Complex}!set\+Re@{set\+Re}}
+\index{set\+Re@{set\+Re}!Complex@{Complex}}
+\subsubsection{\texorpdfstring{set\+Re()}{setRe()}}
+{\footnotesize\ttfamily void Complex\+::set\+Re (\begin{DoxyParamCaption}\item[{double}]{nb }\end{DoxyParamCaption})}
+
+Modifie la partie reelle du complexe 
+
+\subsection{Documentation des fonctions amies et associées}
+\mbox{\Hypertarget{classComplex_aadf4af6aafa8eea50ea802bce62c954c}\label{classComplex_aadf4af6aafa8eea50ea802bce62c954c}} 
+\index{Complex@{Complex}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!Complex@{Complex}}
+\subsubsection{\texorpdfstring{operator$\ast$}{operator*}}
+{\footnotesize\ttfamily \hyperlink{classComplex}{Complex} operator$\ast$ (\begin{DoxyParamCaption}\item[{const \hyperlink{classComplex}{Complex} \&}]{c1,  }\item[{const \hyperlink{classComplex}{Complex} \&}]{c2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+Redefinition de l\textquotesingle{}operateur $\ast$ \mbox{\Hypertarget{classComplex_a3946e00b31192f0b4628357b86131044}\label{classComplex_a3946e00b31192f0b4628357b86131044}} 
+\index{Complex@{Complex}!operator+@{operator+}}
+\index{operator+@{operator+}!Complex@{Complex}}
+\subsubsection{\texorpdfstring{operator+}{operator+}}
+{\footnotesize\ttfamily \hyperlink{classComplex}{Complex} operator+ (\begin{DoxyParamCaption}\item[{const \hyperlink{classComplex}{Complex} \&}]{c1,  }\item[{const \hyperlink{classComplex}{Complex} \&}]{c2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+Redefinition de l\textquotesingle{}operateur + 
+
+\subsection{Documentation des données membres}
+\mbox{\Hypertarget{classComplex_a776d595d5a1b576e9136cbc6bac0589c}\label{classComplex_a776d595d5a1b576e9136cbc6bac0589c}} 
+\index{Complex@{Complex}!im@{im}}
+\index{im@{im}!Complex@{Complex}}
+\subsubsection{\texorpdfstring{im}{im}}
+{\footnotesize\ttfamily double Complex\+::im\hspace{0.3cm}{\ttfamily [private]}}
+
+Partie Imaginaire du complexe \mbox{\Hypertarget{classComplex_a843ce2f85af4c57db9063c86f3cd9607}\label{classComplex_a843ce2f85af4c57db9063c86f3cd9607}} 
+\index{Complex@{Complex}!re@{re}}
+\index{re@{re}!Complex@{Complex}}
+\subsubsection{\texorpdfstring{re}{re}}
+{\footnotesize\ttfamily double Complex\+::re\hspace{0.3cm}{\ttfamily [private]}}
+
+Partie reelle du complexe 
+
+La documentation de cette classe a été générée à partir des fichiers suivants \+:\begin{DoxyCompactItemize}
+\item 
+app/head/\hyperlink{complex_8hh}{complex.\+hh}\item 
+app/src/\hyperlink{complex_8cc}{complex.\+cc}\end{DoxyCompactItemize}

@@ -1,0 +1,94 @@
+SELECT `nom`, `prenom` FROM `malade` WHERE `mutuelle`="MAAF"
+
+R7 : 
+SELECT malade.nom,malade.prenom, COUNT(DISTINCT docteur.specialite) AS nb_specialite,
+COUNT(DISTINCT docteur.numero) AS nb_soignants
+FROM malade,docteur,soigne
+WHERE docteur.numero=soigne.no_docteur
+AND malade.numero=soigne.no_malade
+GROUP BY malade.nom,malade.prenom
+HAVING nb_soignants>3;
+
+R8 :
+SELECT s.code,COUNT_INF.nb_inf/COUNT_MAL.nb_malades AS rapport_i_sur_m
+FROM (SELECT code_service ,COUNT(*) AS nb_inf
+      FROM infirmier
+      GROUP BY code_service) COUNT_INF,
+     (SELECT code_service,COUNT(*) AS nb_malades
+      FROM hospitalisation
+      GROUP BY code_service)COUNT_MAL,
+      service s
+WHERE s.code=COUNT_INF.code_service AND s.code=COUNT_MAL.code_service
+
+R9:
+SELECT DISTINCT employe.nom,employe.prenom
+FROM soigne, employe,hospitalisation
+WHERE employe.numero=soigne.no_docteur
+AND soigne.no_malade=hospitalisation.no_malade
+
+R10:
+SELECT employe.nom,employe.prenom
+FROM employe,docteur
+WHERE employe.numero=docteur.numero
+AND employe.numero
+NOT IN
+(
+    SELECT DISTINCT employe.numero
+	FROM soigne, employe,hospitalisation
+	WHERE employe.numero=soigne.no_docteur
+	AND soigne.no_malade=hospitalisation.no_malade
+) 
+
+R11:
+SELECT employe.nom, employe.prenom, COUNT(*)
+FROM soigne, employe, hospitalisation
+WHERE employe.numero=soigne.no_docteur
+AND soigne.no_malade=hospitalisation.no_malade
+GROUP BY employe.nom,employe.prenom
+UNION
+SELECT employe.nom, employe.prenom,0
+FROM employe, docteur
+WHERE employe.numero=docteur.numero
+AND employe.numero
+NOT IN
+(
+    SELECT DISTINCT employe.numero
+    FROM soigne,employe,hospitalisation
+    WHERE employe.numero=soigne.no_docteur
+    AND soigne.no_malade=hospitalisation.no_malade
+)
+
+R11 v2:
+SELECT employe.prenom, COUNT(hospitalisation.no_malade) AS nb_hosp
+FROM employe, soigne LEFT OUTER JOIN hospitalisation 
+ON soigne.no_malade=hospitalisation.no_malade
+WHERE employe.numero=soigne.no_docteur
+GROUP BY employe.nom,employe.prenom
+
+R12:
+SELECT DISTINCT service.batiment, hospitalisation.no_chambre
+FROM hospitalisation, service
+WHERE hospitalisation.code_service=service.code
+
+R13:
+SELECT chambre.no_chambre, service.batiment
+FROM service,chambre
+WHERE chambre.code_service, service.code 
+AND (chambre.code_service,chambre.no_chambre) 
+NOT IN (
+    SELECT code_service,no_chambre
+    FROM hospitalisation)
+    
+R14:
+SELECT employe.nom,employe.prenom
+FROM employe, docteur
+WHERE employe.numero=docteur.numero
+AND NOT EXISTS (
+    SELECT *
+    FROM service
+    WHERE NOT EXISTS(
+        SELECT *
+        FROM hospitalisation,soigne
+        WHERE soigne.no_malade=hospitalisation.no_malade
+        AND soigne.no_docteur=docteur.numero
+        AND hospitalisation.code_service=service.code))

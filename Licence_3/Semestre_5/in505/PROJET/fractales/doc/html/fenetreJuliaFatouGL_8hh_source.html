@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Fractales:  Fichier source de app/head/fenetreJuliaFatouGL.hh</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Fractales
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_d422163b96683743ed3963d4aac17747.html">app</a></li><li class="navelem"><a class="el" href="dir_b5102c6ec556d9d5555833f0fcbc2722.html">head</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">fenetreJuliaFatouGL.hh</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="fenetreJuliaFatouGL_8hh.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div><div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#ifndef FENETREJULIAFATOUGL__HH</span></div><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#define FENETREJULIAFATOUGL__HH</span></div><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;</div><div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;../head/fenetreMandelbrotGL.hh&quot;</span></div><div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;../head/abstractFenetreGL.hh&quot;</span></div><div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;../head/complex.hh&quot;</span></div><div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;QApplication&gt;</span></div><div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;QWidget&gt;</span></div><div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;QPushButton&gt;</span></div><div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;QHBoxLayout&gt;</span></div><div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;QVBoxLayout&gt;</span></div><div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &lt;QDoubleSpinBox&gt;</span></div><div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div><div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="classFenetreJuliaFatouGL.html">   26</a></span>&#160;<span class="keyword">class </span><a class="code" href="classFenetreJuliaFatouGL.html">FenetreJuliaFatouGL</a> : <span class="keyword">public</span> <a class="code" href="classAbstractFenetreGL.html">AbstractFenetreGL</a> {</div><div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    Q_OBJECT</div><div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    </div><div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keyword">private</span>:</div><div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="classFenetreJuliaFatouGL.html#a212766ae261ef36ff46b50db4e1bff00">   30</a></span>&#160;        QHBoxLayout* <a class="code" href="classFenetreJuliaFatouGL.html#a212766ae261ef36ff46b50db4e1bff00">layoutHorizontal</a>; </div><div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="classFenetreJuliaFatouGL.html#acb452cf6be9c8e45f424df19bba9fa8c">   31</a></span>&#160;        QVBoxLayout* <a class="code" href="classFenetreJuliaFatouGL.html#acb452cf6be9c8e45f424df19bba9fa8c">layoutVertical</a>; </div><div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="classFenetreJuliaFatouGL.html#aa2c66f22aeaf44b6deae63a53e21ab62">   32</a></span>&#160;        QDoubleSpinBox* <a class="code" href="classFenetreJuliaFatouGL.html#aa2c66f22aeaf44b6deae63a53e21ab62">partieReelle</a>; </div><div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="classFenetreJuliaFatouGL.html#abfa274551dbda5d8d0d37cf04314c007">   33</a></span>&#160;        QDoubleSpinBox* <a class="code" href="classFenetreJuliaFatouGL.html#abfa274551dbda5d8d0d37cf04314c007">partieImaginaire</a>; </div><div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keyword">public</span>:</div><div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <a class="code" href="classFenetreJuliaFatouGL.html#a81cadd784a4ce06c47e7e4223f3c55d5">FenetreJuliaFatouGL</a>(<a class="code" href="classComplex.html">Complex</a>&amp; complex); </div><div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <a class="code" href="classFenetreJuliaFatouGL.html#a2d321f007990c90f48e87d6fb1dc7eda">~FenetreJuliaFatouGL</a>();</div><div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        </div><div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keyword">public</span> slots:</div><div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classFenetreJuliaFatouGL.html#a73ccd24872ccdf2d9d6a982c0ed44d70">choixPartieImaginaire</a>(<span class="keywordtype">double</span> nouveau);</div><div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classFenetreJuliaFatouGL.html#ab7e8e57782d953b9ff196d229f543bec">choixPartieReelle</a>(<span class="keywordtype">double</span> nouveau);</div><div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;};</div><div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div><div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div><div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">#endif</span></div><div class="ttc" id="classFenetreJuliaFatouGL_html"><div class="ttname"><a href="classFenetreJuliaFatouGL.html">FenetreJuliaFatouGL</a></div><div class="ttdef"><b>Definition:</b> fenetreJuliaFatouGL.hh:26</div></div>
+<div class="ttc" id="classAbstractFenetreGL_html"><div class="ttname"><a href="classAbstractFenetreGL.html">AbstractFenetreGL</a></div><div class="ttdef"><b>Definition:</b> abstractFenetreGL.hh:26</div></div>
+<div class="ttc" id="classFenetreJuliaFatouGL_html_a2d321f007990c90f48e87d6fb1dc7eda"><div class="ttname"><a href="classFenetreJuliaFatouGL.html#a2d321f007990c90f48e87d6fb1dc7eda">FenetreJuliaFatouGL::~FenetreJuliaFatouGL</a></div><div class="ttdeci">~FenetreJuliaFatouGL()</div><div class="ttdef"><b>Definition:</b> fenetreJuliaFatouGL.cc:88</div></div>
+<div class="ttc" id="classFenetreJuliaFatouGL_html_acb452cf6be9c8e45f424df19bba9fa8c"><div class="ttname"><a href="classFenetreJuliaFatouGL.html#acb452cf6be9c8e45f424df19bba9fa8c">FenetreJuliaFatouGL::layoutVertical</a></div><div class="ttdeci">QVBoxLayout * layoutVertical</div><div class="ttdef"><b>Definition:</b> fenetreJuliaFatouGL.hh:31</div></div>
+<div class="ttc" id="classFenetreJuliaFatouGL_html_aa2c66f22aeaf44b6deae63a53e21ab62"><div class="ttname"><a href="classFenetreJuliaFatouGL.html#aa2c66f22aeaf44b6deae63a53e21ab62">FenetreJuliaFatouGL::partieReelle</a></div><div class="ttdeci">QDoubleSpinBox * partieReelle</div><div class="ttdef"><b>Definition:</b> fenetreJuliaFatouGL.hh:32</div></div>
+<div class="ttc" id="classFenetreJuliaFatouGL_html_a73ccd24872ccdf2d9d6a982c0ed44d70"><div class="ttname"><a href="classFenetreJuliaFatouGL.html#a73ccd24872ccdf2d9d6a982c0ed44d70">FenetreJuliaFatouGL::choixPartieImaginaire</a></div><div class="ttdeci">void choixPartieImaginaire(double nouveau)</div><div class="ttdef"><b>Definition:</b> fenetreJuliaFatouGL.cc:79</div></div>
+<div class="ttc" id="classFenetreJuliaFatouGL_html_a81cadd784a4ce06c47e7e4223f3c55d5"><div class="ttname"><a href="classFenetreJuliaFatouGL.html#a81cadd784a4ce06c47e7e4223f3c55d5">FenetreJuliaFatouGL::FenetreJuliaFatouGL</a></div><div class="ttdeci">FenetreJuliaFatouGL(Complex &amp;complex)</div><div class="ttdef"><b>Definition:</b> fenetreJuliaFatouGL.cc:21</div></div>
+<div class="ttc" id="classFenetreJuliaFatouGL_html_ab7e8e57782d953b9ff196d229f543bec"><div class="ttname"><a href="classFenetreJuliaFatouGL.html#ab7e8e57782d953b9ff196d229f543bec">FenetreJuliaFatouGL::choixPartieReelle</a></div><div class="ttdeci">void choixPartieReelle(double nouveau)</div><div class="ttdef"><b>Definition:</b> fenetreJuliaFatouGL.cc:71</div></div>
+<div class="ttc" id="classFenetreJuliaFatouGL_html_abfa274551dbda5d8d0d37cf04314c007"><div class="ttname"><a href="classFenetreJuliaFatouGL.html#abfa274551dbda5d8d0d37cf04314c007">FenetreJuliaFatouGL::partieImaginaire</a></div><div class="ttdeci">QDoubleSpinBox * partieImaginaire</div><div class="ttdef"><b>Definition:</b> fenetreJuliaFatouGL.hh:33</div></div>
+<div class="ttc" id="classFenetreJuliaFatouGL_html_a212766ae261ef36ff46b50db4e1bff00"><div class="ttname"><a href="classFenetreJuliaFatouGL.html#a212766ae261ef36ff46b50db4e1bff00">FenetreJuliaFatouGL::layoutHorizontal</a></div><div class="ttdeci">QHBoxLayout * layoutHorizontal</div><div class="ttdef"><b>Definition:</b> fenetreJuliaFatouGL.hh:30</div></div>
+<div class="ttc" id="classComplex_html"><div class="ttname"><a href="classComplex.html">Complex</a></div><div class="ttdef"><b>Definition:</b> complex.hh:20</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré par &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.13
+</small></address>
+</body>
+</html>

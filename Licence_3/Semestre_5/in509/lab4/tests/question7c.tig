@@ -1,0 +1,6 @@
+let 
+	var a := 10 
+	var b := 2
+in 
+	while a do (a := a - 1; print_int(a); if a<b then print_int(b) else break) 
+end

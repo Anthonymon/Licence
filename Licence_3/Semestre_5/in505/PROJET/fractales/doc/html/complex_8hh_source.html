@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Fractales:  Fichier source de app/head/complex.hh</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Fractales
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_d422163b96683743ed3963d4aac17747.html">app</a></li><li class="navelem"><a class="el" href="dir_b5102c6ec556d9d5555833f0fcbc2722.html">head</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">complex.hh</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="complex_8hh.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div><div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#ifndef COMPLEX__H</span></div><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#define COMPLEX__H</span></div><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;</div><div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div><div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;</div><div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">using namespace </span><a class="code" href="namespacestd.html">std</a>;</div><div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;</div><div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="classComplex.html">   20</a></span>&#160;<span class="keyword">class </span><a class="code" href="classComplex.html">Complex</a> {</div><div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    </div><div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keyword">private</span>:</div><div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="classComplex.html#a843ce2f85af4c57db9063c86f3cd9607">   23</a></span>&#160;        <span class="keywordtype">double</span> <a class="code" href="classComplex.html#a843ce2f85af4c57db9063c86f3cd9607">re</a>; </div><div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="classComplex.html#a776d595d5a1b576e9136cbc6bac0589c">   24</a></span>&#160;        <span class="keywordtype">double</span> <a class="code" href="classComplex.html#a776d595d5a1b576e9136cbc6bac0589c">im</a>; </div><div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keyword">public</span>:</div><div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <a class="code" href="classComplex.html">Complex</a>();</div><div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        <a class="code" href="classComplex.html">Complex</a>(<span class="keywordtype">double</span> r, <span class="keywordtype">double</span> i);</div><div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        ~<a class="code" href="classComplex.html">Complex</a>();</div><div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        </div><div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <span class="keywordtype">double</span> getRe();</div><div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <span class="keywordtype">double</span> getIm();</div><div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="keywordtype">double</span> getModule();</div><div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        <span class="keywordtype">double</span> getModuleCarre();</div><div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <span class="keywordtype">void</span> setRe(<span class="keywordtype">double</span> nb);</div><div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <span class="keywordtype">void</span> setIm(<span class="keywordtype">double</span> nb);</div><div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <span class="keywordtype">void</span> setComplex(<span class="keywordtype">double</span> re,<span class="keywordtype">double</span> im);</div><div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        </div><div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <a class="code" href="classComplex.html">Complex</a>&amp; operator=(<a class="code" href="classComplex.html">Complex</a>&amp; s);</div><div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        </div><div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="keyword">friend</span> <a class="code" href="classComplex.html">Complex</a> <a class="code" href="complex_8cc.html#a3946e00b31192f0b4628357b86131044">operator+ </a>(<span class="keyword">const</span> <a class="code" href="classComplex.html">Complex</a>&amp; c1, <span class="keyword">const</span> <a class="code" href="classComplex.html">Complex</a>&amp; c2); </div><div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <a class="code" href="classComplex.html">Complex</a>&amp; operator+=(<span class="keyword">const</span> <a class="code" href="classComplex.html">Complex</a>&amp; c);</div><div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        </div><div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="keyword">friend</span> <a class="code" href="classComplex.html">Complex</a> <a class="code" href="complex_8cc.html#aadf4af6aafa8eea50ea802bce62c954c">operator* </a>(<span class="keyword">const</span> <a class="code" href="classComplex.html">Complex</a>&amp; c1, <span class="keyword">const</span> <a class="code" href="classComplex.html">Complex</a>&amp; c2); </div><div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <a class="code" href="classComplex.html">Complex</a>&amp; operator*=(<span class="keyword">const</span> <a class="code" href="classComplex.html">Complex</a>&amp; c);</div><div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        </div><div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;};</div><div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;</div><div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;ostream&amp; <a class="code" href="complex_8hh.html#a469693fd83954e76a875e951fb8dda35">operator&lt;&lt;</a>(ostream&amp; os, <a class="code" href="classComplex.html">Complex</a>&amp; c);</div><div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div><div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor">#endif</span></div><div class="ttc" id="complex_8cc_html_aadf4af6aafa8eea50ea802bce62c954c"><div class="ttname"><a href="complex_8cc.html#aadf4af6aafa8eea50ea802bce62c954c">operator*</a></div><div class="ttdeci">Complex operator*(const Complex &amp;c1, const Complex &amp;c2)</div><div class="ttdef"><b>Definition:</b> complex.cc:72</div></div>
+<div class="ttc" id="namespacestd_html"><div class="ttname"><a href="namespacestd.html">std</a></div></div>
+<div class="ttc" id="classComplex_html_a776d595d5a1b576e9136cbc6bac0589c"><div class="ttname"><a href="classComplex.html#a776d595d5a1b576e9136cbc6bac0589c">Complex::im</a></div><div class="ttdeci">double im</div><div class="ttdef"><b>Definition:</b> complex.hh:24</div></div>
+<div class="ttc" id="complex_8hh_html_a469693fd83954e76a875e951fb8dda35"><div class="ttname"><a href="complex_8hh.html#a469693fd83954e76a875e951fb8dda35">operator&lt;&lt;</a></div><div class="ttdeci">ostream &amp; operator&lt;&lt;(ostream &amp;os, Complex &amp;c)</div><div class="ttdef"><b>Definition:</b> complex.cc:149</div></div>
+<div class="ttc" id="classComplex_html_a843ce2f85af4c57db9063c86f3cd9607"><div class="ttname"><a href="classComplex.html#a843ce2f85af4c57db9063c86f3cd9607">Complex::re</a></div><div class="ttdeci">double re</div><div class="ttdef"><b>Definition:</b> complex.hh:23</div></div>
+<div class="ttc" id="complex_8cc_html_a3946e00b31192f0b4628357b86131044"><div class="ttname"><a href="complex_8cc.html#a3946e00b31192f0b4628357b86131044">operator+</a></div><div class="ttdeci">Complex operator+(const Complex &amp;c1, const Complex &amp;c2)</div><div class="ttdef"><b>Definition:</b> complex.cc:54</div></div>
+<div class="ttc" id="classComplex_html"><div class="ttname"><a href="classComplex.html">Complex</a></div><div class="ttdef"><b>Definition:</b> complex.hh:20</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré par &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.13
+</small></address>
+</body>
+</html>

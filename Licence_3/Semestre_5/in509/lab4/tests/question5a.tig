@@ -1,0 +1,5 @@
+let 
+	var a := if 2 < 3 then 10 else 20 
+in
+	print_int(a)
+end

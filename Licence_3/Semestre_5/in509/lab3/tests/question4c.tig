@@ -1,0 +1,9 @@
+let var a:=3
+	var b:=a+4
+in 
+	let var a:=7
+	in 
+		a:=a*3;
+		a+1
+	end
+end

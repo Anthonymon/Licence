@@ -1,0 +1,11 @@
+let var a:= 3
+	function f(b:int) =
+		let 
+			function add() = a := a+b
+		in 
+			add() 
+		end
+in
+	f(2); 
+	print_int(a)
+end

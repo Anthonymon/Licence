@@ -1,0 +1,83 @@
+\hypertarget{classMenu}{}\section{Référence de la classe Menu}
+\label{classMenu}\index{Menu@{Menu}}
+
+
+{\ttfamily \#include $<$menu.\+hh$>$}
+
+
+
+Graphe d\textquotesingle{}héritage de Menu\+:
+% FIG 0
+
+
+Graphe de collaboration de Menu\+:
+% FIG 1
+\subsection*{Fonctions membres publiques}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classMenu_ad466dd83355124a6ed958430450bfe94}{Menu} ()
+\item 
+\hyperlink{classMenu_a831387f51358cfb88cd018e1777bc980}{$\sim$\+Menu} ()
+\end{DoxyCompactItemize}
+\subsection*{Attributs privés}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classOngletChoix}{Onglet\+Choix} $\ast$ \hyperlink{classMenu_aedcc1cdce0b64f787d05e2625b488211}{fenetre\+Julia\+Fatou}
+\item 
+\hyperlink{classOngletVide}{Onglet\+Vide} $\ast$ \hyperlink{classMenu_a0cb5416b7f7266693059c3f8038aaba3}{fenetre\+Mandelbrot}
+\item 
+Q\+Tab\+Widget $\ast$ \hyperlink{classMenu_afe56e53267ccb7f91c2d8e52c8504ef2}{tableau}
+\item 
+Q\+Push\+Button $\ast$ \hyperlink{classMenu_a71e7ddf2318b3199bb724f96ade1dbc2}{bouton\+Quitter}
+\end{DoxyCompactItemize}
+
+
+\subsection{Description détaillée}
+la classe Q\+Widget (Qt) Cette classe correspond au menu affiche Il y aura 2 pages \+: Julia et Fatou ; \hyperlink{classMandelbrot}{Mandelbrot} afin de choisir la fractale a afficher auteur\+: Yassin Doudouh 
+
+\subsection{Documentation des constructeurs et destructeur}
+\mbox{\Hypertarget{classMenu_ad466dd83355124a6ed958430450bfe94}\label{classMenu_ad466dd83355124a6ed958430450bfe94}} 
+\index{Menu@{Menu}!Menu@{Menu}}
+\index{Menu@{Menu}!Menu@{Menu}}
+\subsubsection{\texorpdfstring{Menu()}{Menu()}}
+{\footnotesize\ttfamily Menu\+::\+Menu (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Constructeur de \hyperlink{classMenu}{Menu} Permet de créer le menu de base qui s\textquotesingle{}affiche à l\textquotesingle{}exécution du programme \mbox{\Hypertarget{classMenu_a831387f51358cfb88cd018e1777bc980}\label{classMenu_a831387f51358cfb88cd018e1777bc980}} 
+\index{Menu@{Menu}!````~Menu@{$\sim$\+Menu}}
+\index{````~Menu@{$\sim$\+Menu}!Menu@{Menu}}
+\subsubsection{\texorpdfstring{$\sim$\+Menu()}{~Menu()}}
+{\footnotesize\ttfamily Menu\+::$\sim$\+Menu (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Destructeur de \hyperlink{classMenu}{Menu} Permet de détruire le menu 
+
+\subsection{Documentation des données membres}
+\mbox{\Hypertarget{classMenu_a71e7ddf2318b3199bb724f96ade1dbc2}\label{classMenu_a71e7ddf2318b3199bb724f96ade1dbc2}} 
+\index{Menu@{Menu}!bouton\+Quitter@{bouton\+Quitter}}
+\index{bouton\+Quitter@{bouton\+Quitter}!Menu@{Menu}}
+\subsubsection{\texorpdfstring{bouton\+Quitter}{boutonQuitter}}
+{\footnotesize\ttfamily Q\+Push\+Button$\ast$ Menu\+::bouton\+Quitter\hspace{0.3cm}{\ttfamily [private]}}
+
+Bouton pour quitter \mbox{\Hypertarget{classMenu_aedcc1cdce0b64f787d05e2625b488211}\label{classMenu_aedcc1cdce0b64f787d05e2625b488211}} 
+\index{Menu@{Menu}!fenetre\+Julia\+Fatou@{fenetre\+Julia\+Fatou}}
+\index{fenetre\+Julia\+Fatou@{fenetre\+Julia\+Fatou}!Menu@{Menu}}
+\subsubsection{\texorpdfstring{fenetre\+Julia\+Fatou}{fenetreJuliaFatou}}
+{\footnotesize\ttfamily \hyperlink{classOngletChoix}{Onglet\+Choix}$\ast$ Menu\+::fenetre\+Julia\+Fatou\hspace{0.3cm}{\ttfamily [private]}}
+
+Onglet pour le choix de julia et fatou \mbox{\Hypertarget{classMenu_a0cb5416b7f7266693059c3f8038aaba3}\label{classMenu_a0cb5416b7f7266693059c3f8038aaba3}} 
+\index{Menu@{Menu}!fenetre\+Mandelbrot@{fenetre\+Mandelbrot}}
+\index{fenetre\+Mandelbrot@{fenetre\+Mandelbrot}!Menu@{Menu}}
+\subsubsection{\texorpdfstring{fenetre\+Mandelbrot}{fenetreMandelbrot}}
+{\footnotesize\ttfamily \hyperlink{classOngletVide}{Onglet\+Vide}$\ast$ Menu\+::fenetre\+Mandelbrot\hspace{0.3cm}{\ttfamily [private]}}
+
+Onglet pour le choix de mandelbrot \mbox{\Hypertarget{classMenu_afe56e53267ccb7f91c2d8e52c8504ef2}\label{classMenu_afe56e53267ccb7f91c2d8e52c8504ef2}} 
+\index{Menu@{Menu}!tableau@{tableau}}
+\index{tableau@{tableau}!Menu@{Menu}}
+\subsubsection{\texorpdfstring{tableau}{tableau}}
+{\footnotesize\ttfamily Q\+Tab\+Widget$\ast$ Menu\+::tableau\hspace{0.3cm}{\ttfamily [private]}}
+
+Tableau qui contient les deux onglets 
+
+La documentation de cette classe a été générée à partir des fichiers suivants \+:\begin{DoxyCompactItemize}
+\item 
+app/head/\hyperlink{menu_8hh}{menu.\+hh}\item 
+app/src/\hyperlink{menu_8cc}{menu.\+cc}\end{DoxyCompactItemize}

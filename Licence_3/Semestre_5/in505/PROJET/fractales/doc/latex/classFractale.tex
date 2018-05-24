@@ -1,0 +1,134 @@
+\hypertarget{classFractale}{}\section{Référence de la classe Fractale}
+\label{classFractale}\index{Fractale@{Fractale}}
+
+
+{\ttfamily \#include $<$fractale.\+hh$>$}
+
+
+
+Graphe d\textquotesingle{}héritage de Fractale\+:
+% FIG 0
+\subsection*{Fonctions membres publiques}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classFractale_a0d3df9f1e22b8e83271406a5cf1d4f93}{Fractale} ()
+\item 
+\hyperlink{classFractale_a509d94d37fe5c6a8443b0eee6e516464}{Fractale} (double z)
+\item 
+double \hyperlink{classFractale_ac3c0405c60e5688e116d39f75289dcf4}{get\+Z\+Max} ()
+\item 
+void \hyperlink{classFractale_a2db0021af26f76cf1c8fcac92d5c107a}{set\+Z\+Max} (double nouveau\+Z\+Max)
+\item 
+virtual int \hyperlink{classFractale_a99a54c1b9b847ca24585f469cf03b67a}{calcul\+Fractale} (double x, double y)=0
+\item 
+virtual void \hyperlink{classFractale_a535969c022c88b7968784e160f41e1c3}{set\+Partie\+Reelle} (double reel)=0
+\item 
+virtual void \hyperlink{classFractale_ab2dc26f50f2b0a3cbe986986075fe8f5}{set\+Partie\+Imaginaire} (double img)=0
+\item 
+string \hyperlink{classFractale_aa7b38c97f45f50b5fbdde1188cf1978e}{get\+My\+Type} ()
+\item 
+virtual \hyperlink{classFractale_a36cd8c958e71902f7e20e9b2032dc089}{$\sim$\+Fractale} ()
+\end{DoxyCompactItemize}
+\subsection*{Attributs protégés}
+\begin{DoxyCompactItemize}
+\item 
+double \hyperlink{classFractale_af7c03c738a3fb51e8e6bbc073bdbd3fe}{z\+Max}
+\item 
+string \hyperlink{classFractale_a6e1e6ca45cb1075c4602c99f2a855a93}{my\+Type}
+\end{DoxyCompactItemize}
+
+
+\subsection{Description détaillée}
+fractale Cette classe heritera de 2 sous classes \+: \hyperlink{classMandelbrot}{Mandelbrot} et \hyperlink{classJuliaFatou}{Julia\+Fatou} auteur\+: Clement Caumes 
+
+\subsection{Documentation des constructeurs et destructeur}
+\mbox{\Hypertarget{classFractale_a0d3df9f1e22b8e83271406a5cf1d4f93}\label{classFractale_a0d3df9f1e22b8e83271406a5cf1d4f93}} 
+\index{Fractale@{Fractale}!Fractale@{Fractale}}
+\index{Fractale@{Fractale}!Fractale@{Fractale}}
+\subsubsection{\texorpdfstring{Fractale()}{Fractale()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Fractale\+::\+Fractale (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Constructeur sans parametre de \hyperlink{classFractale}{Fractale} \mbox{\Hypertarget{classFractale_a509d94d37fe5c6a8443b0eee6e516464}\label{classFractale_a509d94d37fe5c6a8443b0eee6e516464}} 
+\index{Fractale@{Fractale}!Fractale@{Fractale}}
+\index{Fractale@{Fractale}!Fractale@{Fractale}}
+\subsubsection{\texorpdfstring{Fractale()}{Fractale()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Fractale\+::\+Fractale (\begin{DoxyParamCaption}\item[{double}]{z }\end{DoxyParamCaption})}
+
+Constructeur avec parametre de \hyperlink{classFractale}{Fractale} \mbox{\Hypertarget{classFractale_a36cd8c958e71902f7e20e9b2032dc089}\label{classFractale_a36cd8c958e71902f7e20e9b2032dc089}} 
+\index{Fractale@{Fractale}!````~Fractale@{$\sim$\+Fractale}}
+\index{````~Fractale@{$\sim$\+Fractale}!Fractale@{Fractale}}
+\subsubsection{\texorpdfstring{$\sim$\+Fractale()}{~Fractale()}}
+{\footnotesize\ttfamily Fractale\+::$\sim$\+Fractale (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Destructeur de \hyperlink{classFractale}{Fractale} Permet de detruire les instances de \hyperlink{classFractale}{Fractale} 
+
+\subsection{Documentation des fonctions membres}
+\mbox{\Hypertarget{classFractale_a99a54c1b9b847ca24585f469cf03b67a}\label{classFractale_a99a54c1b9b847ca24585f469cf03b67a}} 
+\index{Fractale@{Fractale}!calcul\+Fractale@{calcul\+Fractale}}
+\index{calcul\+Fractale@{calcul\+Fractale}!Fractale@{Fractale}}
+\subsubsection{\texorpdfstring{calcul\+Fractale()}{calculFractale()}}
+{\footnotesize\ttfamily virtual int Fractale\+::calcul\+Fractale (\begin{DoxyParamCaption}\item[{double}]{x,  }\item[{double}]{y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implémenté dans \hyperlink{classJuliaFatou_ac3fbb733a74a780dfc096df4ca64da69}{Julia\+Fatou}, et \hyperlink{classMandelbrot_afc2cf40855f646200d54c263929d3eca}{Mandelbrot}.
+
+\mbox{\Hypertarget{classFractale_aa7b38c97f45f50b5fbdde1188cf1978e}\label{classFractale_aa7b38c97f45f50b5fbdde1188cf1978e}} 
+\index{Fractale@{Fractale}!get\+My\+Type@{get\+My\+Type}}
+\index{get\+My\+Type@{get\+My\+Type}!Fractale@{Fractale}}
+\subsubsection{\texorpdfstring{get\+My\+Type()}{getMyType()}}
+{\footnotesize\ttfamily string Fractale\+::get\+My\+Type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Permet d\textquotesingle{}obtenir en string le type de ma classe \mbox{\Hypertarget{classFractale_ac3c0405c60e5688e116d39f75289dcf4}\label{classFractale_ac3c0405c60e5688e116d39f75289dcf4}} 
+\index{Fractale@{Fractale}!get\+Z\+Max@{get\+Z\+Max}}
+\index{get\+Z\+Max@{get\+Z\+Max}!Fractale@{Fractale}}
+\subsubsection{\texorpdfstring{get\+Z\+Max()}{getZMax()}}
+{\footnotesize\ttfamily double Fractale\+::get\+Z\+Max (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Permet d\textquotesingle{}obtenir le double representant zmax \mbox{\Hypertarget{classFractale_ab2dc26f50f2b0a3cbe986986075fe8f5}\label{classFractale_ab2dc26f50f2b0a3cbe986986075fe8f5}} 
+\index{Fractale@{Fractale}!set\+Partie\+Imaginaire@{set\+Partie\+Imaginaire}}
+\index{set\+Partie\+Imaginaire@{set\+Partie\+Imaginaire}!Fractale@{Fractale}}
+\subsubsection{\texorpdfstring{set\+Partie\+Imaginaire()}{setPartieImaginaire()}}
+{\footnotesize\ttfamily virtual void Fractale\+::set\+Partie\+Imaginaire (\begin{DoxyParamCaption}\item[{double}]{img }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implémenté dans \hyperlink{classJuliaFatou_a99b8e79f86a6a189f861f8273b1a6405}{Julia\+Fatou}, et \hyperlink{classMandelbrot_a9649677b1faeff917202845fd697dbe6}{Mandelbrot}.
+
+\mbox{\Hypertarget{classFractale_a535969c022c88b7968784e160f41e1c3}\label{classFractale_a535969c022c88b7968784e160f41e1c3}} 
+\index{Fractale@{Fractale}!set\+Partie\+Reelle@{set\+Partie\+Reelle}}
+\index{set\+Partie\+Reelle@{set\+Partie\+Reelle}!Fractale@{Fractale}}
+\subsubsection{\texorpdfstring{set\+Partie\+Reelle()}{setPartieReelle()}}
+{\footnotesize\ttfamily virtual void Fractale\+::set\+Partie\+Reelle (\begin{DoxyParamCaption}\item[{double}]{reel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implémenté dans \hyperlink{classJuliaFatou_a5b89c7a96e48d5bdc0b044454fae0113}{Julia\+Fatou}, et \hyperlink{classMandelbrot_a419baeb8628191ee44f3c82dd3281017}{Mandelbrot}.
+
+\mbox{\Hypertarget{classFractale_a2db0021af26f76cf1c8fcac92d5c107a}\label{classFractale_a2db0021af26f76cf1c8fcac92d5c107a}} 
+\index{Fractale@{Fractale}!set\+Z\+Max@{set\+Z\+Max}}
+\index{set\+Z\+Max@{set\+Z\+Max}!Fractale@{Fractale}}
+\subsubsection{\texorpdfstring{set\+Z\+Max()}{setZMax()}}
+{\footnotesize\ttfamily void Fractale\+::set\+Z\+Max (\begin{DoxyParamCaption}\item[{double}]{nouveau\+Z\+Max }\end{DoxyParamCaption})}
+
+Permet de modifier z\+Max 
+
+\subsection{Documentation des données membres}
+\mbox{\Hypertarget{classFractale_a6e1e6ca45cb1075c4602c99f2a855a93}\label{classFractale_a6e1e6ca45cb1075c4602c99f2a855a93}} 
+\index{Fractale@{Fractale}!my\+Type@{my\+Type}}
+\index{my\+Type@{my\+Type}!Fractale@{Fractale}}
+\subsubsection{\texorpdfstring{my\+Type}{myType}}
+{\footnotesize\ttfamily string Fractale\+::my\+Type\hspace{0.3cm}{\ttfamily [protected]}}
+
+Type de la fractale (\hyperlink{classFractale}{Fractale}, \hyperlink{classMandelbrot}{Mandelbrot} ou \hyperlink{classJuliaFatou}{Julia\+Fatou}) \mbox{\Hypertarget{classFractale_af7c03c738a3fb51e8e6bbc073bdbd3fe}\label{classFractale_af7c03c738a3fb51e8e6bbc073bdbd3fe}} 
+\index{Fractale@{Fractale}!z\+Max@{z\+Max}}
+\index{z\+Max@{z\+Max}!Fractale@{Fractale}}
+\subsubsection{\texorpdfstring{z\+Max}{zMax}}
+{\footnotesize\ttfamily double Fractale\+::z\+Max\hspace{0.3cm}{\ttfamily [protected]}}
+
+z\+Max de la fractale 
+
+La documentation de cette classe a été générée à partir des fichiers suivants \+:\begin{DoxyCompactItemize}
+\item 
+app/head/\hyperlink{fractale_8hh}{fractale.\+hh}\item 
+app/src/\hyperlink{fractale_8cc}{fractale.\+cc}\end{DoxyCompactItemize}

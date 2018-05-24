@@ -1,0 +1,9 @@
+*.o
+MakefileProjet
+fractales
+moc_*
+/save/*.svg
+/doc/rapport/rapport.aux
+/doc/rapport/rapport.log
+/doc/rapport/rapport.out
+/doc/rapport/rapport.dvi

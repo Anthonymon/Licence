@@ -1,0 +1,20 @@
+(defun mon-max (liste)
+	(if (or (not (listp liste)) (null liste))
+		nil
+		(let ((max (car liste)) (queue (cdr liste)))
+			(dolist (tmp queue)
+				(if (> tmp max) (setf max tmp))
+			)
+			max
+		)
+	)
+)
+
+(defun maxi (liste)
+	(let* ((x (mon-max liste)) (y (mon-max (remove x liste))))
+		(if (and x y)
+			(* x y)
+			(format t "La liste ne contient pas deux maximum differents")
+		)
+	)
+)

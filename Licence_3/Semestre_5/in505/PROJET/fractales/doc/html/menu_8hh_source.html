@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Fractales:  Fichier source de app/head/menu.hh</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Fractales
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_d422163b96683743ed3963d4aac17747.html">app</a></li><li class="navelem"><a class="el" href="dir_b5102c6ec556d9d5555833f0fcbc2722.html">head</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">menu.hh</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="menu_8hh.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div><div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#ifndef MENU__HH</span></div><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#define MENU__HH</span></div><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;</div><div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="ongletVide_8hh.html">ongletVide.hh</a>&quot;</span></div><div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="ongletChoix_8hh.html">ongletChoix.hh</a>&quot;</span></div><div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;QApplication&gt;</span></div><div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;QWidget&gt;</span></div><div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;QPushButton&gt;</span></div><div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;QTabWidget&gt;</span></div><div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div><div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="classMenu.html">   24</a></span>&#160;<span class="keyword">class </span><a class="code" href="classMenu.html">Menu</a>:<span class="keyword">public</span> QWidget {</div><div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keyword">private</span>:</div><div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="classMenu.html#aedcc1cdce0b64f787d05e2625b488211">   26</a></span>&#160;        <a class="code" href="classOngletChoix.html">OngletChoix</a>* <a class="code" href="classMenu.html#aedcc1cdce0b64f787d05e2625b488211">fenetreJuliaFatou</a>; </div><div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="classMenu.html#a0cb5416b7f7266693059c3f8038aaba3">   27</a></span>&#160;        <a class="code" href="classOngletVide.html">OngletVide</a>* <a class="code" href="classMenu.html#a0cb5416b7f7266693059c3f8038aaba3">fenetreMandelbrot</a>; </div><div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="classMenu.html#afe56e53267ccb7f91c2d8e52c8504ef2">   28</a></span>&#160;        QTabWidget* <a class="code" href="classMenu.html#afe56e53267ccb7f91c2d8e52c8504ef2">tableau</a>; </div><div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="classMenu.html#a71e7ddf2318b3199bb724f96ade1dbc2">   29</a></span>&#160;        QPushButton* <a class="code" href="classMenu.html#a71e7ddf2318b3199bb724f96ade1dbc2">boutonQuitter</a>; </div><div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keyword">public</span>:</div><div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <a class="code" href="classMenu.html#ad466dd83355124a6ed958430450bfe94">Menu</a>();</div><div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <a class="code" href="classMenu.html#a831387f51358cfb88cd018e1777bc980">~Menu</a>();</div><div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;};</div><div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div><div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor">#endif</span></div><div class="ttc" id="classMenu_html_ad466dd83355124a6ed958430450bfe94"><div class="ttname"><a href="classMenu.html#ad466dd83355124a6ed958430450bfe94">Menu::Menu</a></div><div class="ttdeci">Menu()</div><div class="ttdef"><b>Definition:</b> menu.cc:16</div></div>
+<div class="ttc" id="classMenu_html_afe56e53267ccb7f91c2d8e52c8504ef2"><div class="ttname"><a href="classMenu.html#afe56e53267ccb7f91c2d8e52c8504ef2">Menu::tableau</a></div><div class="ttdeci">QTabWidget * tableau</div><div class="ttdef"><b>Definition:</b> menu.hh:28</div></div>
+<div class="ttc" id="ongletChoix_8hh_html"><div class="ttname"><a href="ongletChoix_8hh.html">ongletChoix.hh</a></div><div class="ttdoc">contient les definitions des methodes et des fonctions concernant la classe OngletChoix ...</div></div>
+<div class="ttc" id="classOngletChoix_html"><div class="ttname"><a href="classOngletChoix.html">OngletChoix</a></div><div class="ttdef"><b>Definition:</b> ongletChoix.hh:29</div></div>
+<div class="ttc" id="classMenu_html"><div class="ttname"><a href="classMenu.html">Menu</a></div><div class="ttdef"><b>Definition:</b> menu.hh:24</div></div>
+<div class="ttc" id="classOngletVide_html"><div class="ttname"><a href="classOngletVide.html">OngletVide</a></div><div class="ttdef"><b>Definition:</b> ongletVide.hh:21</div></div>
+<div class="ttc" id="classMenu_html_a831387f51358cfb88cd018e1777bc980"><div class="ttname"><a href="classMenu.html#a831387f51358cfb88cd018e1777bc980">Menu::~Menu</a></div><div class="ttdeci">~Menu()</div><div class="ttdef"><b>Definition:</b> menu.cc:40</div></div>
+<div class="ttc" id="classMenu_html_a71e7ddf2318b3199bb724f96ade1dbc2"><div class="ttname"><a href="classMenu.html#a71e7ddf2318b3199bb724f96ade1dbc2">Menu::boutonQuitter</a></div><div class="ttdeci">QPushButton * boutonQuitter</div><div class="ttdef"><b>Definition:</b> menu.hh:29</div></div>
+<div class="ttc" id="ongletVide_8hh_html"><div class="ttname"><a href="ongletVide_8hh.html">ongletVide.hh</a></div><div class="ttdoc">contient les definitions des methodes et des fonctions concernant la classe OngletVide ...</div></div>
+<div class="ttc" id="classMenu_html_a0cb5416b7f7266693059c3f8038aaba3"><div class="ttname"><a href="classMenu.html#a0cb5416b7f7266693059c3f8038aaba3">Menu::fenetreMandelbrot</a></div><div class="ttdeci">OngletVide * fenetreMandelbrot</div><div class="ttdef"><b>Definition:</b> menu.hh:27</div></div>
+<div class="ttc" id="classMenu_html_aedcc1cdce0b64f787d05e2625b488211"><div class="ttname"><a href="classMenu.html#aedcc1cdce0b64f787d05e2625b488211">Menu::fenetreJuliaFatou</a></div><div class="ttdeci">OngletChoix * fenetreJuliaFatou</div><div class="ttdef"><b>Definition:</b> menu.hh:26</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré par &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.13
+</small></address>
+</body>
+</html>

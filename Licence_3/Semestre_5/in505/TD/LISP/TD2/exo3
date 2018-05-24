@@ -1,0 +1,8 @@
+(defun mystere (X Y)
+	(cond 
+		((null Y) nil)
+		((eql (car Y) X )0)
+		(t (let ((Z(mystere X (cdr Y))))
+		(and Z (+ Z 1))
+		)
+	)

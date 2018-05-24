@@ -1,0 +1,3 @@
+body { background-color: black; color: white; } 
+h1   { color: blue; text-indent: 20px;  line-height: 140%;  text-align: justify;  margin: 0 20% 0 20%; }
+p    {font-size: 64; font-weight: bold; font-style: italic;}

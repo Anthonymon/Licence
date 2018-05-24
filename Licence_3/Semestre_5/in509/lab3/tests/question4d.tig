@@ -1,0 +1,10 @@
+let
+      var a := let
+        var a := 2
+      in
+        (a+1)
+      end
+    in
+      (a*2)
+    end
+

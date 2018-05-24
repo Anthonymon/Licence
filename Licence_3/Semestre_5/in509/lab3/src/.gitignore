@@ -1,0 +1,7 @@
+**/*.o
+**/Makefile
+**/*.a
+**/.deps
+**/.clang_complete
+**/*.dwo
+driver/dtiger

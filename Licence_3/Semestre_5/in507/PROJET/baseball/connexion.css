@@ -1,0 +1,23 @@
+p.FormulaireConnexion
+{
+	margin: 1% 30% 10% 30%; 
+	padding: 5% 5% 5% 5%; 
+	background-color: #002E6C; 
+	text-align: center;
+	border-style: solid; 
+	border-width: 3px; 
+	border-color: red;
+}
+
+body
+{
+	color:red;
+	background-color:#EFFBF2;
+}
+
+img.logo 
+{
+    display: block;
+    margin-left: auto;
+    margin-right: auto 
+}

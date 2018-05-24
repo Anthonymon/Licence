@@ -1,0 +1,42 @@
+PHP/MYSQL - Birthdays Database
+The files contained in this collection make up an integrated database management system.  Included are a simple login script, interface, and scripts for adding, editing, displaying and deleting records.  There are 2 utility files for creating a database and a table within it.
+
+The scripts can be easily modified to create your own unique db management tool.
+
+Utility Files
+birthdays_create_database.php
+birthdays_create_table.php
+
+Management Files
+birthdays_login.php
+birthdays_dbase_interface.php
+Add Records (2 scripts)
+birthdays_insert_form.php
+birthdays_insert_record.php
+Display records (1 script)
+birthdays_display_records.php
+Update Records (3 scripts)
+birthdays_update_form.php
+birthdays_change_form.php
+birthdays_change_record.php
+Delete Records (2 scripts)
+birthdays_delete_form.php
+birthdays_delete_record.php
+
+Run the 2 utility files first:
+1..to create the database,'mydatabase'.(birthdays_create_database.php)
+2..to create the table,'birthdays'.(birthdays_create_table.php)
+
+Remember you won't use birthdays_create_database.php on the internet to create your db.  You will create it using your web host provided control panel and add username and password at the time of creation.
+
+You can however use birthdays_create_table.php to create your table on the internet.  To do so you must supply username and password in the connect process.
+
+(Note: To execute these scripts on your PC, you must have a localhost server installed with PHP and MYSQL capability.  See our website to find out how. htmltutorials.net)
+
+Once you have created the database and table on your PC you can start adding records through the dbase interface.
+
+If you didn't set up mysql with username and password parameters on your PC, you will use the connect statement without username and password entries.  If not required the server will return an error and deny access.
+
+Some of the scripts show how to pass the username and password along to maintain state.  If you modify the scripts for internet use, add the hidden fields to all necessary scripts.
+
+There are mutliple scripts for adding,updating and deleting records.  In each instance the script that contains the word '_form' is executed first.  

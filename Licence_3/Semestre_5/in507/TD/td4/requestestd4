@@ -1,0 +1,129 @@
+create table Joueurs (
+    nom varchar (40) PRIMARY KEY,
+    prenom varchar (40) not null,
+    age SMALLINT not null,
+    nationalite CHAR(40) not null
+);
+
+create table Rencontre(
+    nomgagnant varchar(40),
+    nomperdant varchar (40),
+    lieutournoi varchar(40),
+    annee int(4),
+    score varchar(40),
+    primary key (nomgagnant, nomperdant, lieutournoi, annee),
+    foreign key (nomgagnant) references Joueurs(nom),
+    foreign key (nomperdant) references Joueurs(nom)
+);
+
+create table Sponsor(
+    nom varchar (40),
+    lieutournoi varchar (40),
+    annee int (4),
+    adresse varchar (15),
+    montant int (4),
+    primary key (nom, lieutournoi, annee)
+);
+
+create table Gain(
+    nomjoueur varchar (40),
+    nomsponsor varchar (40),
+    lieutournoi varchar (40),
+    annee int (4),
+    rang int (4),
+    prime int (10),
+    primary key (nomjoueur, lieutournoi, annee),
+    foreign key (nomjoueur) references Joueurs (nom),
+    foreign key (nomsponsor) references Sponsor (nom, lieutournoi, annee)
+);
+
+INSERT INTO Joueurs VALUES 
+(('Federer', 'Roger', 34, 'suisse'), 
+('Berdych', 'tomas', 32, 'tcheque'), 
+('Djokovic', 'Novak',30,'serbe'), 
+('Murray','Andy',30,'anglais'), 
+('Nadal','Rafael',31,'espagnol'));
+
+insert into Sponsor VALUES
+('IBM', 'Melbourne Australie',2011,'Open dautralie',10),
+('Peugeot','Paris France',2011,'Roland Garros',100),
+('Wilson','New York USA',2011,'Fisuhing Meadows',500),
+('Evian', 'Wimbledon Angleterre', 2011,'Manchester Wimbledon',12);
+
+
+insert into Rencontre values 
+    ('Djokovic','Murray','Melbourne Australie',2011,'6/4-6/2-6/3'),
+    ('Nadal','Federer','Paris France',2011,'7/5-7/6-5/7-6/1'),
+    ('Djokovic','Nadal','Wimbledon Angleterre',2011,'6/4-6/1-1/6-6/3');
+    
+insert into Gain values 
+('Djokovic','IBM','Melbourne Australie',2011,1,1000000), 
+('Murray','IBM','Melbourne Australie',2011,2,500000), 
+('Nadal','Peugeot','Paris France',2011,1,1000000), 
+('Federer','Peugeot','Paris France',2011,2,500000), 
+('Djokovic','Evian','Wimbledon Angleterre',2011,1,1000000), 
+('Nadal','Evian','Wimbledon Angleterre',2011,2,500000);
+
+3)
+select  Joueurs.nom, Joueurs.prenom
+from Joueurs
+where Joueurs.prenom="Roger";
+
+select Rencontre.annee
+from Sponsor,Rencontre
+where Sponsor.lieutournoi=Rencontre.lieutournoi
+AND Sponsor.adresse="Roland Garros"
+
+select Joueurs.nom, Joueurs.age
+from Joueurs, Rencontre
+where Joueurs.nom=Rencontre.nomgagnant
+group by Joueurs.nom
+
+select Sponsor.nom
+from Sponsor
+where Sponsor.lieutournoi="Paris France"
+
+select Joueurs.nom, Joueurs.prenom
+from Joueurs, Rencontre, Sponsor
+where Joueurs.nom=Rencontre.nomGagnant
+AND Rencontre.lieutournoi=Sponsor.lieutournoi
+AND Sponsor.nom="IBM"
+
+UPDATE Sponsor SET nom = UPPER(nom) //pour mettre en majuscule nom de sponsor
+
+UPDATE Rencontre SET lieutournoi = UPPER(lieutournoi)
+WHERE Rencontre.annee=2011
+
+UPDATE Joueurs SET age=age+1
+
+DELETE FROM Rencontre 
+WHERE (nomgagnant="Federer" OR nomperdant="Federer")
+AND Rencontre.annee=2011
+
+CREATE VIEW Joueurs_francais
+AS SELECT Joueurs.nom, Joueurs.prenom, Joueurs.age
+FROM Joueurs
+WHERE Joueurs.nationalite="francais"
+
+CREATE VIEW Matchs_perdus_Matchs_gagnes (nom_perdant,prenom_perdant,nom_gagnant, prenom_gagnant)
+AS 
+SELECT Rencontre.nomgagnant, J1.prenom, Rencontre.nomperdant, J2.prenom
+FROM Rencontre, Joueurs J1, Joueurs J2
+WHERE Rencontre.nomgagnant=J1.nom
+AND Rencontre.nomperdant=J2.nom 
+
+6)
+CREATE USER "Alice"@'%' identified by "aliceLaCoquine";
+CREATE USER "Bob"@'%' identified by "bobLeCoquin";
+
+GRANT ALL ON bd_alice.* TO "Alice"@"%" WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+
+GRANT ALL ON bd_bob.* TO "Bob"@"%" WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+
+SHOW GRANTS FOR Alice;
+
+SHOW GRANTS FOR Bob;
+
+GRANT SELECT ON bd_bob.pour_select_alice TO "Alice"@"%" WITH GRANT OPTION;

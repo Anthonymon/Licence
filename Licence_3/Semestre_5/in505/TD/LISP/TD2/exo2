@@ -1,0 +1,8 @@
+(defun carre(nombre)
+	(
+		cond
+		((not (numberp nombre)) nil)
+		((<= nombre 5) nil)
+		(t (* nombre nombre))
+	)
+)
