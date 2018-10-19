@@ -21,4 +21,3 @@ Contenus des TDs en Licence 1/2/3
 + IN603 : Christina Boura
 + IN606 : Abdelhak Gueroui
 
-## Licence
