@@ -1,0 +1,18 @@
+           Avant appel           Prépare appel        Après l'appel
+                                                            
+ (par ex)                      
+ 0x8000                                                             
+   |      +---------+<--FP       +---------+<--FP      +------------+
+   |      | Frame   |            | Frame   |           | Frame      |
+   |      |appelant |            |appelant |           |appelant    |
+   |      +---------+<--SP       +---------+           +------------+
+   |      |         |            | arg 5   |           | arg 5      |
+   |      |         |            | arg 4   |<--SP      | arg 4      |  
+   |      |         |            |         |           +------------+
+   |      +         +            +         +           | Static Link|<--FP
+   |                                                   | Vieux FP   |
+   |                                                   | Var 1      |
+   |                                                   | Var 2      |<--SP
+   v                                                   |            |
+ 0x7000                                                +            +           
+

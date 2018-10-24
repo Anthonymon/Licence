@@ -1,0 +1,1696 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="pandoc.css" type="text/css" />
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+</head>
+<body>
+<div id="TOC">
+<ul>
+<li><a href="#projet-compilation-2017">Projet Compilation 2017</a><ul>
+<li><a href="#rendu">Rendu</a></li>
+<li><a href="#questions">Questions</a></li>
+<li><a href="#plagiat">Plagiat</a></li>
+</ul></li>
+<li><a href="#sujet-1-analyseur-syntaxique-pour-le-langage-tiger">Sujet 1: Analyseur Syntaxique pour le langage Tiger</a><ul>
+<li><a href="#constitution-des-groupes">Constitution des Groupes</a></li>
+<li><a href="#objectif">Objectif</a><ul>
+<li><a href="#première-partie-étude-de-lalgorithme-danalyse-syntaxique-lr">Première partie: Étude de l’algorithme d’analyse syntaxique LR</a></li>
+<li><a href="#deuxième-partie-implémentation-dun-parseur-jcup-pour-tiger">Deuxième partie: Implémentation d’un parseur JCup pour Tiger</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#sujet-2-traduction-en-langage-intermédiaire">Sujet 2: Traduction en Langage Intermédiaire</a><ul>
+<li><a href="#consitution-des-groupes">Consitution des Groupes</a></li>
+<li><a href="#objectif-1">Objectif</a><ul>
+<li><a href="#code-fourni">Code Fourni</a></li>
+</ul></li>
+<li><a href="#comment-tester-votre-projet">Comment tester votre projet</a></li>
+<li><a href="#documentation-et-rapport">Documentation et Rapport</a></li>
+<li><a href="#tests">Tests</a></li>
+<li><a href="#comment-sera-noté-votre-projet">Comment sera noté votre projet</a></li>
+<li><a href="#exemples-de-traductions">Exemples de traductions</a><ul>
+<li><a href="#chaînes">Chaînes</a></li>
+<li><a href="#tableaux">Tableaux</a></li>
+<li><a href="#records">Records</a></li>
+<li><a href="#factorielle">Factorielle</a></li>
+<li><a href="#variable-qui-échappe">Variable qui échappe</a></li>
+<li><a href="#tri-fusion-merge-sort">Tri Fusion (Merge Sort)</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<h1 id="projet-compilation-2017">Projet Compilation 2017</h1>
+<p>Pablo Oliveira <a href="mailto:pablo.oliveira@uvsq.fr">pablo.oliveira@uvsq.fr</a></p>
+<p>Ce document décrit l’objectif, l’organisation et la notation du projet de compilation. Cette année il y a deux sujets au choix: le premier sujet consiste à implémenter l’étape d’analyse syntaxique du langage Tiger; le deuxième sujet consiste à implémenter l’étape de traduction en représentation intermédiaire.</p>
+<h3 id="rendu">Rendu</h3>
+<p>Le projet est à rendre avant le 19 mai à 23:59. Le rendu du projet se fait par envoi de mail avec une archive “.zip”. Attention à respecter strictement les règles suivantes. Le nom respect des règles entrainera un malus de 2 points sur la note finale du projet.</p>
+<ul>
+<li><p>Le sujet du mail sera “[Projet CO sujet 1] nom1enminuscules” pour le sujet 1 ou “[Projet CO sujet 2] nom1enminuscules nom2enminuscules” pour le sujet 2.</p></li>
+<li><p>Le mail contiendra en PJ l’archive “.zip”. Le nom de l’archive sera <code>sujet1-nom1enminuscules.zip</code> ou <code>sujet2-nom1enminuscules-nom2enminuscules.zip</code>.</p></li>
+<li><p>Lors de la décompression de l’archive, tous les fichiers seront au sein d’un répertoire nommé exactement comme l’archive sans le suffixe “.zip”.</p></li>
+</ul>
+<h3 id="questions">Questions</h3>
+<p>Les questions sont encouragées sur le groupe de discussion <a href="https://groups.google.com/group/iatic4-compil/" class="uri">https://groups.google.com/group/iatic4-compil/</a> auquel vous pouvez vous inscrire. Les questions sont fortement encouragées. J’essayerai de lire les messages et répondre à vos questions régulièrement. Mais la participation de tous est encouragée: n’hésitez pas à répondre aux questions de vos camarades, c’est le meilleur moyen d’apprendre!</p>
+<h3 id="plagiat">Plagiat</h3>
+<p>Si vous empruntez du code il faut:</p>
+<ol style="list-style-type: decimal">
+<li><p>Citer sa provenance</p></li>
+<li><p>S’assurer que la licence du code vous permet de l’employer</p></li>
+</ol>
+<p>Vous pouvez discuter et collaborer entre groupes, mais il est strictement interdit de copier du code entre groupes.</p>
+<p>Il est interdit de publier votre code.</p>
+<p>Je vous invite à consulter les règles concernant le Plagiat de l’ISTY et de l’UVSQ: <a href="http://www.isty.uvsq.fr/medias/fichier/guide-anti-plagiat-et-charte_1311241484856.pdf" class="uri">http://www.isty.uvsq.fr/medias/fichier/guide-anti-plagiat-et-charte_1311241484856.pdf</a></p>
+<h1 id="sujet-1-analyseur-syntaxique-pour-le-langage-tiger">Sujet 1: Analyseur Syntaxique pour le langage Tiger</h1>
+<h2 id="constitution-des-groupes">Constitution des Groupes</h2>
+<p>Pour le sujet 1, le projet est à faire individuellement.</p>
+<h2 id="objectif">Objectif</h2>
+<p>L’objectif du projet est d’écrire la phase d’analyse syntaxique complète du langage Tiger. Le projet se décompose en deux parties.</p>
+<h3 id="première-partie-étude-de-lalgorithme-danalyse-syntaxique-lr">Première partie: Étude de l’algorithme d’analyse syntaxique LR</h3>
+<p>JCup utilise un analyseur syntaxique de type LALR appartennant à la famille des analyseurs LR (left-to-right rightmost-derivation). Faites une recherche documentaire et produisez un document synthétique de deux à trois pages présentant l’analyse LR.</p>
+<p>Voici quelques ressources recommandées:</p>
+<ul>
+<li>Modern compiler implementation in ML/C/Java, de Andrew W. Appel</li>
+<li>La page wikipedia de <a href="https://fr.wikipedia.org/wiki/Analyseur_LR">l’analyseur LR</a>.</li>
+<li>Le <a href="https://www.lrde.epita.fr/~akim/thl/lecture-notes/theorie-des-langages-1.pdf">cours de Théorie des Langages de F. Yvon et A. Demaille</a></li>
+</ul>
+<h3 id="deuxième-partie-implémentation-dun-parseur-jcup-pour-tiger">Deuxième partie: Implémentation d’un parseur JCup pour Tiger</h3>
+<p>Suivez le <a href="http://tahiti.prism.uvsq.fr/tigergrader/handout/T3">sujet du T3</a> sur le site de correction automatique des TDs. Vous pouvez créer un nouvel utilisateur individuel pour tester votre rendu. Pour cela utilisez le nom d’utilisateur “projet_nom1enminuscules”.</p>
+<p>Le travail à rendre est l’archive contenant votre code ainsi que le rapport préparé dans la première partie. Vous pouvez utiliser le site de correction automatique pour vous assurer que votre code fonctionne correctement.</p>
+<h1 id="sujet-2-traduction-en-langage-intermédiaire">Sujet 2: Traduction en Langage Intermédiaire</h1>
+<h2 id="consitution-des-groupes">Consitution des Groupes</h2>
+<p>Pour le sujet 2, le projet est à faire en binôme.</p>
+<h2 id="objectif-1">Objectif</h2>
+<p>L’objectif du projet est d’écrire la phase de traduction en langage Intermédiaire (IR) expliquée en cours. Pour rappel, la grammaire de la représentation intermédiaire (IR) est donnée ci-dessous,</p>
+<p>On distingue les Expressions (Exp) et les Effets (Stm)</p>
+<pre><code>IrNode ::= Exp
+         | Stm</code></pre>
+<p>Les Expressions (Exp) peuvent être évaluées et produisent une donnée</p>
+<pre><code>Exp ::=
+# constante entière
+        &quot;const&quot; int
+
+# étiquette
+      | &quot;name&quot; label
+
+# temporaire
+      | &quot;temp&quot; temp
+
+# un opérateur binaire, op est une chaîne parmis &quot;(+)&quot;, &quot;(-)&quot;, &quot;(*)&quot;, &quot;(/)&quot;
+      | &quot;binop&quot; op
+            Exp
+            Exp
+
+# un accès mémoire à l&#39;adresse donnée par Exp
+      | &quot;mem&quot;
+            Exp
+
+# un appel à fonction. Normalement le premier Exp est de type Name et donne le
+# nom de la fonction. Les Exp suivants correspondent aux arguments.
+      | &quot;call&quot;
+            Exp
+            [{Exp}]
+        &quot;call end&quot;
+
+# un Eseq permet de combiner un Effet (Stm) et une Expression (Exp)
+      | &quot;eseq&quot;
+            Stm
+            Exp</code></pre>
+<p>Les Effets (Stm) n’ont pas une valeur associée</p>
+<pre><code>Stm ::=
+# Move déplace le deuxième Exp dans le premier Exp
+# selon la nature du premier Exp on peut soit écrire dans un temporaire soit
+# dans la mémoire
+        &quot;move&quot;
+            Exp
+            Exp
+
+# Sxp permet d&#39;encapsuler une expression dans un Effet
+      | &quot;sxp&quot;
+            Exp
+
+# Jump saute inconditionnellement à l&#39;étiquette dans Exp (souvent de type Name)
+      | &quot;jump&quot;
+            Exp
+
+# CJump saute vers le Name1 si &quot;Exp1 relop Exp2&quot; est vrai, sinon il
+# saute vers Name2. relop est une chaîne parmi
+# &quot;(=)&quot;, &quot;(&lt;&gt;)&quot;, &quot;(&lt;)&quot;, &quot;(&gt;)&quot;, &quot;(&lt;=)&quot;, &quot;(&gt;=)&quot; et
+      | &quot;cjump&quot; relop
+            Exp1
+            Exp2
+            Name1
+            Name2
+
+# Seq encapsule une suite de Stm
+      | &quot;seq&quot;
+            [{Stm}]
+
+# Label marque un point dans un programme.
+      | &quot;label&quot;
+            label</code></pre>
+<p>Votre projet doit prendre en entrée du code Tiger et produire sur la sortie standard un programme en langage IR.</p>
+<p>Par exemple le programme Tiger suivant <code>print_int(21*2)</code> pourrait être traduit vers le code IR suivant:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">call</span>
+  <span class="ex">name</span> print_int
+      <span class="ex">binop</span> (*)
+        <span class="ex">const</span> 21
+        <span class="ex">const</span> 2
+<span class="ex">call</span> end</code></pre></div>
+<p>En pratique les choses sont un peu plus compliquées, car chaque fonction (et en particulier la fonction main) doivent avoir un prologue et un épilogue.</p>
+<p>Voici une traduction complète du programme Tiger <code>print_int(21*2)</code>.</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="bu">echo</span> <span class="st">&quot;print_int(21*2)&quot;</span> <span class="op">&gt;</span> test1.tig
+$ <span class="ex">java</span> jtiger.cli.Compile -h test1.tig <span class="op">&gt;</span> test1.ir
+$ <span class="fu">cat</span> test1.ir
+<span class="fu">seq</span>
+  <span class="ex">label</span> main
+  <span class="ex">move</span>
+    <span class="ex">temp</span> x1
+    <span class="ex">temp</span> fp
+  <span class="ex">move</span>
+    <span class="ex">temp</span> fp
+    <span class="ex">temp</span> sp
+  <span class="ex">move</span>
+    <span class="ex">temp</span> sp
+    <span class="ex">binop</span> (-)
+      <span class="ex">temp</span> sp
+      <span class="ex">const</span> 4
+  <span class="ex">move</span>
+    <span class="ex">mem</span>
+      <span class="ex">temp</span> fp
+    <span class="ex">temp</span> i0
+  <span class="ex">move</span>
+    <span class="ex">temp</span> rv
+    <span class="ex">eseq</span>
+      <span class="ex">sxp</span>
+        <span class="ex">call</span>
+          <span class="ex">name</span> print_int
+          <span class="ex">binop</span> (*)
+            <span class="ex">const</span> 21
+            <span class="ex">const</span> 2
+        <span class="ex">call</span> end
+      <span class="ex">const</span> 0
+  <span class="ex">move</span>
+    <span class="ex">temp</span> sp
+    <span class="ex">temp</span> fp
+  <span class="ex">move</span>
+    <span class="ex">temp</span> fp
+    <span class="ex">temp</span> x1
+  <span class="ex">label</span> end
+<span class="fu">seq</span> end</code></pre></div>
+<p>Analysons la sortie en détail,</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">seq</span>
+  <span class="co"># Ce premier bloc d&#39;Effets constitue le prologue</span>
+
+  <span class="co"># On déclare l&#39;entrée du programme avec le label &quot;main&quot;</span>
+  <span class="ex">label</span> main
+
+  <span class="co"># On sauve l&#39;ancien pointeur de frame dans un temporaire</span>
+  <span class="ex">move</span>
+    <span class="ex">temp</span> x1
+    <span class="ex">temp</span> fp
+
+  <span class="co"># On initialise une nouvelle frame en haut de la pile</span>
+  <span class="ex">move</span>
+    <span class="ex">temp</span> fp
+    <span class="ex">temp</span> sp
+
+  <span class="co"># On réserve 4 octets en haut de la pile</span>
+  <span class="ex">move</span>
+    <span class="ex">temp</span> sp
+    <span class="ex">binop</span> (-)
+      <span class="ex">temp</span> sp
+      <span class="ex">const</span> 4
+
+  <span class="co"># On stocke le premier argument (static link) dans l&#39;espace ainsi crée</span>
+  <span class="co"># en haut de la pile</span>
+  <span class="ex">move</span>
+    <span class="ex">mem</span>
+      <span class="ex">temp</span> fp
+    <span class="ex">temp</span> i0
+
+  <span class="co"># On déplace dans le registre résultat la valeur 0.</span>
+  <span class="co"># (voir dernière ligne de l&#39;eseq) Main doit toujours retourner 0.</span>
+
+  <span class="ex">move</span>
+    <span class="ex">temp</span> rv
+    <span class="ex">eseq</span>
+      <span class="ex">sxp</span>
+        <span class="co"># On appelle la primitive print_int avec 2*21 comme argument</span>
+        <span class="ex">call</span>
+          <span class="ex">name</span> print_int
+          <span class="co"># On lui passe comme premier argument 2 * 21</span>
+          <span class="ex">binop</span> (*)
+            <span class="ex">const</span> 21
+            <span class="ex">const</span> 2
+        <span class="ex">call</span> end
+
+      <span class="ex">const</span> 0
+
+  <span class="co"># Maintenant vient l&#39;épilogue</span>
+  <span class="co"># On remets le pointeur de pile là où il était originellement</span>
+  <span class="co"># à l&#39;entrée de la fonction</span>
+  <span class="ex">move</span>
+    <span class="ex">temp</span> sp
+    <span class="ex">temp</span> fp
+
+  <span class="co"># On restaure l&#39;ancien pointeur de frame</span>
+  <span class="ex">move</span>
+    <span class="ex">temp</span> fp
+    <span class="ex">temp</span> x1
+  <span class="ex">label</span> end
+<span class="fu">seq</span> end</code></pre></div>
+<p>Bien entendu, un projet se construit petit à petit. Il ne faut pas essayer de produire tout en même temps, mais procéder par petites étapes validées par des tests.</p>
+<p>Voici l’ordre d’implémentation conseillé:</p>
+<ol style="list-style-type: decimal">
+<li><p>Implémentez un ensemble de classes Java pour représenter le langage IR. Vous pouvez vous inspirer du code dans le paquet <code>jtiger.ast</code> et créer une nouvelle hiérarchie de noeuds dans le paquet <code>jtiger.ir</code>.</p></li>
+<li><p>Créez un visiteur d’IR et utilisez le pour écrire une classe qui imprime sur la sortie standard un arbre IR. Testez votre “imprimeur” sur des petits arbres IR construits à la main.</p></li>
+<li><p>Commencez à implémenter la traduction. Partez du cas le plus simple, la traduction d’un BinOp en IR. Prennez l’AST suivant par exemple:</p></li>
+</ol>
+<pre><code>        OpExp (+)
+            IntegerExp(4)
+            IntegerExp(2)</code></pre>
+<p>Je vous conseille de traduire l’arbre en utilisant un visiteur d’AST. Le visiteur va traduire chaque feuille en noeuds IR <code>const 4</code> et <code>const 2</code>. Puis le visiteur va traduire le noeud <code>OpExp</code> en noeud IR <code>binop</code>, en récupérant les traductions des feuilles. Finalement, l’arbre IR suivant sera produit:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">    <span class="ex">binop</span> (+)
+        <span class="ex">const</span> 4
+        <span class="ex">const</span> 2</code></pre></div>
+<ol start="4" style="list-style-type: decimal">
+<li><p>Faites une gestion très simple des FuncDec de manière à produire pour chaque fonction le prologue, la traduction du body, l’épilogue. Ce n’est pas la peine à ce stade de gérer les frames parfaitement.</p></li>
+<li><p>Ecrivez la traduction des expresssions conditionelles sans variables (ex: <code>if (5 &gt; 4) then 1 else 0</code>)</p></li>
+<li><p>Implémentez l’appel des fonctions et testez des programmes simples.</p></li>
+<li><p>Implémentez la gestion des frames.</p></li>
+<li><p>Implémentez la gestion des variables.</p></li>
+<li><p>Faites le reste (tableaux, chaînes, records, etc.)</p></li>
+</ol>
+<h3 id="code-fourni">Code Fourni</h3>
+<p>Toutes les phases du compilateur vues en TP vous sont fournies: du lexeur jusqu’à la vérification des types. Le code qui vous est fourni à l’adresse <a href="http://www.sifflez.org/lectures/CO/livrable-projet.zip" class="uri">http://www.sifflez.org/lectures/CO/livrable-projet.zip</a> prends en entrée du code Tiger et produit un AST décoré avec les informations de bind. L’AST est stocké après la phase de Type checking dans l’attribut <code>ast</code> de la classe <code>jtiger.cli.Control</code>.</p>
+<h2 id="comment-tester-votre-projet">Comment tester votre projet</h2>
+<p>Pour tester votre projet, vous pouvez utiliser le simulateur IRVM 0.0.2. Pour installer IRVM suivez les instructions ci-dessous:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">git</span> clone https://github.com/pablooliveira/irvm.git
+$ <span class="bu">cd</span> irvm/
+$ <span class="ex">./autogen.sh</span>
+$ <span class="ex">./configure</span>
+$ <span class="fu">make</span>
+$ <span class="fu">sudo</span> make install</code></pre></div>
+<p>Si tout se passe bien vous devez pouvoir executer,</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">irvm</span>
+<span class="ex">Usage</span>: irvm [OPTIONS] INPUT-FILE
+<span class="ex">--trace</span><span class="kw">|</span><span class="ex">-t</span>    trace execution
+<span class="ex">--help</span><span class="kw">|</span><span class="ex">-h</span>     print this help message
+<span class="ex">--version</span><span class="kw">|</span><span class="ex">-V</span>  print version and exit</code></pre></div>
+<p>IRVM est un simulateur open-source pour la représentation intermédiaire IR. La documentation est disponible dans <code>irvm/doc</code>.</p>
+<p>IRVM permet de simuler l’exécution de code IR. Par exemple,</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="bu">echo</span> <span class="st">&quot;print_int(21*2)&quot;</span> <span class="op">&gt;</span> test1.tig
+$ <span class="ex">java</span> jtiger.cli.Compile -h test1.tig <span class="op">&gt;</span> test1.ir
+$ <span class="ex">irvm</span> test1.ir
+<span class="ex">42</span></code></pre></div>
+<p>IRVM possède un mode trace, vous permettant de debugger vos programmes:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">irvm</span> --trace test1.ir
+
+<span class="ex">2.2-2.6</span>: label main
+<span class="ex">5.4-5.7</span>: temp fp = 16383
+<span class="ex">3.2-3.5</span>: move temp x1 16383
+<span class="ex">8.4-8.7</span>: temp sp = 16383
+<span class="ex">6.2-6.5</span>: move temp fp 16383
+<span class="ex">12.6-12.9</span>: temp sp = 16383
+<span class="ex">13.6-13.10</span>: const 4
+<span class="ex">11.4-11.8</span>: binop (-) <span class="ex">16383</span> 4 = 16379
+<span class="ex">9.2-9.5</span>: move temp sp 16379
+<span class="ex">17.4-17.7</span>: temp i0 = 0
+<span class="ex">16.6-16.9</span>: temp fp = 16383
+<span class="ex">14.2-14.5</span>: move mem [16383] 0
+<span class="ex">25.12-25.16</span>: const 21
+<span class="ex">26.12-26.16</span>: const 2
+<span class="ex">24.10-24.14</span>: binop (*) <span class="ex">21</span> 2 = 42
+<span class="ex">22.8-22.11</span>: call print_int
+<span class="ex">22.8-22.11</span>:     i0 = 42
+<span class="ex">22.8-22.11</span>: call end print_int = 0
+<span class="ex">28.6-28.10</span>: const 0
+<span class="ex">20.4-20.7</span>: eseq = 0
+<span class="ex">18.2-18.5</span>: move temp rv 0
+<span class="ex">31.4-31.7</span>: temp fp = 16383
+<span class="ex">29.2-29.5</span>: move temp sp 16383
+<span class="ex">34.4-34.7</span>: temp x1 = 16383
+<span class="ex">32.2-32.5</span>: move temp fp 16383
+<span class="ex">35.2-35.6</span>: end of program</code></pre></div>
+<p>Comme vous avez du le remarquer certains noms de temporaires sont réservés dans IRVM:</p>
+<ul>
+<li><code>rv</code> pour la valeur de retour</li>
+<li><code>sp</code> et <code>fp</code> pour le stack pointer et frame pointer</li>
+<li><code>i0</code> <code>i1</code> … <code>i&lt;n&gt;</code> pour les paramètres passés en argument</li>
+</ul>
+<h2 id="documentation-et-rapport">Documentation et Rapport</h2>
+<p>Le code produit sera commenté et indenté en utilisant un style uniforme. Les commentaires seront en anglais.</p>
+<p>Un fichier README sera crée à la racine du projet. Il détaillera ce qui est implémenté, ce qui marche et ce qui ne marche pas.</p>
+<p>De plus, chaque groupe produira un rapport au format PDF de deux à cinq pages détaillant le travail fait et décrivant les choix d’implémentation. Le rapport PDF sera crée à la racine du projet également et aura pour nom <code>Rapport.pdf</code>.</p>
+<h2 id="tests">Tests</h2>
+<p>Chaque groupe devra produire un ensemble de tests qui valident le traducteur implémenté. Les tests seront crées dans un répertoire <code>tests/</code> à la racine du projet. Pour chaque test vous devez inclure trois fichiers:</p>
+<ul>
+<li>le programme Tiger (<code>test???.tig</code>)</li>
+<li>la sortie IR attendue (<code>test???.ir</code>)</li>
+<li>la sortie IRVM attendue (<code>test???.exp</code>)</li>
+</ul>
+<h2 id="comment-sera-noté-votre-projet">Comment sera noté votre projet</h2>
+<p>Attention votre projet sera exécuté avec la commande <code>java jtiger.cli.Compile -h &lt;entree.tig&gt;</code>. La sortie doit être du code IR légal que IRVM peut executer.</p>
+<p>La correction du code sera évaluée par un script de manière automatique. Attention assurez vous que les étapes suivantes marchent pour votre rendu. Si votre projet nécessite une intervention manuelle de ma part car vous n’avez pas respecté les consignes, vous serez pénalisés.</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">ant</span> clean
+$ <span class="ex">ant</span>
+$ <span class="ex">java</span> jtiger.cli.Compile -h ../secret-tests/test001. <span class="op">&gt;</span> ../secret-tests/test001.ir
+$ <span class="ex">irvm</span> ../secret-tests/test001.ir <span class="op">&gt;</span> ../secret-tests/test001.out</code></pre></div>
+<p>Si vous avez tout fini avant la date de rendu et vous souhaitez aller plus loin dans le compilateur, envoyez moi un mail.</p>
+<h2 id="exemples-de-traductions">Exemples de traductions</h2>
+<h3 id="chaînes">Chaînes</h3>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="bu">let</span>
+   <span class="ex">var</span> a : string := <span class="st">&quot;hello&quot;</span>
+<span class="kw">in</span>
+  <span class="ex">print</span>(a)
+<span class="ex">end</span>
+
+=<span class="op">&gt;</span>
+
+<span class="ex">label</span> _L29
+<span class="st">&quot;hello&quot;</span>
+<span class="fu">seq</span>
+  <span class="ex">label</span> main
+  <span class="ex">move</span>
+    <span class="ex">temp</span> x2
+    <span class="ex">temp</span> fp
+  <span class="ex">move</span>
+    <span class="ex">temp</span> fp
+    <span class="ex">temp</span> sp
+  <span class="ex">move</span>
+    <span class="ex">temp</span> sp
+    <span class="ex">binop</span> (-)
+      <span class="ex">temp</span> sp
+      <span class="ex">const</span> 4
+  <span class="ex">move</span>
+    <span class="ex">mem</span>
+      <span class="ex">temp</span> fp
+    <span class="ex">temp</span> i0
+  <span class="ex">move</span>
+    <span class="ex">temp</span> rv
+    <span class="ex">eseq</span>
+      <span class="fu">seq</span>
+        <span class="ex">move</span>
+          <span class="ex">temp</span> x1
+          <span class="ex">name</span> _L29
+        <span class="ex">sxp</span>
+          <span class="ex">call</span>
+            <span class="ex">name</span> print
+            <span class="ex">temp</span> x1
+          <span class="ex">call</span> end
+      <span class="fu">seq</span> end
+      <span class="ex">const</span> 0
+  <span class="ex">move</span>
+    <span class="ex">temp</span> sp
+    <span class="ex">temp</span> fp
+  <span class="ex">move</span>
+    <span class="ex">temp</span> fp
+    <span class="ex">temp</span> x2
+  <span class="ex">label</span> end
+<span class="fu">seq</span> end</code></pre></div>
+<h3 id="tableaux">Tableaux</h3>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="bu">let</span>
+  <span class="bu">type</span>  intarr = array of int
+  <span class="ex">var</span> arr : intarr := intarr [10] of 0
+<span class="kw">in</span>
+  <span class="ex">print_int</span>(arr[2])
+<span class="ex">end</span>
+
+=<span class="op">&gt;</span>
+
+<span class="fu">seq</span>
+  <span class="ex">label</span> main
+  <span class="ex">move</span>
+    <span class="ex">temp</span> x2
+    <span class="ex">temp</span> fp
+  <span class="ex">move</span>
+    <span class="ex">temp</span> fp
+    <span class="ex">temp</span> sp
+  <span class="ex">move</span>
+    <span class="ex">temp</span> sp
+    <span class="ex">binop</span> (-)
+      <span class="ex">temp</span> sp
+      <span class="ex">const</span> 4
+  <span class="ex">move</span>
+    <span class="ex">mem</span>
+      <span class="ex">temp</span> fp
+    <span class="ex">temp</span> i0
+  <span class="ex">move</span>
+    <span class="ex">temp</span> rv
+    <span class="ex">eseq</span>
+      <span class="fu">seq</span>
+        <span class="ex">move</span>
+          <span class="ex">temp</span> x1
+          <span class="ex">call</span>
+            <span class="ex">name</span> init_array
+            <span class="ex">const</span> 10
+            <span class="ex">const</span> 0
+          <span class="ex">call</span> end
+        <span class="ex">sxp</span>
+          <span class="ex">call</span>
+            <span class="ex">name</span> print_int
+            <span class="ex">mem</span>
+              <span class="ex">binop</span> (+)
+                <span class="ex">temp</span> x1
+                <span class="ex">binop</span> (*)
+                  <span class="ex">const</span> 2
+                  <span class="ex">const</span> 4
+          <span class="ex">call</span> end
+      <span class="fu">seq</span> end
+      <span class="ex">const</span> 0
+  <span class="ex">move</span>
+    <span class="ex">temp</span> sp
+    <span class="ex">temp</span> fp
+  <span class="ex">move</span>
+    <span class="ex">temp</span> fp
+    <span class="ex">temp</span> x2
+  <span class="ex">label</span> end
+<span class="fu">seq</span> end</code></pre></div>
+<h3 id="records">Records</h3>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="bu">let</span>
+  <span class="bu">type</span> personne = {name:string, age:int}
+  <span class="ex">var</span> a : personne := personne {name=<span class="st">&quot;Marvin&quot;</span>, age=20}
+<span class="kw">in</span>
+  <span class="ex">a.age</span> := a.age + 1
+<span class="ex">end</span>
+
+=<span class="op">&gt;</span>
+
+<span class="ex">label</span> _L29
+<span class="st">&quot;Marvin&quot;</span>
+<span class="fu">seq</span>
+  <span class="ex">label</span> main
+  <span class="ex">move</span>
+    <span class="ex">temp</span> x3
+    <span class="ex">temp</span> fp
+  <span class="ex">move</span>
+    <span class="ex">temp</span> fp
+    <span class="ex">temp</span> sp
+  <span class="ex">move</span>
+    <span class="ex">temp</span> sp
+    <span class="ex">binop</span> (-)
+      <span class="ex">temp</span> sp
+      <span class="ex">const</span> 4
+  <span class="ex">move</span>
+    <span class="ex">mem</span>
+      <span class="ex">temp</span> fp
+    <span class="ex">temp</span> i0
+  <span class="ex">move</span>
+    <span class="ex">temp</span> rv
+    <span class="ex">eseq</span>
+      <span class="fu">seq</span>
+        <span class="ex">move</span>
+          <span class="ex">temp</span> x1
+          <span class="ex">eseq</span>
+            <span class="fu">seq</span>
+              <span class="ex">move</span>
+                <span class="ex">temp</span> x2
+                <span class="ex">call</span>
+                  <span class="ex">name</span> malloc
+                  <span class="ex">const</span> 8
+                <span class="ex">call</span> end
+              <span class="ex">move</span>
+                <span class="ex">mem</span>
+                  <span class="ex">binop</span> (+)
+                    <span class="ex">temp</span> x2
+                    <span class="ex">const</span> 0
+                <span class="ex">name</span> _L29
+              <span class="ex">move</span>
+                <span class="ex">mem</span>
+                  <span class="ex">binop</span> (+)
+                    <span class="ex">temp</span> x2
+                    <span class="ex">const</span> 4
+                <span class="ex">const</span> 20
+            <span class="fu">seq</span> end
+            <span class="ex">temp</span> x2
+        <span class="ex">move</span>
+          <span class="ex">mem</span>
+            <span class="ex">binop</span> (+)
+              <span class="ex">temp</span> x1
+              <span class="ex">binop</span> (*)
+                <span class="ex">const</span> 1
+                <span class="ex">const</span> 4
+          <span class="ex">binop</span> (+)
+            <span class="ex">mem</span>
+              <span class="ex">binop</span> (+)
+                <span class="ex">temp</span> x1
+                <span class="ex">binop</span> (*)
+                  <span class="ex">const</span> 1
+                  <span class="ex">const</span> 4
+            <span class="ex">const</span> 1
+      <span class="fu">seq</span> end
+      <span class="ex">const</span> 0
+  <span class="ex">move</span>
+    <span class="ex">temp</span> sp
+    <span class="ex">temp</span> fp
+  <span class="ex">move</span>
+    <span class="ex">temp</span> fp
+    <span class="ex">temp</span> x3
+  <span class="ex">label</span> end
+<span class="fu">seq</span> end</code></pre></div>
+<h3 id="factorielle">Factorielle</h3>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="bu">let</span>
+  <span class="kw">function</span><span class="fu"> fact</span><span class="kw">(</span><span class="ex">n</span>:int<span class="kw">)</span> <span class="bu">:</span> int =
+    <span class="kw">if</span> <span class="ex">1</span> <span class="op">&lt;</span> n then n * fact(n-1) <span class="kw">else</span> <span class="ex">1</span>
+<span class="kw">in</span>
+    <span class="ex">print_int</span>(fact(7))
+<span class="ex">end</span>
+
+=<span class="op">&gt;</span>
+
+<span class="fu">seq</span>
+  <span class="ex">label</span> _L2fact
+  <span class="ex">move</span>
+    <span class="ex">temp</span> x3
+    <span class="ex">temp</span> fp
+  <span class="ex">move</span>
+    <span class="ex">temp</span> fp
+    <span class="ex">temp</span> sp
+  <span class="ex">move</span>
+    <span class="ex">temp</span> sp
+    <span class="ex">binop</span> (-)
+      <span class="ex">temp</span> sp
+      <span class="ex">const</span> 4
+  <span class="ex">move</span>
+    <span class="ex">mem</span>
+      <span class="ex">temp</span> fp
+    <span class="ex">temp</span> i0
+  <span class="ex">move</span>
+    <span class="ex">temp</span> x1
+    <span class="ex">temp</span> i1
+  <span class="ex">move</span>
+    <span class="ex">temp</span> rv
+    <span class="ex">eseq</span>
+      <span class="fu">seq</span>
+        <span class="ex">cjump</span> (<span class="op">&lt;</span>)
+          <span class="ex">const</span> 1
+          <span class="ex">temp</span> x1
+         <span class="ex">name</span> _L32 name _L33
+        <span class="ex">label</span> _L33
+        <span class="ex">move</span>
+          <span class="ex">temp</span> x2
+          <span class="ex">const</span> 1
+        <span class="ex">jump</span>
+          <span class="ex">name</span> _L31
+        <span class="ex">label</span> _L32
+        <span class="ex">move</span>
+          <span class="ex">temp</span> x2
+          <span class="ex">binop</span> (*)
+            <span class="ex">temp</span> x1
+            <span class="ex">call</span>
+              <span class="ex">name</span> _L2fact
+              <span class="ex">mem</span>
+                <span class="ex">temp</span> fp
+              <span class="ex">binop</span> (-)
+                <span class="ex">temp</span> x1
+                <span class="ex">const</span> 1
+            <span class="ex">call</span> end
+        <span class="ex">label</span> _L31
+      <span class="fu">seq</span> end
+      <span class="ex">temp</span> x2
+  <span class="ex">move</span>
+    <span class="ex">temp</span> sp
+    <span class="ex">temp</span> fp
+  <span class="ex">move</span>
+    <span class="ex">temp</span> fp
+    <span class="ex">temp</span> x3
+  <span class="ex">label</span> end
+<span class="fu">seq</span> end
+<span class="fu">seq</span>
+  <span class="ex">label</span> main
+  <span class="ex">move</span>
+    <span class="ex">temp</span> x4
+    <span class="ex">temp</span> fp
+  <span class="ex">move</span>
+    <span class="ex">temp</span> fp
+    <span class="ex">temp</span> sp
+  <span class="ex">move</span>
+    <span class="ex">temp</span> sp
+    <span class="ex">binop</span> (-)
+      <span class="ex">temp</span> sp
+      <span class="ex">const</span> 4
+  <span class="ex">move</span>
+    <span class="ex">mem</span>
+      <span class="ex">temp</span> fp
+    <span class="ex">temp</span> i0
+  <span class="ex">move</span>
+    <span class="ex">temp</span> rv
+    <span class="ex">eseq</span>
+      <span class="ex">sxp</span>
+        <span class="ex">call</span>
+          <span class="ex">name</span> print_int
+          <span class="ex">call</span>
+            <span class="ex">name</span> _L2fact
+            <span class="ex">temp</span> fp
+            <span class="ex">const</span> 7
+          <span class="ex">call</span> end
+        <span class="ex">call</span> end
+      <span class="ex">const</span> 0
+  <span class="ex">move</span>
+    <span class="ex">temp</span> sp
+    <span class="ex">temp</span> fp
+  <span class="ex">move</span>
+    <span class="ex">temp</span> fp
+    <span class="ex">temp</span> x4
+  <span class="ex">label</span> end
+<span class="fu">seq</span> end</code></pre></div>
+<h3 id="variable-qui-échappe">Variable qui échappe</h3>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="bu">let</span>
+    <span class="ex">var</span> a := 0 /* la variable a echappe */
+    <span class="kw">function</span><span class="fu"> plusUn()</span> <span class="bu">:</span> int = a + 1
+<span class="kw">in</span>
+    <span class="ex">print_int</span>(plusUn())
+<span class="ex">end</span>
+
+=<span class="op">&gt;</span>
+
+<span class="fu">seq</span>
+  <span class="ex">label</span> _L2plusUn
+  <span class="ex">move</span>
+    <span class="ex">temp</span> x1
+    <span class="ex">temp</span> fp
+  <span class="ex">move</span>
+    <span class="ex">temp</span> fp
+    <span class="ex">temp</span> sp
+  <span class="ex">move</span>
+    <span class="ex">temp</span> sp
+    <span class="ex">binop</span> (-)
+      <span class="ex">temp</span> sp
+      <span class="ex">const</span> 4
+  <span class="ex">move</span>
+    <span class="ex">mem</span>
+      <span class="ex">temp</span> fp
+    <span class="ex">temp</span> i0
+  <span class="ex">move</span>
+    <span class="ex">temp</span> rv
+    <span class="ex">binop</span> (+)
+      <span class="ex">mem</span>
+        <span class="ex">binop</span> (+)
+          <span class="ex">mem</span>
+            <span class="ex">temp</span> fp
+          <span class="ex">const</span> -4
+      <span class="ex">const</span> 1
+  <span class="ex">move</span>
+    <span class="ex">temp</span> sp
+    <span class="ex">temp</span> fp
+  <span class="ex">move</span>
+    <span class="ex">temp</span> fp
+    <span class="ex">temp</span> x1
+  <span class="ex">label</span> end
+<span class="fu">seq</span> end
+
+<span class="fu">seq</span>
+  <span class="ex">label</span> main
+  <span class="ex">move</span>
+    <span class="ex">temp</span> x2
+    <span class="ex">temp</span> fp
+  <span class="ex">move</span>
+    <span class="ex">temp</span> fp
+    <span class="ex">temp</span> sp
+  <span class="ex">move</span>
+    <span class="ex">temp</span> sp
+    <span class="ex">binop</span> (-)
+      <span class="ex">temp</span> sp
+      <span class="ex">const</span> 8
+  <span class="ex">move</span>
+    <span class="ex">mem</span>
+      <span class="ex">temp</span> fp
+    <span class="ex">temp</span> i0
+  <span class="ex">move</span>
+    <span class="ex">temp</span> rv
+    <span class="ex">eseq</span>
+      <span class="fu">seq</span>
+        <span class="ex">move</span>
+          <span class="ex">mem</span>
+            <span class="ex">binop</span> (+)
+              <span class="ex">temp</span> fp
+              <span class="ex">const</span> -4
+          <span class="ex">const</span> 0
+        <span class="ex">sxp</span>
+          <span class="ex">call</span>
+            <span class="ex">name</span> print_int
+            <span class="ex">call</span>
+              <span class="ex">name</span> _L2plusUn
+              <span class="ex">temp</span> fp
+            <span class="ex">call</span> end
+          <span class="ex">call</span> end
+      <span class="fu">seq</span> end
+      <span class="ex">const</span> 0
+  <span class="ex">move</span>
+    <span class="ex">temp</span> sp
+    <span class="ex">temp</span> fp
+  <span class="ex">move</span>
+    <span class="ex">temp</span> fp
+    <span class="ex">temp</span> x2
+  <span class="ex">label</span> end
+<span class="fu">seq</span> end</code></pre></div>
+<h3 id="tri-fusion-merge-sort">Tri Fusion (Merge Sort)</h3>
+<p>Ce programme est un tri Fusion qui permets de trier une liste avec une complexité de <span class="math inline">\(O(n.log(n))\)</span>. Il a été écrit par Andrew Appel créateur du langage Tiger.</p>
+<p>Pour passer ce programme votre compilateur devra avoir implémenté pratiquement tout Tiger.</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="bu">let</span>
+ <span class="bu">type</span> any = {any : int}
+ <span class="ex">var</span> buffer := getchar ()
+
+ <span class="kw">function</span><span class="fu"> readint</span> <span class="kw">(</span><span class="ex">any</span> : any<span class="kw">)</span> <span class="bu">:</span> int =
+   <span class="bu">let</span> var i := 0
+       <span class="kw">function</span><span class="fu"> isdigit</span> <span class="kw">(</span><span class="ex">s</span> : string<span class="kw">)</span> <span class="bu">:</span> int =
+     <span class="ex">ord</span> (<span class="st">&quot;0&quot;</span>) <span class="op">&lt;</span>= <span class="ex">ord</span> (s) <span class="kw">&amp;</span> <span class="ex">ord</span> (s) <span class="op">&lt;</span>= <span class="ex">ord</span> (<span class="st">&quot;9&quot;</span>)
+       <span class="kw">function</span><span class="fu"> skipto ()</span> =
+     <span class="kw">while</span> <span class="ex">buffer</span> = <span class="st">&quot; &quot;</span> <span class="kw">|</span> <span class="ex">buffer</span> = <span class="st">&quot;\n&quot;</span>
+       <span class="kw">do</span> <span class="ex">buffer</span> := getchar ()
+   <span class="kw">in</span> <span class="fu">skipto ()</span>;
+      <span class="ex">any.any</span> := isdigit (buffer);
+      <span class="kw">while</span> <span class="ex">isdigit</span> (buffer)
+    <span class="kw">do</span> <span class="kw">(</span><span class="ex">i</span> := i * 10 + ord (buffer<span class="kw">)</span> <span class="ex">-</span> ord (<span class="st">&quot;0&quot;</span>);
+        <span class="ex">buffer</span> := getchar ());
+      <span class="ex">i</span>
+   <span class="ex">end</span>
+
+ <span class="bu">type</span> list = {first : int, rest : list}
+
+ <span class="kw">function</span><span class="fu"> readlist ()</span> <span class="bu">:</span> list =
+   <span class="bu">let</span> var any := any<span class="dt">{any=0}</span>
+       <span class="ex">var</span> i := readint (any)
+   <span class="kw">in</span> <span class="kw">if</span> <span class="ex">any.any</span>
+    <span class="kw">then</span> <span class="ex">list</span>{first=i,rest=readlist ()}
+    <span class="kw">else</span> <span class="ex">nil</span>
+   <span class="ex">end</span>
+
+ <span class="kw">function</span><span class="fu"> merge</span> <span class="kw">(</span><span class="ex">a</span> : list, b : list<span class="kw">)</span> <span class="bu">:</span> list =
+   <span class="kw">if</span> <span class="ex">a</span> = nil then b
+   <span class="kw">else</span> <span class="kw">if</span> <span class="ex">b</span> = nil then a
+   <span class="kw">else</span> <span class="kw">if</span> <span class="ex">a.first</span> <span class="op">&lt;</span> b.first
+      <span class="kw">then</span> <span class="ex">list</span> {first = a.first, rest = merge (a.rest, b)}
+      <span class="kw">else</span> <span class="ex">list</span> {first = b.first, rest = merge (a, b.rest)}
+
+ <span class="kw">function</span><span class="fu"> printmint</span> <span class="kw">(</span><span class="ex">i</span> : int<span class="kw">)</span> =
+   <span class="bu">let</span> function f (i : int) =
+    <span class="kw">if</span> <span class="ex">i</span> <span class="op">&gt;</span> 0
+    <span class="kw">then</span> <span class="kw">(</span><span class="ex">f</span> (i/10<span class="kw">)</span>; <span class="ex">print</span> (chr (i-i/10*10+ord (<span class="st">&quot;0&quot;</span>))))
+   <span class="kw">in</span> <span class="kw">if</span> <span class="ex">i</span> <span class="op">&lt;</span> 0 then (print (<span class="st">&quot;-&quot;</span>); <span class="ex">f</span> (-i))
+      <span class="kw">else</span> <span class="kw">if</span> <span class="ex">i</span><span class="op">&gt;</span>0 then f (i)
+      <span class="kw">else</span> <span class="ex">print</span> (<span class="st">&quot;0&quot;</span>)
+   <span class="ex">end</span>
+
+ <span class="kw">function</span><span class="fu"> printlist</span> <span class="kw">(</span><span class="ex">l</span> : list<span class="kw">)</span> =
+   <span class="kw">if</span> <span class="ex">l</span> = nil then print (<span class="st">&quot;\n&quot;</span>)
+   <span class="kw">else</span> <span class="kw">(</span><span class="ex">printmint</span> (l.first<span class="kw">)</span>; <span class="ex">print</span> (<span class="st">&quot; &quot;</span>); <span class="ex">printlist</span> (l.rest))
+
+   <span class="ex">var</span> list1 := readlist ()
+   <span class="ex">var</span> list2 := (buffer := getchar (); <span class="fu">readlist ()</span>)
+
+<span class="kw">in</span> <span class="ex">printlist</span> (merge (list1,list2))
+<span class="ex">end</span>
+
+=<span class="op">&gt;</span>
+
+<span class="ex">label</span> _L46
+<span class="st">&quot;\071&quot;</span>
+<span class="ex">label</span> _L45
+<span class="st">&quot;\060&quot;</span>
+<span class="fu">seq</span>
+  <span class="ex">label</span> _L2isdigit
+  <span class="ex">move</span>
+    <span class="ex">temp</span> x6
+    <span class="ex">temp</span> fp
+  <span class="ex">move</span>
+    <span class="ex">temp</span> fp
+    <span class="ex">temp</span> sp
+  <span class="ex">move</span>
+    <span class="ex">temp</span> sp
+    <span class="ex">binop</span> (-)
+      <span class="ex">temp</span> sp
+      <span class="ex">const</span> 4
+  <span class="ex">move</span>
+    <span class="ex">mem</span>
+      <span class="ex">temp</span> fp
+    <span class="ex">temp</span> i0
+  <span class="ex">move</span>
+    <span class="ex">temp</span> x3
+    <span class="ex">temp</span> i1
+  <span class="ex">move</span>
+    <span class="ex">temp</span> rv
+    <span class="ex">eseq</span>
+      <span class="fu">seq</span>
+        <span class="ex">cjump</span> (<span class="op">&lt;</span>=)
+          <span class="ex">call</span>
+            <span class="ex">name</span> ord
+            <span class="ex">name</span> _L45
+          <span class="ex">call</span> end
+          <span class="ex">call</span>
+            <span class="ex">name</span> ord
+            <span class="ex">temp</span> x3
+          <span class="ex">call</span> end
+         <span class="ex">name</span> _L50 name _L51
+        <span class="ex">label</span> _L51
+        <span class="ex">move</span>
+          <span class="ex">temp</span> x4
+          <span class="ex">const</span> 0
+        <span class="ex">jump</span>
+          <span class="ex">name</span> _L49
+        <span class="ex">label</span> _L50
+        <span class="ex">move</span>
+          <span class="ex">temp</span> x4
+          <span class="ex">eseq</span>
+            <span class="fu">seq</span>
+              <span class="ex">move</span>
+                <span class="ex">temp</span> x5
+                <span class="ex">const</span> 1
+              <span class="ex">cjump</span> (<span class="op">&lt;</span>=)
+                <span class="ex">call</span>
+                  <span class="ex">name</span> ord
+                  <span class="ex">temp</span> x3
+                <span class="ex">call</span> end
+                <span class="ex">call</span>
+                  <span class="ex">name</span> ord
+                  <span class="ex">name</span> _L46
+                <span class="ex">call</span> end
+               <span class="ex">name</span> _L47 name _L48
+              <span class="ex">label</span> _L48
+              <span class="ex">move</span>
+                <span class="ex">temp</span> x5
+                <span class="ex">const</span> 0
+              <span class="ex">label</span> _L47
+            <span class="fu">seq</span> end
+            <span class="ex">temp</span> x5
+        <span class="ex">label</span> _L49
+      <span class="fu">seq</span> end
+      <span class="ex">temp</span> x4
+  <span class="ex">move</span>
+    <span class="ex">temp</span> sp
+    <span class="ex">temp</span> fp
+  <span class="ex">move</span>
+    <span class="ex">temp</span> fp
+    <span class="ex">temp</span> x6
+  <span class="ex">label</span> end
+<span class="fu">seq</span> end
+<span class="ex">label</span> _L55
+<span class="st">&quot;\040&quot;</span>
+<span class="ex">label</span> _L56
+<span class="st">&quot;\012&quot;</span>
+<span class="fu">seq</span>
+  <span class="ex">label</span> _L4skipto
+  <span class="ex">move</span>
+    <span class="ex">temp</span> x7
+    <span class="ex">temp</span> fp
+  <span class="ex">move</span>
+    <span class="ex">temp</span> fp
+    <span class="ex">temp</span> sp
+  <span class="ex">move</span>
+    <span class="ex">temp</span> sp
+    <span class="ex">binop</span> (-)
+      <span class="ex">temp</span> sp
+      <span class="ex">const</span> 4
+  <span class="ex">move</span>
+    <span class="ex">mem</span>
+      <span class="ex">temp</span> fp
+    <span class="ex">temp</span> i0
+  <span class="fu">seq</span>
+    <span class="ex">label</span> _L52
+    <span class="fu">seq</span>
+      <span class="ex">cjump</span> (=)
+        <span class="ex">call</span>
+          <span class="ex">name</span> strcmp
+          <span class="ex">mem</span>
+            <span class="ex">binop</span> (+)
+              <span class="ex">mem</span>
+                <span class="ex">mem</span>
+                  <span class="ex">temp</span> fp
+              <span class="ex">const</span> -4
+          <span class="ex">name</span> _L55
+        <span class="ex">call</span> end
+        <span class="ex">const</span> 0
+       <span class="ex">name</span> _L58 name _L59
+      <span class="ex">label</span> _L59
+      <span class="ex">cjump</span> (=)
+        <span class="ex">call</span>
+          <span class="ex">name</span> strcmp
+          <span class="ex">mem</span>
+            <span class="ex">binop</span> (+)
+              <span class="ex">mem</span>
+                <span class="ex">mem</span>
+                  <span class="ex">temp</span> fp
+              <span class="ex">const</span> -4
+          <span class="ex">name</span> _L56
+        <span class="ex">call</span> end
+        <span class="ex">const</span> 0
+       <span class="ex">name</span> _L53 name _L54
+      <span class="ex">jump</span>
+        <span class="ex">name</span> _L57
+      <span class="ex">label</span> _L58
+      <span class="ex">jump</span>
+        <span class="ex">name</span> _L53
+      <span class="ex">label</span> _L57
+    <span class="fu">seq</span> end
+    <span class="ex">label</span> _L53
+    <span class="ex">move</span>
+      <span class="ex">mem</span>
+        <span class="ex">binop</span> (+)
+          <span class="ex">mem</span>
+            <span class="ex">mem</span>
+              <span class="ex">temp</span> fp
+          <span class="ex">const</span> -4
+      <span class="ex">call</span>
+        <span class="ex">name</span> getchar
+      <span class="ex">call</span> end
+    <span class="ex">jump</span>
+      <span class="ex">name</span> _L52
+    <span class="ex">label</span> _L54
+  <span class="fu">seq</span> end
+  <span class="ex">move</span>
+    <span class="ex">temp</span> sp
+    <span class="ex">temp</span> fp
+  <span class="ex">move</span>
+    <span class="ex">temp</span> fp
+    <span class="ex">temp</span> x7
+  <span class="ex">label</span> end
+<span class="fu">seq</span> end
+<span class="ex">label</span> _L63
+<span class="st">&quot;\060&quot;</span>
+<span class="fu">seq</span>
+  <span class="ex">label</span> _L6readint
+  <span class="ex">move</span>
+    <span class="ex">temp</span> x8
+    <span class="ex">temp</span> fp
+  <span class="ex">move</span>
+    <span class="ex">temp</span> fp
+    <span class="ex">temp</span> sp
+  <span class="ex">move</span>
+    <span class="ex">temp</span> sp
+    <span class="ex">binop</span> (-)
+      <span class="ex">temp</span> sp
+      <span class="ex">const</span> 4
+  <span class="ex">move</span>
+    <span class="ex">mem</span>
+      <span class="ex">temp</span> fp
+    <span class="ex">temp</span> i0
+  <span class="ex">move</span>
+    <span class="ex">temp</span> x1
+    <span class="ex">temp</span> i1
+  <span class="ex">move</span>
+    <span class="ex">temp</span> rv
+    <span class="ex">eseq</span>
+      <span class="ex">move</span>
+        <span class="ex">temp</span> x2
+        <span class="ex">const</span> 0
+      <span class="ex">eseq</span>
+        <span class="fu">seq</span>
+          <span class="ex">sxp</span>
+            <span class="ex">call</span>
+              <span class="ex">name</span> _L4skipto
+              <span class="ex">temp</span> fp
+            <span class="ex">call</span> end
+          <span class="ex">move</span>
+            <span class="ex">mem</span>
+              <span class="ex">binop</span> (+)
+                <span class="ex">temp</span> x1
+                <span class="ex">binop</span> (*)
+                  <span class="ex">const</span> 0
+                  <span class="ex">const</span> 4
+            <span class="ex">call</span>
+              <span class="ex">name</span> _L2isdigit
+              <span class="ex">temp</span> fp
+              <span class="ex">mem</span>
+                <span class="ex">binop</span> (+)
+                  <span class="ex">mem</span>
+                    <span class="ex">temp</span> fp
+                  <span class="ex">const</span> -4
+            <span class="ex">call</span> end
+          <span class="fu">seq</span>
+            <span class="ex">label</span> _L60
+            <span class="ex">cjump</span> (<span class="op">&lt;&gt;</span>)
+              <span class="ex">call</span>
+                <span class="ex">name</span> _L2isdigit
+                <span class="ex">temp</span> fp
+                <span class="ex">mem</span>
+                  <span class="ex">binop</span> (+)
+                    <span class="ex">mem</span>
+                      <span class="ex">temp</span> fp
+                    <span class="ex">const</span> -4
+              <span class="ex">call</span> end
+              <span class="ex">const</span> 0
+             <span class="ex">name</span> _L61 name _L62
+            <span class="ex">label</span> _L61
+            <span class="fu">seq</span>
+              <span class="ex">move</span>
+                <span class="ex">temp</span> x2
+                <span class="ex">binop</span> (-)
+                  <span class="ex">binop</span> (+)
+                    <span class="ex">binop</span> (*)
+                      <span class="ex">temp</span> x2
+                      <span class="ex">const</span> 10
+                    <span class="ex">call</span>
+                      <span class="ex">name</span> ord
+                      <span class="ex">mem</span>
+                        <span class="ex">binop</span> (+)
+                          <span class="ex">mem</span>
+                            <span class="ex">temp</span> fp
+                          <span class="ex">const</span> -4
+                    <span class="ex">call</span> end
+                  <span class="ex">call</span>
+                    <span class="ex">name</span> ord
+                    <span class="ex">name</span> _L63
+                  <span class="ex">call</span> end
+              <span class="ex">move</span>
+                <span class="ex">mem</span>
+                  <span class="ex">binop</span> (+)
+                    <span class="ex">mem</span>
+                      <span class="ex">temp</span> fp
+                    <span class="ex">const</span> -4
+                <span class="ex">call</span>
+                  <span class="ex">name</span> getchar
+                <span class="ex">call</span> end
+            <span class="fu">seq</span> end
+            <span class="ex">jump</span>
+              <span class="ex">name</span> _L60
+            <span class="ex">label</span> _L62
+          <span class="fu">seq</span> end
+        <span class="fu">seq</span> end
+        <span class="ex">temp</span> x2
+  <span class="ex">move</span>
+    <span class="ex">temp</span> sp
+    <span class="ex">temp</span> fp
+  <span class="ex">move</span>
+    <span class="ex">temp</span> fp
+    <span class="ex">temp</span> x8
+  <span class="ex">label</span> end
+<span class="fu">seq</span> end
+<span class="fu">seq</span>
+  <span class="ex">label</span> _L8readlist
+  <span class="ex">move</span>
+    <span class="ex">temp</span> x14
+    <span class="ex">temp</span> fp
+  <span class="ex">move</span>
+    <span class="ex">temp</span> fp
+    <span class="ex">temp</span> sp
+  <span class="ex">move</span>
+    <span class="ex">temp</span> sp
+    <span class="ex">binop</span> (-)
+      <span class="ex">temp</span> sp
+      <span class="ex">const</span> 4
+  <span class="ex">move</span>
+    <span class="ex">mem</span>
+      <span class="ex">temp</span> fp
+    <span class="ex">temp</span> i0
+  <span class="ex">move</span>
+    <span class="ex">temp</span> rv
+    <span class="ex">eseq</span>
+      <span class="fu">seq</span>
+        <span class="ex">move</span>
+          <span class="ex">temp</span> x9
+          <span class="ex">eseq</span>
+            <span class="fu">seq</span>
+              <span class="ex">move</span>
+                <span class="ex">temp</span> x10
+                <span class="ex">call</span>
+                  <span class="ex">name</span> malloc
+                  <span class="ex">const</span> 4
+                <span class="ex">call</span> end
+              <span class="ex">move</span>
+                <span class="ex">mem</span>
+                  <span class="ex">binop</span> (+)
+                    <span class="ex">temp</span> x10
+                    <span class="ex">const</span> 0
+                <span class="ex">const</span> 0
+            <span class="fu">seq</span> end
+            <span class="ex">temp</span> x10
+        <span class="ex">move</span>
+          <span class="ex">temp</span> x11
+          <span class="ex">call</span>
+            <span class="ex">name</span> _L6readint
+            <span class="ex">mem</span>
+              <span class="ex">temp</span> fp
+            <span class="ex">temp</span> x9
+          <span class="ex">call</span> end
+      <span class="fu">seq</span> end
+      <span class="ex">eseq</span>
+        <span class="fu">seq</span>
+          <span class="ex">cjump</span> (<span class="op">&lt;&gt;</span>)
+            <span class="ex">mem</span>
+              <span class="ex">binop</span> (+)
+                <span class="ex">temp</span> x9
+                <span class="ex">binop</span> (*)
+                  <span class="ex">const</span> 0
+                  <span class="ex">const</span> 4
+            <span class="ex">const</span> 0
+           <span class="ex">name</span> _L65 name _L66
+          <span class="ex">label</span> _L66
+          <span class="ex">move</span>
+            <span class="ex">temp</span> x13
+            <span class="ex">const</span> 0
+          <span class="ex">jump</span>
+            <span class="ex">name</span> _L64
+          <span class="ex">label</span> _L65
+          <span class="ex">move</span>
+            <span class="ex">temp</span> x13
+            <span class="ex">eseq</span>
+              <span class="fu">seq</span>
+                <span class="ex">move</span>
+                  <span class="ex">temp</span> x12
+                  <span class="ex">call</span>
+                    <span class="ex">name</span> malloc
+                    <span class="ex">const</span> 8
+                  <span class="ex">call</span> end
+                <span class="ex">move</span>
+                  <span class="ex">mem</span>
+                    <span class="ex">binop</span> (+)
+                      <span class="ex">temp</span> x12
+                      <span class="ex">const</span> 0
+                  <span class="ex">temp</span> x11
+                <span class="ex">move</span>
+                  <span class="ex">mem</span>
+                    <span class="ex">binop</span> (+)
+                      <span class="ex">temp</span> x12
+                      <span class="ex">const</span> 4
+                  <span class="ex">call</span>
+                    <span class="ex">name</span> _L8readlist
+                    <span class="ex">mem</span>
+                      <span class="ex">temp</span> fp
+                  <span class="ex">call</span> end
+              <span class="fu">seq</span> end
+              <span class="ex">temp</span> x12
+          <span class="ex">label</span> _L64
+        <span class="fu">seq</span> end
+        <span class="ex">temp</span> x13
+  <span class="ex">move</span>
+    <span class="ex">temp</span> sp
+    <span class="ex">temp</span> fp
+  <span class="ex">move</span>
+    <span class="ex">temp</span> fp
+    <span class="ex">temp</span> x14
+  <span class="ex">label</span> end
+<span class="fu">seq</span> end
+<span class="fu">seq</span>
+  <span class="ex">label</span> _L10merge
+  <span class="ex">move</span>
+    <span class="ex">temp</span> x22
+    <span class="ex">temp</span> fp
+  <span class="ex">move</span>
+    <span class="ex">temp</span> fp
+    <span class="ex">temp</span> sp
+  <span class="ex">move</span>
+    <span class="ex">temp</span> sp
+    <span class="ex">binop</span> (-)
+      <span class="ex">temp</span> sp
+      <span class="ex">const</span> 4
+  <span class="ex">move</span>
+    <span class="ex">mem</span>
+      <span class="ex">temp</span> fp
+    <span class="ex">temp</span> i0
+  <span class="ex">move</span>
+    <span class="ex">temp</span> x15
+    <span class="ex">temp</span> i1
+  <span class="ex">move</span>
+    <span class="ex">temp</span> x16
+    <span class="ex">temp</span> i2
+  <span class="ex">move</span>
+    <span class="ex">temp</span> rv
+    <span class="ex">eseq</span>
+      <span class="fu">seq</span>
+        <span class="ex">cjump</span> (=)
+          <span class="ex">temp</span> x15
+          <span class="ex">const</span> 0
+         <span class="ex">name</span> _L74 name _L75
+        <span class="ex">label</span> _L75
+        <span class="ex">move</span>
+          <span class="ex">temp</span> x19
+          <span class="ex">eseq</span>
+            <span class="fu">seq</span>
+              <span class="ex">cjump</span> (=)
+                <span class="ex">temp</span> x16
+                <span class="ex">const</span> 0
+               <span class="ex">name</span> _L71 name _L72
+              <span class="ex">label</span> _L72
+              <span class="ex">move</span>
+                <span class="ex">temp</span> x20
+                <span class="ex">eseq</span>
+                  <span class="fu">seq</span>
+                    <span class="ex">cjump</span> (<span class="op">&lt;</span>)
+                      <span class="ex">mem</span>
+                        <span class="ex">binop</span> (+)
+                          <span class="ex">temp</span> x15
+                          <span class="ex">binop</span> (*)
+                            <span class="ex">const</span> 0
+                            <span class="ex">const</span> 4
+                      <span class="ex">mem</span>
+                        <span class="ex">binop</span> (+)
+                          <span class="ex">temp</span> x16
+                          <span class="ex">binop</span> (*)
+                            <span class="ex">const</span> 0
+                            <span class="ex">const</span> 4
+                     <span class="ex">name</span> _L68 name _L69
+                    <span class="ex">label</span> _L69
+                    <span class="ex">move</span>
+                      <span class="ex">temp</span> x21
+                      <span class="ex">eseq</span>
+                        <span class="fu">seq</span>
+                          <span class="ex">move</span>
+                            <span class="ex">temp</span> x18
+                            <span class="ex">call</span>
+                              <span class="ex">name</span> malloc
+                              <span class="ex">const</span> 8
+                            <span class="ex">call</span> end
+                          <span class="ex">move</span>
+                            <span class="ex">mem</span>
+                              <span class="ex">binop</span> (+)
+                                <span class="ex">temp</span> x18
+                                <span class="ex">const</span> 0
+                            <span class="ex">mem</span>
+                              <span class="ex">binop</span> (+)
+                                <span class="ex">temp</span> x16
+                                <span class="ex">binop</span> (*)
+                                  <span class="ex">const</span> 0
+                                  <span class="ex">const</span> 4
+                          <span class="ex">move</span>
+                            <span class="ex">mem</span>
+                              <span class="ex">binop</span> (+)
+                                <span class="ex">temp</span> x18
+                                <span class="ex">const</span> 4
+                            <span class="ex">call</span>
+                              <span class="ex">name</span> _L10merge
+                              <span class="ex">mem</span>
+                                <span class="ex">temp</span> fp
+                              <span class="ex">temp</span> x15
+                              <span class="ex">mem</span>
+                                <span class="ex">binop</span> (+)
+                                  <span class="ex">temp</span> x16
+                                  <span class="ex">binop</span> (*)
+                                    <span class="ex">const</span> 1
+                                    <span class="ex">const</span> 4
+                            <span class="ex">call</span> end
+                        <span class="fu">seq</span> end
+                        <span class="ex">temp</span> x18
+                    <span class="ex">jump</span>
+                      <span class="ex">name</span> _L67
+                    <span class="ex">label</span> _L68
+                    <span class="ex">move</span>
+                      <span class="ex">temp</span> x21
+                      <span class="ex">eseq</span>
+                        <span class="fu">seq</span>
+                          <span class="ex">move</span>
+                            <span class="ex">temp</span> x17
+                            <span class="ex">call</span>
+                              <span class="ex">name</span> malloc
+                              <span class="ex">const</span> 8
+                            <span class="ex">call</span> end
+                          <span class="ex">move</span>
+                            <span class="ex">mem</span>
+                              <span class="ex">binop</span> (+)
+                                <span class="ex">temp</span> x17
+                                <span class="ex">const</span> 0
+                            <span class="ex">mem</span>
+                              <span class="ex">binop</span> (+)
+                                <span class="ex">temp</span> x15
+                                <span class="ex">binop</span> (*)
+                                  <span class="ex">const</span> 0
+                                  <span class="ex">const</span> 4
+                          <span class="ex">move</span>
+                            <span class="ex">mem</span>
+                              <span class="ex">binop</span> (+)
+                                <span class="ex">temp</span> x17
+                                <span class="ex">const</span> 4
+                            <span class="ex">call</span>
+                              <span class="ex">name</span> _L10merge
+                              <span class="ex">mem</span>
+                                <span class="ex">temp</span> fp
+                              <span class="ex">mem</span>
+                                <span class="ex">binop</span> (+)
+                                  <span class="ex">temp</span> x15
+                                  <span class="ex">binop</span> (*)
+                                    <span class="ex">const</span> 1
+                                    <span class="ex">const</span> 4
+                              <span class="ex">temp</span> x16
+                            <span class="ex">call</span> end
+                        <span class="fu">seq</span> end
+                        <span class="ex">temp</span> x17
+                    <span class="ex">label</span> _L67
+                  <span class="fu">seq</span> end
+                  <span class="ex">temp</span> x21
+              <span class="ex">jump</span>
+                <span class="ex">name</span> _L70
+              <span class="ex">label</span> _L71
+              <span class="ex">move</span>
+                <span class="ex">temp</span> x20
+                <span class="ex">temp</span> x15
+              <span class="ex">label</span> _L70
+            <span class="fu">seq</span> end
+            <span class="ex">temp</span> x20
+        <span class="ex">jump</span>
+          <span class="ex">name</span> _L73
+        <span class="ex">label</span> _L74
+        <span class="ex">move</span>
+          <span class="ex">temp</span> x19
+          <span class="ex">temp</span> x16
+        <span class="ex">label</span> _L73
+      <span class="fu">seq</span> end
+      <span class="ex">temp</span> x19
+  <span class="ex">move</span>
+    <span class="ex">temp</span> sp
+    <span class="ex">temp</span> fp
+  <span class="ex">move</span>
+    <span class="ex">temp</span> fp
+    <span class="ex">temp</span> x22
+  <span class="ex">label</span> end
+<span class="fu">seq</span> end
+<span class="ex">label</span> _L76
+<span class="st">&quot;\060&quot;</span>
+<span class="fu">seq</span>
+  <span class="ex">label</span> _L12f
+  <span class="ex">move</span>
+    <span class="ex">temp</span> x25
+    <span class="ex">temp</span> fp
+  <span class="ex">move</span>
+    <span class="ex">temp</span> fp
+    <span class="ex">temp</span> sp
+  <span class="ex">move</span>
+    <span class="ex">temp</span> sp
+    <span class="ex">binop</span> (-)
+      <span class="ex">temp</span> sp
+      <span class="ex">const</span> 4
+  <span class="ex">move</span>
+    <span class="ex">mem</span>
+      <span class="ex">temp</span> fp
+    <span class="ex">temp</span> i0
+  <span class="ex">move</span>
+    <span class="ex">temp</span> x24
+    <span class="ex">temp</span> i1
+  <span class="fu">seq</span>
+    <span class="ex">cjump</span> (<span class="op">&gt;</span>)
+      <span class="ex">temp</span> x24
+      <span class="ex">const</span> 0
+     <span class="ex">name</span> _L78 name _L77
+    <span class="ex">label</span> _L78
+    <span class="fu">seq</span>
+      <span class="ex">sxp</span>
+        <span class="ex">call</span>
+          <span class="ex">name</span> _L12f
+          <span class="ex">mem</span>
+            <span class="ex">temp</span> fp
+          <span class="ex">binop</span> (/)
+            <span class="ex">temp</span> x24
+            <span class="ex">const</span> 10
+        <span class="ex">call</span> end
+      <span class="ex">sxp</span>
+        <span class="ex">call</span>
+          <span class="ex">name</span> print
+          <span class="ex">call</span>
+            <span class="ex">name</span> chr
+            <span class="ex">binop</span> (+)
+              <span class="ex">binop</span> (-)
+                <span class="ex">temp</span> x24
+                <span class="ex">binop</span> (*)
+                  <span class="ex">binop</span> (/)
+                    <span class="ex">temp</span> x24
+                    <span class="ex">const</span> 10
+                  <span class="ex">const</span> 10
+              <span class="ex">call</span>
+                <span class="ex">name</span> ord
+                <span class="ex">name</span> _L76
+              <span class="ex">call</span> end
+          <span class="ex">call</span> end
+        <span class="ex">call</span> end
+    <span class="fu">seq</span> end
+    <span class="ex">label</span> _L77
+  <span class="fu">seq</span> end
+  <span class="ex">move</span>
+    <span class="ex">temp</span> sp
+    <span class="ex">temp</span> fp
+  <span class="ex">move</span>
+    <span class="ex">temp</span> fp
+    <span class="ex">temp</span> x25
+  <span class="ex">label</span> end
+<span class="fu">seq</span> end
+<span class="ex">label</span> _L80
+<span class="st">&quot;\060&quot;</span>
+<span class="ex">label</span> _L79
+<span class="st">&quot;\055&quot;</span>
+<span class="fu">seq</span>
+  <span class="ex">label</span> _L14printmint
+  <span class="ex">move</span>
+    <span class="ex">temp</span> x26
+    <span class="ex">temp</span> fp
+  <span class="ex">move</span>
+    <span class="ex">temp</span> fp
+    <span class="ex">temp</span> sp
+  <span class="ex">move</span>
+    <span class="ex">temp</span> sp
+    <span class="ex">binop</span> (-)
+      <span class="ex">temp</span> sp
+      <span class="ex">const</span> 4
+  <span class="ex">move</span>
+    <span class="ex">mem</span>
+      <span class="ex">temp</span> fp
+    <span class="ex">temp</span> i0
+  <span class="ex">move</span>
+    <span class="ex">temp</span> x23
+    <span class="ex">temp</span> i1
+  <span class="fu">seq</span>
+    <span class="ex">cjump</span> (<span class="op">&lt;</span>)
+      <span class="ex">temp</span> x23
+      <span class="ex">const</span> 0
+     <span class="ex">name</span> _L85 name _L86
+    <span class="ex">label</span> _L86
+    <span class="fu">seq</span>
+      <span class="ex">cjump</span> (<span class="op">&gt;</span>)
+        <span class="ex">temp</span> x23
+        <span class="ex">const</span> 0
+       <span class="ex">name</span> _L82 name _L83
+      <span class="ex">label</span> _L83
+      <span class="ex">sxp</span>
+        <span class="ex">call</span>
+          <span class="ex">name</span> print
+          <span class="ex">name</span> _L80
+        <span class="ex">call</span> end
+      <span class="ex">jump</span>
+        <span class="ex">name</span> _L81
+      <span class="ex">label</span> _L82
+      <span class="ex">sxp</span>
+        <span class="ex">call</span>
+          <span class="ex">name</span> _L12f
+          <span class="ex">temp</span> fp
+          <span class="ex">temp</span> x23
+        <span class="ex">call</span> end
+      <span class="ex">label</span> _L81
+    <span class="fu">seq</span> end
+    <span class="ex">jump</span>
+      <span class="ex">name</span> _L84
+    <span class="ex">label</span> _L85
+    <span class="fu">seq</span>
+      <span class="ex">sxp</span>
+        <span class="ex">call</span>
+          <span class="ex">name</span> print
+          <span class="ex">name</span> _L79
+        <span class="ex">call</span> end
+      <span class="ex">sxp</span>
+        <span class="ex">call</span>
+          <span class="ex">name</span> _L12f
+          <span class="ex">temp</span> fp
+          <span class="ex">binop</span> (-)
+            <span class="ex">const</span> 0
+            <span class="ex">temp</span> x23
+        <span class="ex">call</span> end
+    <span class="fu">seq</span> end
+    <span class="ex">label</span> _L84
+  <span class="fu">seq</span> end
+  <span class="ex">move</span>
+    <span class="ex">temp</span> sp
+    <span class="ex">temp</span> fp
+  <span class="ex">move</span>
+    <span class="ex">temp</span> fp
+    <span class="ex">temp</span> x26
+  <span class="ex">label</span> end
+<span class="fu">seq</span> end
+<span class="ex">label</span> _L87
+<span class="st">&quot;\012&quot;</span>
+<span class="ex">label</span> _L88
+<span class="st">&quot;\040&quot;</span>
+<span class="fu">seq</span>
+  <span class="ex">label</span> _L16printlist
+  <span class="ex">move</span>
+    <span class="ex">temp</span> x28
+    <span class="ex">temp</span> fp
+  <span class="ex">move</span>
+    <span class="ex">temp</span> fp
+    <span class="ex">temp</span> sp
+  <span class="ex">move</span>
+    <span class="ex">temp</span> sp
+    <span class="ex">binop</span> (-)
+      <span class="ex">temp</span> sp
+      <span class="ex">const</span> 4
+  <span class="ex">move</span>
+    <span class="ex">mem</span>
+      <span class="ex">temp</span> fp
+    <span class="ex">temp</span> i0
+  <span class="ex">move</span>
+    <span class="ex">temp</span> x27
+    <span class="ex">temp</span> i1
+  <span class="fu">seq</span>
+    <span class="ex">cjump</span> (=)
+      <span class="ex">temp</span> x27
+      <span class="ex">const</span> 0
+     <span class="ex">name</span> _L90 name _L91
+    <span class="ex">label</span> _L91
+    <span class="fu">seq</span>
+      <span class="ex">sxp</span>
+        <span class="ex">call</span>
+          <span class="ex">name</span> _L14printmint
+          <span class="ex">mem</span>
+            <span class="ex">temp</span> fp
+          <span class="ex">mem</span>
+            <span class="ex">binop</span> (+)
+              <span class="ex">temp</span> x27
+              <span class="ex">binop</span> (*)
+                <span class="ex">const</span> 0
+                <span class="ex">const</span> 4
+        <span class="ex">call</span> end
+      <span class="ex">sxp</span>
+        <span class="ex">call</span>
+          <span class="ex">name</span> print
+          <span class="ex">name</span> _L88
+        <span class="ex">call</span> end
+      <span class="ex">sxp</span>
+        <span class="ex">call</span>
+          <span class="ex">name</span> _L16printlist
+          <span class="ex">mem</span>
+            <span class="ex">temp</span> fp
+          <span class="ex">mem</span>
+            <span class="ex">binop</span> (+)
+              <span class="ex">temp</span> x27
+              <span class="ex">binop</span> (*)
+                <span class="ex">const</span> 1
+                <span class="ex">const</span> 4
+        <span class="ex">call</span> end
+    <span class="fu">seq</span> end
+    <span class="ex">jump</span>
+      <span class="ex">name</span> _L89
+    <span class="ex">label</span> _L90
+    <span class="ex">sxp</span>
+      <span class="ex">call</span>
+        <span class="ex">name</span> print
+        <span class="ex">name</span> _L87
+      <span class="ex">call</span> end
+    <span class="ex">label</span> _L89
+  <span class="fu">seq</span> end
+  <span class="ex">move</span>
+    <span class="ex">temp</span> sp
+    <span class="ex">temp</span> fp
+  <span class="ex">move</span>
+    <span class="ex">temp</span> fp
+    <span class="ex">temp</span> x28
+  <span class="ex">label</span> end
+<span class="fu">seq</span> end
+<span class="fu">seq</span>
+  <span class="ex">label</span> main
+  <span class="ex">move</span>
+    <span class="ex">temp</span> x31
+    <span class="ex">temp</span> fp
+  <span class="ex">move</span>
+    <span class="ex">temp</span> fp
+    <span class="ex">temp</span> sp
+  <span class="ex">move</span>
+    <span class="ex">temp</span> sp
+    <span class="ex">binop</span> (-)
+      <span class="ex">temp</span> sp
+      <span class="ex">const</span> 8
+  <span class="ex">move</span>
+    <span class="ex">mem</span>
+      <span class="ex">temp</span> fp
+    <span class="ex">temp</span> i0
+  <span class="ex">move</span>
+    <span class="ex">temp</span> rv
+    <span class="ex">eseq</span>
+      <span class="fu">seq</span>
+        <span class="ex">move</span>
+          <span class="ex">mem</span>
+            <span class="ex">binop</span> (+)
+              <span class="ex">temp</span> fp
+              <span class="ex">const</span> -4
+          <span class="ex">call</span>
+            <span class="ex">name</span> getchar
+          <span class="ex">call</span> end
+        <span class="ex">move</span>
+          <span class="ex">temp</span> x29
+          <span class="ex">call</span>
+            <span class="ex">name</span> _L8readlist
+            <span class="ex">temp</span> fp
+          <span class="ex">call</span> end
+        <span class="ex">move</span>
+          <span class="ex">temp</span> x30
+          <span class="ex">eseq</span>
+            <span class="ex">move</span>
+              <span class="ex">mem</span>
+                <span class="ex">binop</span> (+)
+                  <span class="ex">temp</span> fp
+                  <span class="ex">const</span> -4
+              <span class="ex">call</span>
+                <span class="ex">name</span> getchar
+              <span class="ex">call</span> end
+            <span class="ex">call</span>
+              <span class="ex">name</span> _L8readlist
+              <span class="ex">temp</span> fp
+            <span class="ex">call</span> end
+        <span class="ex">sxp</span>
+          <span class="ex">call</span>
+            <span class="ex">name</span> _L16printlist
+            <span class="ex">temp</span> fp
+            <span class="ex">call</span>
+              <span class="ex">name</span> _L10merge
+              <span class="ex">temp</span> fp
+              <span class="ex">temp</span> x29
+              <span class="ex">temp</span> x30
+            <span class="ex">call</span> end
+          <span class="ex">call</span> end
+      <span class="fu">seq</span> end
+      <span class="ex">const</span> 0
+  <span class="ex">move</span>
+    <span class="ex">temp</span> sp
+    <span class="ex">temp</span> fp
+  <span class="ex">move</span>
+    <span class="ex">temp</span> fp
+    <span class="ex">temp</span> x31
+  <span class="ex">label</span> end
+<span class="fu">seq</span> end</code></pre></div>
+</body>
+</html>

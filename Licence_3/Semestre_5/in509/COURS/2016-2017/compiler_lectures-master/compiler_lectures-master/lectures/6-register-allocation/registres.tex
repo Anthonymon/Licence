@@ -1,0 +1,1299 @@
+\documentclass[10pt, handout]{beamer}
+\usepackage{xmpincl}
+\includexmp{license}
+\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+\usepackage{ae}
+\usepackage[french]{babel}
+\usepackage{array, longtable}
+\usepackage{tikz}
+\usetikzlibrary{arrows,shapes,trees,patterns,fit,backgrounds,%
+decorations.pathreplacing,chains,calc,decorations.pathmorphing}
+
+% for printing
+%\usepackage{pgfpages}
+%\pgfpagesuselayout{2 on 1}[a4paper,border shrink=5mm]
+%\pgfpagesuselayout{resize to}[a4paper,border shrink=5mm,landscape]
+
+
+\usepackage{listings}
+\usepackage{verbatim}
+\makeatletter
+\newwrite\lstvrb@out
+\newenvironment{code}{%
+  \begingroup
+  \@bsphack
+  \immediate\openout\lstvrb@out\jobname.lst
+  \let\do\@makeother\dospecials\catcode`\^^M\active
+  \def\verbatim@processline{%
+    \immediate\write\lstvrb@out{\the\verbatim@line}}%
+  \verbatim@start}{%
+  \immediate\closeout\lstvrb@out
+  \@esphack
+  \endgroup
+
+  \begin{alertblock}{}
+    \lstinputlisting[language=C]{\jobname.lst}
+  \end{alertblock}}
+\makeatother
+
+\lstset{language=C, basicstyle=\small, commentstyle=\color{blue}\textrm}
+
+\title{Allocation de registres}
+
+\subtitle{Allocation des registres}
+
+\author[Pablo Oliveira]{Pablo Oliveira \texttt{<pablo@sifflez.org>}}
+\institute{UVSQ}
+
+\date{}
+
+\begin{document}
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{Outline}
+  \tableofcontents
+\end{frame}
+
+\begin{frame}
+  \frametitle{Références}
+  \begin{itemize}
+    \item \structure{Modern Compiler Implementation in Java/C/ML, A. Appel}
+    \item Cours de compilation de A.Demaille et R.Levillain.
+    \item Cours de compilation de S.Tardieu
+    \item Compilers Principles, Techniques and Tools, Aho, Lam, Sethi, Ullman
+  \end{itemize}
+\end{frame}
+
+\section{Graphe d'interférence}
+
+\begin{frame}[fragile]
+  \frametitle{Exemple de fonction}
+  \begin{code}
+    int f(int c) {
+      int a,b;
+
+      a = 0;
+      while(a < N) {
+        b=a+1;
+        c=c+b;
+        a=2*b;
+      }
+      return c;
+    }
+  \end{code}
+\begin{itemize}
+\item On pourrait mettre à jour les valeurs des variables sur la pile.
+\item Les registres sont plus rapides !
+\item Utiliser les registres comme variables temporaires.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{Durée de vie}
+  \begin{minipage}{.45\textwidth}
+  \begin{tikzpicture}[node distance=1.5cm]
+    \node[draw] (b1) {(1) a := 0 };
+    \node[below of=b1, draw] (b2) {(2) b := a + 1};
+    \node[below of=b2, draw] (b3) {(3) c := c + b};
+    \node[below of=b3, draw] (b4) {(4) a := b * 2};
+    \node[below right of=b4, draw] (b5) {(5) a < N};
+    \node[below of=b5, draw] (b6) {(6) return c};
+
+    \draw  (b1) edge[->] node[auto] {a,c} (b2);
+    \draw  (b2) edge[->] node[auto] {b,c} (b3);
+    \draw  (b3) edge[->] node[auto] {b,c} (b4);
+    \draw  (b4) edge[->] node {a,c} (b5);
+    \draw  (b5) edge[->] node[auto] {c} (b6);
+    \draw  (b5) edge[->, bend right=60] node[auto] {a,c} (b2);
+  \end{tikzpicture}
+\end{minipage}
+  \begin{minipage}{.45\textwidth}
+  \begin{itemize}
+    \item c est vivant de l'entrée à la sortie de la fonction f.
+    \item b est vivant entre: 2 $\rightarrow$ 4
+    \item a est vivant entre: 1 $\rightarrow$ 2 et 4 $\rightarrow$ 2.
+    \item Graphe d'interférence: deux noeuds sont connectés s'ils sont vivants
+      en même temps.
+  \end{itemize}
+  \begin{center}
+  \begin{tikzpicture}
+    \node (a) [circle, draw] {a};
+    \node (b) [right of=a, circle, draw] {b};
+    \node (c) [circle, draw, below of= a] {c};
+    \draw (a) -- (c);
+    \draw (b) -- (c);
+  \end{tikzpicture}
+  \end{center}
+\end{minipage}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Equations de flots}
+$$in(N) = use(N) \cup (out(N) - def(N))$$
+$$out(N) = \bigcup_{s \in succ(N)} in(S)$$
+
+\begin{itemize}
+  \item Les variables utilis\'ees dans un noeud sont vivantes en entr\'ee
+  \item Les variables vivantes en sortie d'un noeud sont soit vivantes en entr\'ee, soit d\'efinies dans le noeud. 
+  \item Les variables vivantes en entr\'ee d'un noeud sont n\'ecessairement vivantes en sortie des
+  noeud pr\'ec\'edents.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Equations de flots: example}
+\begin{minipage}{.25\textwidth}
+  \begin{tikzpicture}[node distance=1.5cm]
+    \node[draw] (b1) { (1) a := 0 };
+    \node[below of=b1, draw] (b2) { (2) b := a + 1};
+    \node[below of=b2, draw] (b3) { (3) c := c + b};
+    \node[below of=b3, draw] (b4) { (4) a := b * 2};
+    \node[below right of=b4, draw] (b5) { (5) a < N};
+    \node[below of=b5, draw] (b6) { (6) return c};
+
+    \draw  (b1) edge[->] node[auto] {a,c} (b2);
+    \draw  (b2) edge[->] node[auto] {b,c} (b3);
+    \draw  (b3) edge[->] node[auto] {b,c} (b4);
+    \draw  (b4) edge[->] node {a,c} (b5);
+    \draw  (b5) edge[->] node[auto] {c} (b6);
+    \draw  (b5) edge[->, bend right=60] node[auto] {a,c} (b2);
+  \end{tikzpicture}
+\end{minipage}
+\hspace{3mm}
+  \begin{minipage}{.7\textwidth}
+  \begin{itemize}
+    \item $in(6) = use(6) = \{c\}$
+    \item $out(5) = in(6) = \{c\}$
+    \item $in(5) = (out(5) - def(5)) \cup use(5) = \{a,c\}$
+    \item $out(4) = in(5) = \{a,c\}$
+    \item $in(4) = (out(4)-def(4)) \cup use(4) = \{b,c\}$
+    \item $out(3) = in(4) = \{b,c\}$
+    \item $in(3) = (out(3)-def(3)) \cup use(3) = \{b,c\}$
+    \item $out(2) = in(3) = \{b,c\}$
+    \item $in(2) = (out(2)-def(2)) \cup use(2) = \{a,c\}$
+    \item $out(1) = in(2) = \{a,c\}$
+          $out(5) = in(2) = \{a,c\}$
+    \item $in(5) = (out(5) - def(5)) \cup use(5) = \{a,c\}$
+          \structure{Point Fixe !}
+  \end{itemize}
+\end{minipage}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Discussion}
+  \begin{itemize}
+    \item Pourquoi y a-t-il toujours un point fixe ? (au tableau)
+    \item Proposition d'algorithme ? 
+      \begin{itemize}
+        \item anti parcours du graphe plus efficace. Pourquoi ? 
+      \end{itemize}
+    \item L'analyse de flots est un outil très puissant:
+      \begin{itemize}
+        \item à la base de nombreuses optimisations
+        \item eg. propagation de constantes
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{Allocation de registres = Coloration de graphe}
+  \begin{itemize}
+    \item Graphe d'interférence: deux noeuds connectés sont vivants en même temps.
+    \item Règle de coloriage: les noeuds connectés doivent être affectés des
+      registres différents.
+    \end{itemize}
+ \begin{minipage}{.45\textwidth}
+  \begin{tikzpicture}
+    \node (a) [circle, draw, fill=red!20] {a};
+    \node (b) [right of=a, circle, draw, fill=red!20] {b};
+    \node (c) [circle, draw, below of= a, fill=blue!20] {c};
+    \draw (a) -- (c);
+    \draw (b) -- (c);
+    \node (eax) [draw, below of=c, fill=blue!20] {\%eax};
+    \node (edx) [draw, right of=eax, fill=red!20] {\%edx};
+  \end{tikzpicture}
+\end{minipage}
+ \begin{minipage}{.45\textwidth}
+\begin{code}
+   %edx = 0
+L1:%edx = %edx + 1
+   %eax = %eax + %edx
+   %edx = %edx * 2
+   if %edx < N goto L1
+   return %eax
+\end{code}
+\end{minipage}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Coloriage de graphe}
+  \begin{itemize}
+    \item Si on dispose de k registres physiques, le problème d'allocation de
+      registres
+      est équivalent au problème de coloriage du graphe d'interférence avec k
+      couleurs.
+    \item NP-complet.
+    \item Mais heuristique performante: \alert{coloriage par simplification.}
+    \end{itemize}
+\end{frame}
+
+\section{Coloriage par simplification}
+
+\begin{frame}[fragile]
+  \frametitle{Graphe d'interférence}
+ \begin{minipage}{.45\textwidth}
+   \begin{itemize}
+     \item On dispose de 4 registres physiques: r1, r2, r3, r4
+   \end{itemize}
+   \begin{code}
+     in : k j
+     g = *(j+12)
+     h = k - 1
+     f = g * h
+     e = *(j+8)
+     m = *(j+16)
+     b = *(f)
+     c = e + 8
+     d = c
+     k = m + 4
+     j = b
+     out : d k j
+   \end{code}
+ \end{minipage}
+ \begin{minipage}{.45\textwidth}
+   \begin{center}
+   \begin{tikzpicture}
+   \node (f) [circle, draw] at (0,0) {f};
+   \node (e) [circle, draw] at (1,0) {e};
+   \node (m) [circle, draw] at (2,0) {m};
+   \node (c) [circle, draw] at (3,0) {c};
+   \node (b) [circle, draw] at (2,-1) {b};
+   \node (j) [circle, draw] at (1,-2) {j};
+   \node (d) [circle, draw] at (3,-2) {d};
+   \node (h) [circle, draw] at (0,-3) {h};
+   \node (k) [circle, draw] at (2,-3) {k};
+   \node (g) [circle, draw] at (1,-4) {g};
+
+   \draw (f) -- (e);
+   \draw (e) -- (m);
+   \draw (m) -- (c);
+   \draw (f) edge[bend left=60] (m);
+   \draw (f) -- (j);
+   \draw (e) -- (j);
+   \draw (e) -- (b);
+   \draw (m) -- (b);
+   \draw (m) -- (d);
+   \draw (c) -- (b);
+   \draw (b) -- (d);
+   \draw[dashed, blue] (b) -- (j);
+   \draw[dashed, blue] (c) -- (d);
+   \draw (j) -- (h);
+   \draw (j) -- (g);
+   \draw (j) -- (k);
+   \draw (j) -- (d);
+   \draw (h) -- (g);
+   \draw (g) -- (k);
+   \draw (k) -- (d);
+   \draw (k) -- (b);
+
+   \end{tikzpicture}
+
+
+   Les arcs en pointillées sont des copies.
+   \end{center}
+ \end{minipage}
+\end{frame}
+
+\begin{frame}
+\frametitle{Simplification}
+\begin{lemma}
+  Soit un graphe $G$ et un de ses noeuds $N$.
+  On veut colorier $G$ avec $K$ couleurs.
+  Si le degré de $N$ est strictement inférieur à $K$, alors
+  si on peut colorier $G\backslash N$, on peut
+  colorier $G$.
+\end{lemma}
+
+Soit K=3.
+
+\begin{center}
+\begin{tikzpicture}
+\node(G)[draw, cloud, minimum size=3cm] {} ;
+
+\node(G) at(0,1){$G\backslash N$};
+\node(A)[circle, draw, fill=red!20] at (-0.75,0) {A};
+\node(B)[circle, draw, fill=blue!20] at (0.75,0) {B};
+
+\node(N)[circle, draw, fill=green!20] at (0,-2) {N};
+\draw (N) -- (A);
+\draw (N) -- (B);
+\end{tikzpicture}
+\end{center}
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{Simplification du graphe d'interférence}
+  \fbox{g}
+
+   \begin{center}
+   \begin{tikzpicture}
+   \node (f) [circle, draw] at (0,0) {f};
+   \node (e) [circle, draw] at (1,0) {e};
+   \node (m) [circle, draw] at (2,0) {m};
+   \node (c) [circle, draw] at (3,0) {c};
+   \node (b) [circle, draw] at (2,-1) {b};
+   \node (j) [circle, draw] at (1,-2) {j};
+   \node (d) [circle, draw] at (3,-2) {d};
+   \node (h) [circle, draw] at (0,-3) {h};
+   \node (k) [circle, draw] at (2,-3) {k};
+   \node (g) [dotted, circle, draw] at (1,-4) {g};
+
+   \draw (f) -- (e);
+   \draw (e) -- (m);
+   \draw (m) -- (c);
+   \draw (f) edge[bend left=60] (m);
+   \draw (f) -- (j);
+   \draw (e) -- (j);
+   \draw (e) -- (b);
+   \draw (m) -- (b);
+   \draw (m) -- (d);
+   \draw (c) -- (b);
+   \draw (b) -- (d);
+   \draw[dashed,blue] (b) -- (j);
+   \draw[dashed,blue] (c) -- (d);
+   \draw (j) -- (h);
+   \draw[dotted] (j) -- (g);
+   \draw (j) -- (k);
+   \draw (j) -- (d);
+   \draw[dotted] (h) -- (g);
+   \draw[dotted] (g) -- (k);
+   \draw (k) -- (d);
+   \draw (k) -- (b);
+
+   \end{tikzpicture}
+   \end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Simplification du graphe d'interférence}
+  \fbox{g h}
+
+   \begin{center}
+   \begin{tikzpicture}
+   \node (f) [circle, draw] at (0,0) {f};
+   \node (e) [circle, draw] at (1,0) {e};
+   \node (m) [circle, draw] at (2,0) {m};
+   \node (c) [circle, draw] at (3,0) {c};
+   \node (b) [circle, draw] at (2,-1) {b};
+   \node (j) [circle, draw] at (1,-2) {j};
+   \node (d) [circle, draw] at (3,-2) {d};
+   \node (h) [dotted, circle, draw] at (0,-3) {h};
+   \node (k) [circle, draw] at (2,-3) {k};
+   \node (g) [dotted, circle, draw] at (1,-4) {g};
+
+   \draw (f) -- (e);
+   \draw (e) -- (m);
+   \draw (m) -- (c);
+   \draw (f) edge[bend left=60] (m);
+   \draw (f) -- (j);
+   \draw (e) -- (j);
+   \draw (e) -- (b);
+   \draw (m) -- (b);
+   \draw (m) -- (d);
+   \draw (c) -- (b);
+   \draw (b) -- (d);
+   \draw[dashed,blue] (b) -- (j);
+   \draw[dashed,blue] (c) -- (d);
+   \draw[dotted] (j) -- (h);
+   \draw[dotted] (j) -- (g);
+   \draw (j) -- (k);
+   \draw (j) -- (d);
+   \draw[dotted] (h) -- (g);
+   \draw[dotted] (g) -- (k);
+   \draw (k) -- (d);
+   \draw (k) -- (b);
+
+   \end{tikzpicture}
+   \end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Simplification du graphe d'interférence}
+  \fbox{g h k}
+
+   \begin{center}
+   \begin{tikzpicture}
+   \node (f) [circle, draw] at (0,0) {f};
+   \node (e) [circle, draw] at (1,0) {e};
+   \node (m) [circle, draw] at (2,0) {m};
+   \node (c) [circle, draw] at (3,0) {c};
+   \node (b) [circle, draw] at (2,-1) {b};
+   \node (j) [circle, draw] at (1,-2) {j};
+   \node (d) [circle, draw] at (3,-2) {d};
+   \node (h) [dotted, circle, draw] at (0,-3) {h};
+   \node (k) [dotted,circle, draw] at (2,-3) {k};
+   \node (g) [dotted, circle, draw] at (1,-4) {g};
+
+   \draw (f) -- (e);
+   \draw (e) -- (m);
+   \draw (m) -- (c);
+   \draw (f) edge[bend left=60] (m);
+   \draw (f) -- (j);
+   \draw (e) -- (j);
+   \draw (e) -- (b);
+   \draw (m) -- (b);
+   \draw (m) -- (d);
+   \draw (c) -- (b);
+   \draw (b) -- (d);
+   \draw[dashed,blue] (b) -- (j);
+   \draw[dashed,blue] (c) -- (d);
+   \draw[dotted] (j) -- (h);
+   \draw[dotted] (j) -- (g);
+   \draw[dotted] (j) -- (k);
+   \draw (j) -- (d);
+   \draw[dotted] (h) -- (g);
+   \draw[dotted] (g) -- (k);
+   \draw[dotted] (k) -- (d);
+   \draw[dotted] (k) -- (b);
+
+   \end{tikzpicture}
+   \end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Simplification du graphe d'interférence}
+  \fbox{g h k d}
+
+   \begin{center}
+   \begin{tikzpicture}
+   \node (f) [circle, draw] at (0,0) {f};
+   \node (e) [circle, draw] at (1,0) {e};
+   \node (m) [circle, draw] at (2,0) {m};
+   \node (c) [circle, draw] at (3,0) {c};
+   \node (b) [circle, draw] at (2,-1) {b};
+   \node (j) [circle, draw] at (1,-2) {j};
+   \node (d) [dotted, circle, draw] at (3,-2) {d};
+   \node (h) [dotted, circle, draw] at (0,-3) {h};
+   \node (k) [dotted,circle, draw] at (2,-3) {k};
+   \node (g) [dotted, circle, draw] at (1,-4) {g};
+
+   \draw (f) -- (e);
+   \draw (e) -- (m);
+   \draw (m) -- (c);
+   \draw (f) edge[bend left=60] (m);
+   \draw (f) -- (j);
+   \draw (e) -- (j);
+   \draw (e) -- (b);
+   \draw (m) -- (b);
+   \draw[dotted] (m) -- (d);
+   \draw (c) -- (b);
+   \draw[dotted] (b) -- (d);
+   \draw[dashed,blue] (b) -- (j);
+   \draw[dotted] (c) -- (d);
+   \draw[dotted] (j) -- (h);
+   \draw[dotted] (j) -- (g);
+   \draw[dotted] (j) -- (k);
+   \draw[dotted] (j) -- (d);
+   \draw[dotted] (h) -- (g);
+   \draw[dotted] (g) -- (k);
+   \draw[dotted] (k) -- (d);
+   \draw[dotted] (k) -- (b);
+
+   \end{tikzpicture}
+   \end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Simplification du graphe d'interférence}
+  \fbox{g h k d j}
+
+   \begin{center}
+   \begin{tikzpicture}
+   \node (f) [circle, draw] at (0,0) {f};
+   \node (e) [circle, draw] at (1,0) {e};
+   \node (m) [circle, draw] at (2,0) {m};
+   \node (c) [circle, draw] at (3,0) {c};
+   \node (b) [circle, draw] at (2,-1) {b};
+   \node (j) [dotted, circle, draw] at (1,-2) {j};
+   \node (d) [dotted, circle, draw] at (3,-2) {d};
+   \node (h) [dotted, circle, draw] at (0,-3) {h};
+   \node (k) [dotted,circle, draw] at (2,-3) {k};
+   \node (g) [dotted, circle, draw] at (1,-4) {g};
+
+   \draw (f) -- (e);
+   \draw (e) -- (m);
+   \draw (m) -- (c);
+   \draw (f) edge[bend left=60] (m);
+   \draw[dotted] (f) -- (j);
+   \draw[dotted] (e) -- (j);
+   \draw (e) -- (b);
+   \draw (m) -- (b);
+   \draw[dotted] (m) -- (d);
+   \draw (c) -- (b);
+   \draw[dotted] (b) -- (d);
+   \draw[dotted] (b) -- (j);
+   \draw[dotted] (c) -- (d);
+   \draw[dotted] (j) -- (h);
+   \draw[dotted] (j) -- (g);
+   \draw[dotted] (j) -- (k);
+   \draw[dotted] (j) -- (d);
+   \draw[dotted] (h) -- (g);
+   \draw[dotted] (g) -- (k);
+   \draw[dotted] (k) -- (d);
+   \draw[dotted] (k) -- (b);
+
+   \end{tikzpicture}
+   \end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Simplification du graphe d'interférence}
+  \fbox{g h k d j e}
+
+   \begin{center}
+   \begin{tikzpicture}
+   \node (f) [circle, draw] at (0,0) {f};
+   \node (e) [dotted, circle, draw] at (1,0) {e};
+   \node (m) [circle, draw] at (2,0) {m};
+   \node (c) [circle, draw] at (3,0) {c};
+   \node (b) [circle, draw] at (2,-1) {b};
+   \node (j) [dotted, circle, draw] at (1,-2) {j};
+   \node (d) [dotted, circle, draw] at (3,-2) {d};
+   \node (h) [dotted, circle, draw] at (0,-3) {h};
+   \node (k) [dotted,circle, draw] at (2,-3) {k};
+   \node (g) [dotted, circle, draw] at (1,-4) {g};
+
+   \draw[dotted] (f) -- (e);
+   \draw[dotted] (e) -- (m);
+   \draw (m) -- (c);
+   \draw (f) edge[bend left=60] (m);
+   \draw[dotted] (f) -- (j);
+   \draw[dotted] (e) -- (j);
+   \draw[dotted] (e) -- (b);
+   \draw (m) -- (b);
+   \draw[dotted] (m) -- (d);
+   \draw (c) -- (b);
+   \draw[dotted] (b) -- (d);
+   \draw[dotted] (b) -- (j);
+   \draw[dotted] (c) -- (d);
+   \draw[dotted] (j) -- (h);
+   \draw[dotted] (j) -- (g);
+   \draw[dotted] (j) -- (k);
+   \draw[dotted] (j) -- (d);
+   \draw[dotted] (h) -- (g);
+   \draw[dotted] (g) -- (k);
+   \draw[dotted] (k) -- (d);
+   \draw[dotted] (k) -- (b);
+
+   \end{tikzpicture}
+   \end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Simplification du graphe d'interférence : etc...}
+  \fbox{g h k d j e f b c m}
+
+   \begin{center}
+   \begin{tikzpicture}
+   \node (f) [dotted,circle, draw] at (0,0) {f};
+   \node (e) [dotted, circle, draw] at (1,0) {e};
+   \node (m) [dotted,circle, draw] at (2,0) {m};
+   \node (c) [dotted,circle, draw] at (3,0) {c};
+   \node (b) [dotted,circle, draw] at (2,-1) {b};
+   \node (j) [dotted, circle, draw] at (1,-2) {j};
+   \node (d) [dotted, circle, draw] at (3,-2) {d};
+   \node (h) [dotted, circle, draw] at (0,-3) {h};
+   \node (k) [dotted,circle, draw] at (2,-3) {k};
+   \node (g) [dotted, circle, draw] at (1,-4) {g};
+
+   \draw[dotted] (f) -- (e);
+   \draw[dotted] (e) -- (m);
+   \draw[dotted] (m) -- (c);
+   \draw[dotted] (f) edge[bend left=60] (m);
+   \draw[dotted] (f) -- (j);
+   \draw[dotted] (e) -- (j);
+   \draw[dotted] (e) -- (b);
+   \draw[dotted] (m) -- (b);
+   \draw[dotted] (m) -- (d);
+   \draw[dotted] (c) -- (b);
+   \draw[dotted] (b) -- (d);
+   \draw[dotted] (b) -- (j);
+   \draw[dotted] (c) -- (d);
+   \draw[dotted] (j) -- (h);
+   \draw[dotted] (j) -- (g);
+   \draw[dotted] (j) -- (k);
+   \draw[dotted] (j) -- (d);
+   \draw[dotted] (h) -- (g);
+   \draw[dotted] (g) -- (k);
+   \draw[dotted] (k) -- (d);
+   \draw[dotted] (k) -- (b);
+
+   \end{tikzpicture}
+   \end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Coloriage}
+  \fbox{g h k d j e f b c \alert{m}}
+
+   \begin{center}
+   \begin{tikzpicture}
+   \node (f) [dotted,circle, draw] at (0,0) {f};
+   \node (e) [dotted, circle, draw] at (1,0) {e};
+   \node (m) [circle, draw, fill=red!20] at (2,0) {m};
+   \node (c) [dotted,circle, draw] at (3,0) {c};
+   \node (b) [dotted,circle, draw] at (2,-1) {b};
+   \node (j) [dotted, circle, draw] at (1,-2) {j};
+   \node (d) [dotted, circle, draw] at (3,-2) {d};
+   \node (h) [dotted, circle, draw] at (0,-3) {h};
+   \node (k) [dotted,circle, draw] at (2,-3) {k};
+   \node (g) [dotted, circle, draw] at (1,-4) {g};
+
+   \draw[dotted] (f) -- (e);
+   \draw[dotted] (e) -- (m);
+   \draw[dotted] (m) -- (c);
+   \draw[dotted] (f) edge[bend left=60] (m);
+   \draw[dotted] (f) -- (j);
+   \draw[dotted] (e) -- (j);
+   \draw[dotted] (e) -- (b);
+   \draw[dotted] (m) -- (b);
+   \draw[dotted] (m) -- (d);
+   \draw[dotted] (c) -- (b);
+   \draw[dotted] (b) -- (d);
+   \draw[dotted] (b) -- (j);
+   \draw[dotted] (c) -- (d);
+   \draw[dotted] (j) -- (h);
+   \draw[dotted] (j) -- (g);
+   \draw[dotted] (j) -- (k);
+   \draw[dotted] (j) -- (d);
+   \draw[dotted] (h) -- (g);
+   \draw[dotted] (g) -- (k);
+   \draw[dotted] (k) -- (d);
+   \draw[dotted] (k) -- (b);
+
+   \end{tikzpicture}
+   \end{center}
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{Coloriage}
+  \fbox{g h k d j e f b \alert{c} }
+
+   \begin{center}
+   \begin{tikzpicture}
+   \node (f) [dotted,circle, draw] at (0,0) {f};
+   \node (e) [dotted, circle, draw] at (1,0) {e};
+   \node (m) [circle, draw, fill=red!20] at (2,0) {m};
+   \node (c) [circle, draw, fill=blue!20] at (3,0) {c};
+   \node (b) [dotted,circle, draw] at (2,-1) {b};
+   \node (j) [dotted, circle, draw] at (1,-2) {j};
+   \node (d) [dotted, circle, draw] at (3,-2) {d};
+   \node (h) [dotted, circle, draw] at (0,-3) {h};
+   \node (k) [dotted,circle, draw] at (2,-3) {k};
+   \node (g) [dotted, circle, draw] at (1,-4) {g};
+
+   \draw[dotted] (f) -- (e);
+   \draw[dotted] (e) -- (m);
+   \draw (m) -- (c);
+   \draw[dotted] (f) edge[bend left=60] (m);
+   \draw[dotted] (f) -- (j);
+   \draw[dotted] (e) -- (j);
+   \draw[dotted] (e) -- (b);
+   \draw[dotted] (m) -- (b);
+   \draw[dotted] (m) -- (d);
+   \draw[dotted] (c) -- (b);
+   \draw[dotted] (b) -- (d);
+   \draw[dotted] (b) -- (j);
+   \draw[dotted] (c) -- (d);
+   \draw[dotted] (j) -- (h);
+   \draw[dotted] (j) -- (g);
+   \draw[dotted] (j) -- (k);
+   \draw[dotted] (j) -- (d);
+   \draw[dotted] (h) -- (g);
+   \draw[dotted] (g) -- (k);
+   \draw[dotted] (k) -- (d);
+   \draw[dotted] (k) -- (b);
+
+   \end{tikzpicture}
+   \end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Coloriage}
+  \fbox{g h k d j e f \alert{b} }
+
+   \begin{center}
+   \begin{tikzpicture}
+   \node (f) [dotted,circle, draw] at (0,0) {f};
+   \node (e) [dotted, circle, draw] at (1,0) {e};
+   \node (m) [circle, draw, fill=red!20] at (2,0) {m};
+   \node (c) [circle, draw, fill=blue!20] at (3,0) {c};
+   \node (b) [circle, draw, fill=green!20] at (2,-1) {b};
+   \node (j) [dotted, circle, draw] at (1,-2) {j};
+   \node (d) [dotted, circle, draw] at (3,-2) {d};
+   \node (h) [dotted, circle, draw] at (0,-3) {h};
+   \node (k) [dotted,circle, draw] at (2,-3) {k};
+   \node (g) [dotted, circle, draw] at (1,-4) {g};
+
+   \draw[dotted] (f) -- (e);
+   \draw[dotted] (e) -- (m);
+   \draw (m) -- (c);
+   \draw[dotted] (f) edge[bend left=60] (m);
+   \draw[dotted] (f) -- (j);
+   \draw[dotted] (e) -- (j);
+   \draw[dotted] (e) -- (b);
+   \draw (m) -- (b);
+   \draw[dotted] (m) -- (d);
+   \draw (c) -- (b);
+   \draw[dotted] (b) -- (d);
+   \draw[dotted] (b) -- (j);
+   \draw[dotted] (c) -- (d);
+   \draw[dotted] (j) -- (h);
+   \draw[dotted] (j) -- (g);
+   \draw[dotted] (j) -- (k);
+   \draw[dotted] (j) -- (d);
+   \draw[dotted] (h) -- (g);
+   \draw[dotted] (g) -- (k);
+   \draw[dotted] (k) -- (d);
+   \draw[dotted] (k) -- (b);
+
+   \end{tikzpicture}
+   \end{center}
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{Coloriage}
+  \fbox{g h k d j e \alert{f}}
+
+   \begin{center}
+   \begin{tikzpicture}
+   \node (f) [circle, draw, fill=green!20] at (0,0) {f};
+   \node (e) [dotted, circle, draw] at (1,0) {e};
+   \node (m) [circle, draw, fill=red!20] at (2,0) {m};
+   \node (c) [circle, draw, fill=blue!20] at (3,0) {c};
+   \node (b) [circle, draw, fill=green!20] at (2,-1) {b};
+   \node (j) [dotted, circle, draw] at (1,-2) {j};
+   \node (d) [dotted, circle, draw] at (3,-2) {d};
+   \node (h) [dotted, circle, draw] at (0,-3) {h};
+   \node (k) [dotted,circle, draw] at (2,-3) {k};
+   \node (g) [dotted, circle, draw] at (1,-4) {g};
+
+   \draw[dotted] (f) -- (e);
+   \draw[dotted] (e) -- (m);
+   \draw (m) -- (c);
+   \draw (f) edge[bend left=60] (m);
+   \draw[dotted] (f) -- (j);
+   \draw[dotted] (e) -- (j);
+   \draw[dotted] (e) -- (b);
+   \draw (m) -- (b);
+   \draw[dotted] (m) -- (d);
+   \draw (c) -- (b);
+   \draw[dotted] (b) -- (d);
+   \draw[dotted] (b) -- (j);
+   \draw[dotted] (c) -- (d);
+   \draw[dotted] (j) -- (h);
+   \draw[dotted] (j) -- (g);
+   \draw[dotted] (j) -- (k);
+   \draw[dotted] (j) -- (d);
+   \draw[dotted] (h) -- (g);
+   \draw[dotted] (g) -- (k);
+   \draw[dotted] (k) -- (d);
+   \draw[dotted] (k) -- (b);
+
+   \end{tikzpicture}
+   \end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Coloriage : etc...}
+
+   \begin{center}
+   \begin{tikzpicture}
+   \node (f) [circle, draw, fill=green!20] at (0,0) {f};
+   \node (e) [circle, draw, fill=orange!20] at (1,0) {e};
+   \node (m) [circle, draw, fill=red!20] at (2,0) {m};
+   \node (c) [circle, draw, fill=blue!20] at (3,0) {c};
+   \node (b) [circle, draw, fill=green!20] at (2,-1) {b};
+   \node (j) [circle, draw, fill=blue!20] at (1,-2) {j};
+   \node (d) [circle, draw, fill=orange!20] at (3,-2) {d};
+   \node (h) [circle, draw, fill=green!20] at (0,-3) {h};
+   \node (k) [circle, draw, fill=red!20] at (2,-3) {k};
+   \node (g) [circle, draw, fill=orange!20] at (1,-4) {g};
+
+   \draw (f) -- (e);
+   \draw (e) -- (m);
+   \draw (m) -- (c);
+   \draw (f) edge[bend left=60] (m);
+   \draw (f) -- (j);
+   \draw (e) -- (j);
+   \draw (e) -- (b);
+   \draw (m) -- (b);
+   \draw (m) -- (d);
+   \draw (c) -- (b);
+   \draw (b) -- (d);
+   \draw (b) -- (j);
+   \draw (c) -- (d);
+   \draw (j) -- (h);
+   \draw (j) -- (g);
+   \draw (j) -- (k);
+   \draw (j) -- (d);
+   \draw (h) -- (g);
+   \draw (g) -- (k);
+   \draw (k) -- (d);
+   \draw (k) -- (b);
+
+   \end{tikzpicture}
+   \end{center}
+\end{frame}
+
+\begin{frame} \frametitle{Allocation simple de registres}
+  $\rightarrow$ Build $\rightarrow$ Simplify $\rightarrow$ Select
+
+  \begin{enumerate}
+  \item Build : On construit le graphe d'interférence
+  \item Simplify: On enlève un à un les noeuds de degré < K
+  \item Select: On colorie les noeuds en reconstruisant le graphe
+    \begin{itemize}
+      \item On choisit une couleur différente de celle de nos voisins.
+    \end{itemize}
+  \end{enumerate}
+
+  A.B. Kempe. On the Geographical problem of the four Colors.
+\end{frame}
+
+\section{Spilling}
+\begin{frame} \frametitle{Problème}
+  \begin{itemize}
+  \item L'heuristique ci-dessus peut ne pas fonctionner:
+    \begin{itemize}
+      \item Lors de la phase Simplify tous les noeuds sont de degré $\geq K$.
+    \end{itemize}
+  \item Solution: \structure{Spilling de registres}
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame} \frametitle{Spilling}
+  \begin{itemize}
+  \item Pas assez de registres.
+  \item Il faut diminuer le degré d'une variable $a$ dans le graphe d'interférence.
+  \item On alloue une case sur la pile.
+  \item Chaque fois que l'on veut utiliser $a$, on le charge depuis la pile.
+  \item Après utilisation on le sauve sur la pile.
+  \end{itemize}
+\end{frame}
+
+\begin{frame} \frametitle{Simplification avec Spilling}
+  \begin{tikzpicture}[node distance = 2cm]
+    \node (B) {Build};
+    \node[right of=B] (S) {Simplify};
+    \node[right of=S, text width=1.5cm] (P) {Potential Spill ?};
+    \node[right of=P] (C) {Select};
+    \node[right of=C] (A) {Actual Spill ?};
+
+    \draw[->] (B) -- (S);
+    \draw[->] (S) -- (P);
+    \draw[->] (P) -- (C);
+    \draw[->] (C) -- (A);
+
+    \draw[->] (S) edge[loop above] (S);
+    \draw[->] (P) edge[bend left = 60] (S);
+    \draw[->] (C) edge[loop above] (C);
+    \draw[->] (A) edge[bend left = 60] node[auto] {Rebuild the graph} (B);
+   \end{tikzpicture}
+
+   \begin{itemize}
+     \item Si un noeud de degré supérieur à K apparait lors de la
+       simplification. On enregistre un spill possible.
+     \item Parfois lors de la coloration on peut tout de même colorier
+       les spill possibles. Si ce n'est pas le cas, on a un vrai spill.
+     \item Dans ce cas on ``spill'' le registre sur la pile et on recommence.
+   \end{itemize}
+\end{frame}
+
+
+\begin{frame} \frametitle{Quel noeud faut il spiller ?}
+   \begin{itemize}
+     \item Un noeud qui éliminera beaucoup d'arcs d'interférence.
+     \item Un noeud utilisé peu fréquemment (le coût de passage par la pile est
+       non négligeable). Éviter de spiller une variable d'induction dans une
+       boucle !
+   \end{itemize}
+\end{frame}
+
+\section{Fusion}
+\begin{frame}[fragile] \frametitle{Fusion de registres}
+\begin{minipage}{.45\textwidth}
+   \begin{code}
+     in : k j
+     g = *(j+12)
+     h = k - 1
+     f = g * h
+     e = *(j+8)
+     m = *(j+16)
+     b = *(f)
+     c = e + 8
+     d = c
+     k = m + 4
+     j = b
+     out : d k j
+   \end{code}
+ \end{minipage}
+ \begin{minipage}{.45\textwidth}
+   \begin{center}
+   \begin{tikzpicture}
+   \node (f) [circle, draw] at (0,0) {f};
+   \node (e) [circle, draw] at (1,0) {e};
+   \node (m) [circle, draw] at (2,0) {m};
+   \node (c) [circle, draw] at (3,0) {c};
+   \node (b) [circle, draw] at (2,-1) {b};
+   \node (j) [circle, draw] at (1,-2) {j};
+   \node (d) [circle, draw] at (3,-2) {d};
+   \node (h) [circle, draw] at (0,-3) {h};
+   \node (k) [circle, draw] at (2,-3) {k};
+   \node (g) [circle, draw] at (1,-4) {g};
+
+   \draw (f) -- (e);
+   \draw (e) -- (m);
+   \draw (m) -- (c);
+   \draw (f) edge[bend left=60] (m);
+   \draw (f) -- (j);
+   \draw (e) -- (j);
+   \draw (e) -- (b);
+   \draw (m) -- (b);
+   \draw (m) -- (d);
+   \draw (c) -- (b);
+   \draw (b) -- (d);
+   \draw[dashed, blue] (b) -- (j);
+   \draw[dashed, blue] (c) -- (d);
+   \draw (j) -- (h);
+   \draw (j) -- (g);
+   \draw (j) -- (k);
+   \draw (j) -- (d);
+   \draw (h) -- (g);
+   \draw (g) -- (k);
+   \draw (k) -- (d);
+   \draw (k) -- (b);
+
+   \end{tikzpicture}
+
+
+   \structure{Les arcs en pointillées sont des copies.}
+   \end{center}
+ \end{minipage}
+\end{frame}
+
+\begin{frame} \frametitle{Fusion de registres}
+\begin{itemize}
+\item Dans le graphe d'interférence on peut fusionner deux sommets:
+  \begin{itemize}
+    \item ce sont des copies
+    \item ils n'interfèrent pas entre eux.
+  \end{itemize}
+\item Dans ce cas:
+  \begin{itemize}
+    \item Les arcs du nouveau sommet sont l'union des arcs des anciens sommets.
+    \item On supprimme l'instruction de copie du programme initial.
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame} \frametitle{Quand fusionner}
+\begin{itemize}
+\item La fusion peut rendre le graphe non K-coloriable.
+\item Deux stratégies de fusion entre $a$ et $b$:
+  \begin{itemize}
+    \item Briggs: $ab$ a moins de K voisins de degrée $\geq K$.
+    \item George: tous les voisins de $a$ sont
+      \begin{itemize}
+        \item de degré $< K$
+        \item ou déjà en interférence avec $b$
+      \end{itemize}
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Simplification du graphe d'interférence}
+  \fbox{g h k}
+
+   \begin{center}
+   \begin{tikzpicture}
+   \node (f) [circle, draw] at (0,0) {f};
+   \node (e) [circle, draw] at (1,0) {e};
+   \node (m) [circle, draw] at (2,0) {m};
+   \node (c) [circle, draw] at (3,0) {c};
+   \node (b) [circle, draw] at (2,-1) {b};
+   \node (j) [circle, draw] at (1,-2) {j};
+   \node (d) [circle, draw] at (3,-2) {d};
+   \node (h) [dotted, circle, draw] at (0,-3) {h};
+   \node (k) [dotted,circle, draw] at (2,-3) {k};
+   \node (g) [dotted, circle, draw] at (1,-4) {g};
+
+   \draw (f) -- (e);
+   \draw (e) -- (m);
+   \draw (m) -- (c);
+   \draw (f) edge[bend left=60] (m);
+   \draw (f) -- (j);
+   \draw (e) -- (j);
+   \draw (e) -- (b);
+   \draw (m) -- (b);
+   \draw (m) -- (d);
+   \draw (c) -- (b);
+   \draw (b) -- (d);
+   \draw[dashed,blue] (b) -- (j);
+   \draw[dashed,blue] (c) -- (d);
+   \draw[dotted] (j) -- (h);
+   \draw[dotted] (j) -- (g);
+   \draw[dotted] (j) -- (k);
+   \draw (j) -- (d);
+   \draw[dotted] (h) -- (g);
+   \draw[dotted] (g) -- (k);
+   \draw[dotted] (k) -- (d);
+   \draw[dotted] (k) -- (b);
+
+   \end{tikzpicture}
+   \end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Simplification du graphe d'interférence}
+  \fbox{g h k c\&d}
+
+   \begin{center}
+   \begin{tikzpicture}
+   \node (f) [circle, draw] at (0,0) {f};
+   \node (e) [circle, draw] at (1,0) {e};
+   \node (m) [circle, draw] at (2,0) {m};
+   \node (cd) [circle, draw] at (3,-1.5) {cd};
+   \node (b) [circle, draw] at (2,-1) {b};
+   \node (j) [circle, draw] at (1,-2) {j};
+   \node (h) [dotted, circle, draw] at (0,-3) {h};
+   \node (k) [dotted,circle, draw] at (2,-3) {k};
+   \node (g) [dotted, circle, draw] at (1,-4) {g};
+
+   \draw (f) -- (e);
+   \draw (e) -- (m);
+   \draw (m) -- (cd);
+   \draw (f) edge[bend left=60] (m);
+   \draw (f) -- (j);
+   \draw (e) -- (j);
+   \draw (e) -- (b);
+   \draw (m) -- (b);
+   \draw (m) -- (cd);
+   \draw (cd) -- (b);
+   \draw (b) -- (cd);
+   \draw[dashed,blue] (b) -- (j);
+   \draw[dotted] (j) -- (h);
+   \draw[dotted] (j) -- (g);
+   \draw[dotted] (j) -- (k);
+   \draw (j) -- (cd);
+   \draw[dotted] (h) -- (g);
+   \draw[dotted] (g) -- (k);
+   \draw[dotted] (k) -- (cd);
+   \draw[dotted] (k) -- (b);
+
+   \end{tikzpicture}
+   \end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Simplification du graphe d'interférence}
+  \fbox{g h k c\&d b\&j}
+
+   \begin{center}
+   \begin{tikzpicture}
+   \node (f) [circle, draw] at (0,0) {f};
+   \node (e) [circle, draw] at (1,0) {e};
+   \node (m) [circle, draw] at (2,0) {m};
+   \node (cd) [circle, draw] at (3,-1.5) {cd};
+   \node (bj) [circle, draw] at (1,-1.5) {bj};
+   \node (h) [dotted, circle, draw] at (0,-3) {h};
+   \node (k) [dotted,circle, draw] at (2,-3) {k};
+   \node (g) [dotted, circle, draw] at (1,-4) {g};
+
+   \draw (f) -- (e);
+   \draw (e) -- (m);
+   \draw (m) -- (cd);
+   \draw (f) edge[bend left=60] (m);
+   \draw (f) -- (bj);
+   \draw (e) -- (bj);
+   \draw (e) -- (bj);
+   \draw (m) -- (bj);
+   \draw (m) -- (cd);
+   \draw (cd) -- (bj);
+   \draw (bj) -- (cd);
+   \draw[dotted] (bj) -- (h);
+   \draw[dotted] (bj) -- (g);
+   \draw[dotted] (bj) -- (k);
+   \draw (bj) -- (cd);
+   \draw[dotted] (h) -- (g);
+   \draw[dotted] (g) -- (k);
+   \draw[dotted] (k) -- (cd);
+   \draw[dotted] (k) -- (bj);
+
+   \end{tikzpicture}
+   \end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Simplification du graphe d'interférence}
+  \fbox{g h k c\&d b\&j cd}
+
+   \begin{center}
+   \begin{tikzpicture}
+   \node (f) [circle, draw] at (0,0) {f};
+   \node (e) [circle, draw] at (1,0) {e};
+   \node (m) [circle, draw] at (2,0) {m};
+   \node (cd) [dotted,circle, draw] at (3,-1.5) {cd};
+   \node (bj) [circle, draw] at (1,-1.5) {bj};
+   \node (h) [dotted, circle, draw] at (0,-3) {h};
+   \node (k) [dotted,circle, draw] at (2,-3) {k};
+   \node (g) [dotted, circle, draw] at (1,-4) {g};
+
+   \draw (f) -- (e);
+   \draw (e) -- (m);
+   \draw (f) edge[bend left=60] (m);
+   \draw (f) -- (bj);
+   \draw (e) -- (bj);
+   \draw (e) -- (bj);
+   \draw (m) -- (bj);
+   \draw[dotted] (m) -- (cd);
+   \draw[dotted] (cd) -- (bj);
+   \draw[dotted] (bj) -- (h);
+   \draw[dotted] (bj) -- (g);
+   \draw[dotted] (bj) -- (k);
+   \draw[dotted] (h) -- (g);
+   \draw[dotted] (g) -- (k);
+   \draw[dotted] (k) -- (cd);
+   \draw[dotted] (k) -- (bj);
+
+   \end{tikzpicture}
+   \end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Simplification du graphe d'interférence: etc ...}
+
+\begin{minipage}{0.45\textwidth}
+   \begin{center}
+   \begin{tikzpicture}
+   \node (f) [circle, draw, fill=blue!20] at (0,0) {f};
+   \node (e) [circle, draw, fill=red!20] at (1,0) {e};
+   \node (m) [circle, draw, fill=green!20] at (2,0) {m};
+   \node (cd) [circle, draw, fill=red!20] at (3,-1.5) {cd};
+   \node (bj) [circle, draw, fill=orange!20] at (1,-1.5) {bj};
+   \node (h) [circle, draw, fill=green!20] at (0,-3) {h};
+   \node (k) [circle, draw, fill=green!20] at (2,-3) {k};
+   \node (g) [circle, draw, fill=red!20] at (1,-4) {g};
+
+   \draw (f) -- (e);
+   \draw (e) -- (m);
+   \draw (m) -- (cd);
+   \draw (f) edge[bend left=60] (m);
+   \draw (f) -- (bj);
+   \draw (e) -- (bj);
+   \draw (e) -- (bj);
+   \draw (m) -- (bj);
+   \draw (m) -- (cd);
+   \draw (cd) -- (bj);
+   \draw (bj) -- (cd);
+   \draw (bj) -- (h);
+   \draw (bj) -- (g);
+   \draw (bj) -- (k);
+   \draw (bj) -- (cd);
+   \draw (h) -- (g);
+   \draw (g) -- (k);
+   \draw (k) -- (cd);
+   \draw (k) -- (bj);
+
+   \end{tikzpicture}
+   \end{center}
+\end{minipage}
+\begin{minipage}{0.45\textwidth}
+\newcommand\rone{\textbf{\textcolor{red!80}{r1}} {}}
+\newcommand\rtwo{\textbf{\textcolor{green!80}{r2}} {}}
+\newcommand\rthree{\textbf{\textcolor{blue!80}{r3}} {}}
+\newcommand\rfour{\textbf{\textcolor{orange!80}{r4}} {}}
+\begin{texttt}
+     in : \rtwo \rfour
+
+     \rone = *(\rfour+12)
+
+     \rtwo = \rtwo - 1
+
+     \rthree = \rone * \rtwo
+
+     \rone = *(\rfour+8)
+
+     \rtwo = *(\rfour+16)
+
+     \rfour = *\rthree
+
+     \rone = \rone + 8
+
+     \# d = c
+
+     \rtwo = \rtwo + 4
+
+     \# j = b
+
+     out : \rone \rtwo \rfour
+\end{texttt}
+
+\structure{On évite les deux copies.}
+\end{minipage}
+\end{frame}
+
+\section{Autres subtilités}
+\begin{frame}\frametitle{Noeuds précoloriés}
+  \begin{itemize}
+    \item Certains registres physiques sont utilisés pour des buts précis:
+      retour d'une fonction, pointeur de pile, etc.
+    \item Pour épargner ces registres on peut précolorier certains noeuds
+      du graphe d'inférence.
+    \item Un sommet précolorié ne sera jamais simplifié.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Registres et appels de fonctions}
+  \begin{itemize}
+    \item Certains registres sont:
+      \begin{itemize}
+        \item callee-save: à sauver par l'appelé
+        \item caller-save: à sauver par l'appelant
+      \end{itemize}
+    \item Une instruction call redéfinit tous les caller-save
+    \item On privilégiera:
+      \begin{itemize}
+        \item les caller-save pour les variables temporaires éphémères.
+          \begin{itemize}
+            \item pas besoin de faire un backup avant l'appel de fonction.
+          \end{itemize}
+        \item les callee-save pour les variables temporaires vivantes autour
+          d'appels de sous programme.
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\section{Conclusion}
+\begin{frame}\frametitle{Conclusion}
+  \begin{itemize}
+    \item Allocation de registre = Coloriage de graphe
+    \item Heuristique efficace : build / simplify / select
+    \item De nombreuses optimisations peuvent être utilisés pour:
+      éliminer les copies, préserver certains registres, éviter les spills, etc.
+  \end{itemize}
+\end{frame}
+
+
+\end{document}

@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="pandoc.css" type="text/css" />
+</head>
+<body>
+<div id="TOC">
+<ul>
+<li><a href="#projet-jtiger-td-2b">Projet JTiger : TD 2B</a><ul>
+<li><a href="#mise-en-place">Mise en place</a><ul>
+<li><a href="#reconnaître-et-manipuler-les-expressions-arithméthiques-partie-2">Reconnaître et manipuler les expressions arithméthiques (Partie 2)</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<h1 id="projet-jtiger-td-2b">Projet JTiger : TD 2B</h1>
+<h2 id="mise-en-place">Mise en place</h2>
+<p>Récupérez et décompressez l’archive contenant le code fourni pour ce livrable <a href="http://tahiti.prism.uvsq.fr/tigergrader/static/support/livrable-T2B.zip" class="uri">http://tahiti.prism.uvsq.fr/tigergrader/static/support/livrable-T2B.zip</a>.</p>
+<p>Un fichier build.xml (équivalent d’un Makefile) est inclus. Pour compiler les sources tapez :</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">ant</span>
+<span class="ex">...</span>
+<span class="ex">BUILD</span> SUCCESSFUL
+<span class="ex">Total</span> time: 1 second</code></pre></div>
+<p>Si tout ce passe bien, un ficher <code>JTiger.jar</code> est produit dans <code>dist/lib</code>. Pour que Java puisse le trouver il faut le rajouter à la variable d’environnement <code>CLASSPATH</code>. Le script <code>setenv.sh</code> s’en charge:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="bu">.</span> <span class="ex">setenv.sh</span>  <span class="co"># ATTENTION: le point (équivalent de source) est important!</span></code></pre></div>
+<p>Nous pouvons maintenant essayer de lancer notre compilateur:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">java</span> jtiger.cli.Compile
+<span class="ex">usage</span>: jtiger <span class="dt">{-l}</span> input.tig
+ <span class="ex">-s</span>,--scaner   dump lexer output
+ <span class="ex">-p</span>,--parser   dump parser output
+<span class="ex">Missing</span> required option: [-s dump lexer output, -p dump parser output]</code></pre></div>
+<p>Pour envoyer votre projet au serveur de notation, il faut créer une archive des sources:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">ant</span> zip-src</code></pre></div>
+<h3 id="reconnaître-et-manipuler-les-expressions-arithméthiques-partie-2">Reconnaître et manipuler les expressions arithméthiques (Partie 2)</h3>
+<p>Nous allons modifier le parseur que vous avez effectué dans la première partie de ce TP. Cette fois ci au lieu de calculer le résultat d’une expression arithmétique on va construire l’arbre de syntaxe abstraite associé.</p>
+<p>Nous allons également rajouter une nouvelle règle à la grammaire qui va nous permettre de concatener plusieurs expressions à la suite. Cela permettra d’écrire des programmes comme (1+2 ; 3*54+2; 42).</p>
+<p>Un arbre de syntaxe abstraite associe un noeud à chaque règle de production de la grammaire. Nous donnons ci-dessous la correspondance entre règle de production et noeud dans l’AST produit.</p>
+<pre class="ebnf"><code>     program ::= exp                    (AST: noeud Exp) 
+
+     exp ::= intExp                     (AST: noeud Exp)
+           | seqExp
+           | opExp
+           | negExp
+
+     intExp ::= INT                     (AST: noeud IntegerExp)
+     seqExp ::= ( exps )                (AST: noeud Exp)  
+
+     exps ::= [ exp { ; exp } ]         (AST: SeqExp)
+
+     opExp ::= exp op exp               (AST: OpExp)
+             | exp &amp; exp                (AST: IfExp, on produit l&#39;arbre IF (e1) THEN e2 ELSE 0)
+             | exp | exp                (AST: IfExp, on produit l&#39;arbre IF (e1) THEN 1 ELSE e2)
+
+     negExp ::= - exp                   (AST: OpExp, on produit l&#39;arbre 0 - exp) 
+
+     op ::= + | - | * | / | = | &lt;&gt; | &gt; | &lt; | &gt;= | &lt;=</code></pre>
+<p>Par exemple, le programme</p>
+<pre class="tiger"><code>(1+2; 3*(4+5))</code></pre>
+<p>va produire l’arbre suivant:</p>
+<pre class="tree"><code>  SeqExp [pos=&#39;1:8&#39; _typeDefinition=&#39;null&#39;]
+    OpExp [pos=&#39;1:3&#39; _typeDefinition=&#39;null&#39; op=&#39;+&#39;]
+      IntegerExp [pos=&#39;1:2&#39; _typeDefinition=&#39;null&#39; value=&#39;1&#39;]
+      IntegerExp [pos=&#39;1:4&#39; _typeDefinition=&#39;null&#39; value=&#39;2&#39;]
+    OpExp [pos=&#39;1:8&#39; _typeDefinition=&#39;null&#39; op=&#39;*&#39;]
+      IntegerExp [pos=&#39;1:7&#39; _typeDefinition=&#39;null&#39; value=&#39;3&#39;]
+      SeqExp [pos=&#39;1:11&#39; _typeDefinition=&#39;null&#39;]
+        OpExp [pos=&#39;1:11&#39; _typeDefinition=&#39;null&#39; op=&#39;+&#39;]
+          IntegerExp [pos=&#39;1:10&#39; _typeDefinition=&#39;null&#39; value=&#39;4&#39;]
+          IntegerExp [pos=&#39;1:12&#39; _typeDefinition=&#39;null&#39; value=&#39;5&#39;]</code></pre>
+<p><img src="/tigergrader/static/support/ast.png" height="300px"></p>
+<p>Le noeud racine est de type SeqExp et correspond à la concatenation de plusieurs expressions. Ici les deux expressions filles, sont de type OpExp.</p>
+<p>Le fichier <code>src/jtiger/parser/tiger.cup</code> définit les règles de la grammaire.</p>
+<ol class="example" style="list-style-type: decimal">
+<li><p>Étudier les fichiers dans <code>src/jtiger/ast/</code> pour comprendre comment sont définis les noeuds de l’AST.</p></li>
+<li><p>Implémenter toutes les règles sauf <code>seqExp</code>, <code>negExp</code> et <code>opExp</code> avec <code>&amp;</code> et <code>|</code>.</p></li>
+<li><p>Implémenter la règle pour <code>negExp</code>. Ici l’idée c’est que lorsque le programme <code>-4</code> est reconnu on génère l’AST pour <code>0 - 4</code> en utilisant un noeud <code>opExp</code>.</p></li>
+<li><p>Implémenter la règle pour <code>&amp;</code> et <code>|</code>. L’idée est d’utiliser un noeud <code>ifExp</code>.</p></li>
+<li><p>Implémenter la règle pour <code>seqExp</code>. Attention le parseur doit reconnaître la liste vide <code>()</code>. Il n’est pas légal d’utiliser un point virgule s’il n’est pas suivi d’une expression. Par exemple, <code>(1+3;)</code> doit lever une erreur de parser.</p></li>
+</ol>
+</body>
+</html>

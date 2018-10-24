@@ -1,0 +1,179 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <link rel="stylesheet" href="pandoc.css" type="text/css" />
+</head>
+<body>
+<div id="TOC">
+<ul>
+<li><a href="#projet-jtiger-td-5">Projet JTiger : TD 5</a><ul>
+<li><a href="#mise-en-place">Mise en place</a></li>
+<li><a href="#vérification-des-types">Vérification des types</a><ul>
+<li><a href="#équivalence-de-types">Équivalence de types</a></li>
+<li><a href="#types-name-ou-alias">Types <em>name</em> ou alias</a></li>
+<li><a href="#implémentation">Implémentation</a></li>
+</ul></li>
+<li><a href="#typechecker">TypeChecker</a></li>
+</ul></li>
+</ul>
+</div>
+<h1 id="projet-jtiger-td-5"><a href="#TOC">Projet JTiger : TD 5</a></h1>
+<h2 id="mise-en-place"><a href="#TOC">Mise en place</a></h2>
+<p>Récupérez et décompressez l’archive contenant le code fourni pour ce livrable <a href="http://tahiti.prism.uvsq.fr/jtiger/static/support/livrable-T5.zip"><code class="url">http://tahiti.prism.uvsq.fr/jtiger/static/support/livrable-T5.zip</code></a>. Pour compiler et soumettre le projet, faites comme dans les TPs précédents.</p>
+<p>L’archive qui vous est fournie comporte un répertoire <code>testcases</code>. Ce répertoire contient 51 fichiers Tiger complets suffixés par l’extension `<code>.tig</code>. Ces tests sont fournis par A.W. Appel de l``université de Princeton et créateur du langage Tiger <a href="http://www.cs.princeton.edu/~appel/modern/"><code class="url">http://www.cs.princeton.edu/~appel/modern/</code></a>.</p>
+<p>Pour chaque test, j’ai inclus un fichier éponyme suffixé par <code>.tig.expected</code>. Ce fichier contient la sortie attendue.</p>
+<h2 id="vérification-des-types"><a href="#TOC">Vérification des types</a></h2>
+<p>Dans ce TD nous nous intéressons au vérificateur de types qui sera implémenté dans le fichier <code>src/jtiger/bind/TypeChecker.java</code>. Le vérificateur de types est responsable de:</p>
+<ul>
+<li>Vérifier que le programme source est correctement type</li>
+<li>Achever le binding des types en réalisant des <em>inférences de type</em></li>
+</ul>
+<p>Les règles de typage en Tiger sont spécifiées complétement dans les <a href="/jtiger/handout/T3#spécifications-syntaxiques-du-langage-tiger">spécifications du langage Tiger</a>. Néanmoins, suit un rappel des règles les plus importantes.</p>
+<h4 id="équivalence-de-types"><a href="#TOC">Équivalence de types</a></h4>
+<p>Deux types sont équivalents si et seulement si ils viennent de la <strong>même déclaration</strong>. Par exemple, le programme suivant est correctement type car <code>r1</code> et <code>r2</code> sont tous les deux du même type rec1.</p>
+<pre><code>    let 
+        type rec1 = { val : int }
+        var r1 : rec1 := rec1 { val = 42 }
+        var r2 : rec1 := rec1 { val = 21 }
+    in
+        r1 := r2
+    end</code></pre>
+<p>Néanmoins, le programme suivant est <strong>illégal</strong> et doit produire un message d’erreur à la compilation,</p>
+<pre><code>    let 
+        type rec1 = { val : int }
+        type rec2 = { val : int }
+        var r1 : rec1 := rec1 { val = 42 }
+        var r2 : rec2 := rec2 { val = 21 }
+    in
+        r1 := r2
+    end</code></pre>
+<p>Même si les types <code>rec1</code> et <code>rec2</code> sont <em>structurellement</em> identiques, dans Tiger ils sont considérés non équivalents.</p>
+<h4 id="types-name-ou-alias"><a href="#TOC">Types <em>name</em> ou alias</a></h4>
+<p>Il existe une exception à la règle précédente, les types <strong>name</strong> ou <strong>alias</strong> ne sont pas considérés comme une nouvelle déclaration de type, mais juste comme un renommage. C’est pourquoi le programme suivant est légal:</p>
+<pre><code>    let 
+        type rec1 = { val : int }
+        type rec2 = rec1
+        var r1 : rec1 := rec1 { val = 42 }
+        var r2 : rec2 := rec2 { val = 21 }
+    in
+        r1 := r2
+    end</code></pre>
+<p><code>rec2</code> n’est pas un nouveau type mais juste un renommage du type <code>rec1</code>. <code>rec1</code> et <code>rec2</code> sont donc considérés comme équivalents.</p>
+<p>La règle reste vraie même si plusieurs renommages ont lieu. En effet, le programme suivant est légal:</p>
+<pre><code>    let 
+        type int1 = int
+        type int2 = int1
+        var i1 : int := 21
+        var i2 : int2 := 42 
+    in
+        i1 := i2
+    end</code></pre>
+<p>Les types name ne peuvent pas être cycliques, le programme suivant est illégal:</p>
+<pre><code>    let 
+        type int1 = int2
+        type int2 = int1
+    in
+    end</code></pre>
+<h4 id="implémentation"><a href="#TOC">Implémentation</a></h4>
+<p>Chaque type <code>NameTy</code> possède un attribut <code>type</code> qui contient l’objet <code>ast.NameType</code> qui le déclare. L’objet <code>ast.NameType</code> contient lui même l’attribut <code>_typeDefinition</code> qui pointe vers sa définition de type, un objet de classe <code>types.Ty</code>.</p>
+<p>On peut donc en remontant la chaîne de pointeurs <code>type._typeDefinition</code> obtenir le type alias de l’objet <code>NameTy</code>. Par exemple, dans le code suivant</p>
+<pre><code>~~~
+    let 
+        type int1 = int2
+        type int2 = int3
+        type int3 = int1
+    in end
+~~~</code></pre>
+<p>si on appelle <code>type._typeDefinition</code> sur le <code>NameType int1</code> on récuperera le <code>NameType int2</code>. Si on appelle <code>type._typeDefinition</code> sur le <code>NameType int2</code> on récuperera le <code>NameType int3</code>. Si on appelle <code>type._typeDefinition</code> sur le <code>NameType int3</code> on récuperera le <code>NameType int1</code>.</p>
+<p>Grâce à l’attribut <code>type._typeDefinition</code> il est possible de remonter la chaîne de renommages de type. Si cette chaîne contient un cycle alors il faut remonter une erreur.</p>
+<ol style="list-style-type: example">
+<li><p>Implémentez la fonction <code>boolean jtiger.types.NameTy.isCyclic()</code>. Cette fonction doit retourner vrai, si et seulement si le type est cyclique. Pour savoir si un type est une instance de <code>NameTy</code> vous pouvez utiliser le mot clé java <code>instanceof</code>.</p></li>
+<li><p>Implémentez la fonction <code>static boolean jtiger.types.Ty.equiv(Ty t1, Ty t2)</code>. Cette fonction doit retourner vrai, si et seulement si les types <code>t1</code> et <code>t2</code> sont équivalents.</p></li>
+</ol>
+<h2 id="typechecker"><a href="#TOC">TypeChecker</a></h2>
+<p>Tout est prêt maintenant pour écrire la classe <code>jtiger.bind.TypeChecker</code>. <code>TypeChecker</code> est un visiteur d’AST. Elle doit effectuer les actions suivantes:</p>
+<p><strong>NameTypes (tests à passer 14 et 50)</strong></p>
+<ol start="3" style="list-style-type: example">
+<li>Pour les nœuds <code>NameType</code>, il faut vérifier que la définition de type n’est pas circulaire.</li>
+</ol>
+<p><strong>Types de base (pas de nouveaux tests)</strong></p>
+<ol start="4" style="list-style-type: example">
+<li><p>Les nœuds <code>StringExp</code> doivent être bindés au type String (<code>Ty.createString()</code>).</p></li>
+<li><p>Les nœuds <code>NilExp</code> doivent être bindés au type Nil.</p></li>
+<li><p>Les nœuds <code>BreakExp</code> doivent être bindés au type Void.</p></li>
+<li><p>Les nœuds <code>IntegerExp</code> doivent être bindés au type Integer.</p></li>
+</ol>
+<p><strong>Expressions de base (tests à passer 11, 12, 21, 34)</strong></p>
+<ol start="8" style="list-style-type: example">
+<li><p>Pour les nœuds <code>LetExp</code>, il faut binder le type au type du body.</p></li>
+<li><p>Pour les nœuds <code>SeqExp</code>, il faut binder le type,</p></li>
+</ol>
+<ul>
+<li>Si le <code>SeqExp</code> est vide, <code>()</code>, le type est Nil.</li>
+<li>Sinon le type est celui de la dernière expression du <code>SeqExp</code></li>
+</ul>
+<ol start="10" style="list-style-type: example">
+<li>Pour les nœuds <code>OpExp</code>, il faut vérifier:</li>
+</ol>
+<ul>
+<li>Que les deux opérandes sont de même type</li>
+<li>Pour les opérandes <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>|</code> et <code>&amp;</code> les deux opérandes doivent être de types IntegerTy.</li>
+<li>Pour les opérandes <code>&gt;</code>, <code>&lt;</code>, <code>&lt;=</code> et <code>&gt;=</code> les deux opérandes doivent être de type IntegerTy ou StringTy.</li>
+<li>Il faut binder le type de OpExp.</li>
+</ul>
+<p><strong>Variables (tests à passer 3, 4, 5, 6, 15, 23, 24, 25, 27, 36, 37, 38, 39, 41, 46, 47, 48, 49)</strong></p>
+<ol start="11" style="list-style-type: example">
+<li>Pour les nœuds <code>VarDec</code>, trois cas sont possibles:</li>
+</ol>
+<ul>
+<li>Soit un type est explicitement déclaré, par exemple <code>var a : int := 42 + 3</code>. Dans ce cas il faut vérifier que le type déclaré (ici <code>int</code>) est équivalent au type de l’initialisation ici un <code>OpExp (42+3)</code>.</li>
+<li>Soit le type n’est pas explicitement déclaré, par exemple <code>var a := 42 + 3</code>. Dans ce cas il faut binder le type de <code>VarExp</code> au type de l’initialisation.</li>
+<li>Le type n’est pas explicitement déclaré et initialisé à <code>Nil</code>, par exemple <code>var a := nil</code>. Ceci est illégal en Tiger, et une erreur doit être enregistrée.</li>
+</ul>
+<ol start="12" style="list-style-type: example">
+<li><p>Pour les nœuds <code>SimpleVar</code>, il faut binder le type de <code>SimpleVar</code> au type de sa déclaration.</p></li>
+<li><p>Pour les nœuds <code>AssignExp</code>, il faut vérifier que le type de l’expression est equivalent au type de la variable. Dans Tiger il est interdit de modifier les variables de boucle, il faut donc vérifier que la variable modifiée n’est pas déclarée dans une expression For.</p></li>
+<li><p>Pour les nœuds <code>VarExp</code> il faut binder le type du <code>VarExp</code> au type de la déclaration de la variable.</p></li>
+</ol>
+<p><strong>Tableaux et Structures (tests à passer 17, 18, 19, 20, 26, 28, 32, 35)</strong></p>
+<ol start="15" style="list-style-type: example">
+<li><p>Pour les nœuds <code>ArrayVar</code>, il faut vérifier que l’index de tableau est entier et que le type est bien un tableau. Il faut aussi faire le binding de type.</p></li>
+<li><p>Pour les nœuds <code>ArrayExp</code>, il faut vérifier que la valeur d’initialisation du tableau est du même type que pour la déclaration du type tableau. Il faut aussi faire le binding de type.</p></li>
+<li><p>Pour les nœuds <code>RecordType</code>, il faut vérifier que les noms des champs de la structure sont tous différents. Par exemple, le programme suivant est illégal</p></li>
+</ol>
+<pre><code>    let 
+        type rec := {champ1: int, champ1: int}
+    in end</code></pre>
+<ol start="18" style="list-style-type: example">
+<li><p>Pour les nœuds <code>RecordVar</code>, il faut vérifier si le champ accédé existe et faire le binding des types.</p></li>
+<li><p>Pour les nœuds <code>RecordExp</code>, il faut vérifier que l’expression a le même nombre de champs que la déclaration et que les champs sont du bon type. Par exemple, le programme suivant est illégal,</p></li>
+</ol>
+<pre><code>    let type rec := {champ1 : int, champ2: string}
+        var r1 : rec := {champ1 = 10 + 6, champ2 = 11}
+    in end </code></pre>
+<p><strong>Fonctions (tests à passer 7, 22, 29, 30, 31, 33, 42, 43)</strong></p>
+<ol start="20" style="list-style-type: example">
+<li><p>Pour les nœuds <code>FuncDec</code>, il faut vérifier que le type du body est équivalent au type de retour de la fonction.</p></li>
+<li><p>Pour les nœuds <code>CallExp</code>.</p></li>
+</ol>
+<ul>
+<li>Il faut binder le type du <code>CallExp</code> au type de retour de la déclaration de fonction dans <code>_resultTypeDefinition</code>.</li>
+<li>Il faut vérifier que le bon nombre d’arguments avec le bon type on été passés.</li>
+</ul>
+<p><strong>Contrôle (tests à passer 1, 2, 8, 9, 10, 13, 16, 40, 44, 45)</strong></p>
+<ol start="22" style="list-style-type: example">
+<li><p>Pour les nœuds <code>WhileExp</code>, il faut vérifier que la condition du While est de type <code>IntegerTy</code> et vérifier que le body ne retourne pas de valeur, c’est à dire qu’il est de type <code>VoidTy</code>.</p></li>
+<li><p>Pour les nœuds <code>ForExp</code>, il faut vérifier que les bornes sont entières et que le body est de type <code>VoidTy</code>.</p></li>
+<li>Pour les nœuds <code>IfExp</code>, il faut binder le type et</li>
+</ol>
+<ul>
+<li>Tester que le test est de type IntegerTy.</li>
+<li>S’il y a deux branches, tester que les deux branches retournent le même type</li>
+<li>S’il y a une seule branche, tester que le type de retour est VoidTy.</li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,331 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="pandoc.css" type="text/css" />
+</head>
+<body>
+<div id="TOC">
+<ul>
+<li><a href="#projet-jtiger-td-4">Projet JTiger : TD 4</a><ul>
+<li><a href="#mise-en-place">Mise en place</a></li>
+<li><a href="#binding-construction-de-la-table-des-symboles">Binding: construction de la table des symboles</a></li>
+<li><a href="#remarque-importante">Remarque importante</a></li>
+<li><a href="#table-de-symboles">Table de symboles</a></li>
+<li><a href="#binding-des-variables">Binding des variables</a></li>
+<li><a href="#binding-des-variables-de-boucle">Binding des variables de boucle</a></li>
+<li><a href="#binding-des-fonctions">Binding des fonctions</a></li>
+<li><a href="#binding-des-types">Binding des types</a></li>
+<li><a href="#binding-des-breaks">Binding des breaks</a></li>
+<li><a href="#escape-visitor">Escape Visitor</a></li>
+</ul></li>
+</ul>
+</div>
+<h1 id="projet-jtiger-td-4">Projet JTiger : TD 4</h1>
+<h2 id="mise-en-place">Mise en place</h2>
+<p>Récupérez et décompressez l’archive contenant le code fourni pour ce livrable <a href="http://tahiti.prism.uvsq.fr/tigergrader/static/support/livrable-T4.zip" class="uri">http://tahiti.prism.uvsq.fr/tigergrader/static/support/livrable-T4.zip</a>. Pour compiler et soumettre le projet, faites comme dans les TPs précédents.</p>
+<p>L’archive qui vous est fournie comporte un répertoire <code>testcases</code>. Ce répertoire contient 51 fichiers Tiger complets suffixés par l’extension `<code>.tig</code>. Ces tests sont fournis par A.W. Appel de l``université de Princeton et créateur du langage Tiger <a href="http://www.cs.princeton.edu/~appel/modern/" class="uri">http://www.cs.princeton.edu/~appel/modern/</a>.</p>
+<p>Pour chaque test, j’ai inclus un fichier éponyme suffixé par <code>.tig.expected</code>. Ce fichier contient la sortie attendue.</p>
+<h2 id="binding-construction-de-la-table-des-symboles">Binding: construction de la table des symboles</h2>
+<p>Dans ce TD nous nous intéressons à la construction de la table des symboles et à la phase de binding du compilateur. Comme nous avons vu en cours, le binding consiste à reconnaître:</p>
+<ul>
+<li><p>pour chaque utilisation d’une variable, vérifier <em>si et où</em> elle est déclarée</p></li>
+<li><p>pour chaque utilisation d’un type, vérifier <em>si et où</em> il est déclaré</p></li>
+<li><p>pour chaque utilisation d’une fonction, vérifier <em>si et où</em> elle est déclarée</p></li>
+<li><p>pour chaque utilisation de break, vérifier si le break est inclus dans une boucle et savoir laquelle (si plusieurs boucles l’entourent on prendra la plus interne)</p></li>
+</ul>
+<h2 id="remarque-importante">Remarque importante</h2>
+<p>Le langage Tiger tel que spécifié par Appel autorise le <em>variable hiding</em> à l’intérieur d’un même bloc de déclarations. C’est à dire, le programme suivant est légal,</p>
+<pre><code>let var a := 0 
+    var a := &quot;hello&quot;
+in
+    a
+end</code></pre>
+<p>La deuxième déclaration de <code>a</code> cache la première déclaration.</p>
+<p>Cela a des conséquences bizarres, par exemple le programme suivant est illégal,</p>
+<pre><code>/* This is illegal, since there are two functions with the same name
+    in the same (consecutive) batch of mutually recursive functions.
+   See also test48 */
+let
+        function g(a:int):int = a
+        function g(a:int):int = a
+in
+        0
+end</code></pre>
+<p>mais par contre le programme,</p>
+<pre><code>/* This is legal.  The second function &quot;g&quot; simply hides the first one.
+   Because of the intervening variable declaration, the two &quot;g&quot; functions
+   are not in the same  batch of mutually recursive functions. 
+   See also test39 */
+let
+        function g(a:int):int = a
+        type t = int
+        function g(a:int):int = a
+in
+        0
+end</code></pre>
+<p>est légal.</p>
+<p>Pour notre compilateur, de manière à éviter ces ambiguïtés, nous avons décidé que, à l’intérieur d’un même bloc de déclarations, il est interdit de déclarer deux symboles de même type (variables, fonctions, types) avec le même nom.</p>
+<p>Mais il est toujours possible de faire:</p>
+<pre><code>let
+    function a(a : int) : int = a
+    var a := 0
+in
+    a(a)
+end</code></pre>
+<p>car les symboles <code>a</code> sont de types différents.</p>
+<h2 id="table-de-symboles">Table de symboles</h2>
+<p>Nous allons commencer par construire une structure adaptée au binding. Pour un langage à structures mutables comme Java, la structure la plus adaptée est une structure hybride, à moitié table de hachage et à moitié pile. En anglais on l’appelle <em>Hashtable with internal chaining</em>.</p>
+<p>Voici une animation qui explique le fonctionnement de cette structure de données.</p>
+<style>
+    .ccbef{
+        top: 95%;
+    }
+    .ccaft{
+        top: 80%;
+    }
+  </style>
+<div id="myCarousel" class="carousel">
+<div class="carousel-inner">
+<div class="active item">
+<center>
+<img src="http://tahiti.prism.uvsq.fr/tigergrader/static/support/anim-T4/1.svg.png" \>
+</center>
+</div>
+<div class="item">
+<center>
+<img src="http://tahiti.prism.uvsq.fr/tigergrader/static/support/anim-T4/2.svg.png" \>
+</center>
+</div>
+<div class="item">
+<center>
+<img src="http://tahiti.prism.uvsq.fr/tigergrader/static/support/anim-T4/3.svg.png" \>
+</center>
+</div>
+<div class="item">
+<center>
+<img src="http://tahiti.prism.uvsq.fr/tigergrader/static/support/anim-T4/4.svg.png" \>
+</center>
+</div>
+<div class="item">
+<center>
+<img src="http://tahiti.prism.uvsq.fr/tigergrader/static/support/anim-T4/5.svg.png" \>
+</center>
+</div>
+<div class="item">
+<center>
+<img src="http://tahiti.prism.uvsq.fr/tigergrader/static/support/anim-T4/55.svg.png" \>
+</center>
+</div>
+<div class="item">
+<center>
+<img src="http://tahiti.prism.uvsq.fr/tigergrader/static/support/anim-T4/6.svg.png" \>
+</center>
+</div>
+<div class="item">
+<center>
+<img src="http://tahiti.prism.uvsq.fr/tigergrader/static/support/anim-T4/7.svg.png" \>
+</center>
+</div>
+<div class="item">
+<center>
+<img src="http://tahiti.prism.uvsq.fr/tigergrader/static/support/anim-T4/8.svg.png" \>
+</center>
+</div>
+<div class="item">
+<center>
+<img src="http://tahiti.prism.uvsq.fr/tigergrader/static/support/anim-T4/9.svg.png" \>
+</center>
+</div>
+<div class="item">
+<center>
+<img src="http://tahiti.prism.uvsq.fr/tigergrader/static/support/anim-T4/10.svg.png" \>
+</center>
+</div>
+<div class="item">
+<center>
+<img src="http://tahiti.prism.uvsq.fr/tigergrader/static/support/anim-T4/11.svg.png" \>
+</center>
+</div>
+<div class="item">
+<center>
+<img src="http://tahiti.prism.uvsq.fr/tigergrader/static/support/anim-T4/12.svg.png" \>
+</center>
+</div>
+<div class="item">
+<center>
+<img src="http://tahiti.prism.uvsq.fr/tigergrader/static/support/anim-T4/13.svg.png" \>
+</center>
+</div>
+<div class="item">
+<center>
+<img src="http://tahiti.prism.uvsq.fr/tigergrader/static/support/anim-T4/14.svg.png" \>
+</center>
+</div>
+<div class="item">
+<center>
+<img src="http://tahiti.prism.uvsq.fr/tigergrader/static/support/anim-T4/15.svg.png" \>
+</center>
+</div>
+</div>
+<p><a class="carousel-control right ccaft" href="#myCarousel" data-slide="next">›</a> <a class="carousel-control right ccbef" href="#myCarousel" data-slide="prev">‹</a></p>
+</div>
+<p>La table de symboles possède deux sous-structures:</p>
+<ul>
+<li><code>Scopes</code>: une table de hashage qui contient des listes de déclarations</li>
+<li><code>Marks</code>: une pile qui contient la liste de déclarations rajoutées à chaque portée</li>
+</ul>
+<p>La table de symboles, qu’on appelera tout simplement <code>Table</code>, doit satisfaire l’interface suivante:</p>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="co">/** </span>
+<span class="co"> * Table implements an symbol table using a Hashmap with inner chaining.</span>
+<span class="co"> * Table is used to keep track of which variables or types are declared in each</span>
+<span class="er"> * scope.  The generic type &lt;T&gt; is the type of the declarations that Table is</span>
+<span class="co"> * in charge of tracking. </span>
+<span class="co"> */</span> 
+<span class="kw">class</span> Table&lt;T&gt; { 
+    <span class="co">/**</span>
+<span class="co">     * Constructs a new Table</span>
+<span class="co">     */</span> 
+    <span class="fu">Table</span>();
+
+    <span class="co">/**</span>
+<span class="co">     * Returns the declaration for symbol id. If symbol id is unknow throws</span>
+<span class="co">     * Undefined Exception.</span>
+<span class="co">     */</span> 
+    T <span class="fu">get</span>(Id id) <span class="kw">throws</span> UndefinedException;
+
+    <span class="co">/**</span>
+<span class="co">     * Add to the Table the declaration, value, for symbol id.</span>
+<span class="co">     * If the symbol has already been defined in the *current* scope throw AlreadyDefinedException. </span>
+<span class="co">     */</span>
+    <span class="dt">void</span> <span class="fu">put</span>(Id id, T value) <span class="kw">throws</span> AlreadyDefinedException; 
+
+    <span class="co">/** </span>
+<span class="co">     * beginScope must be called at the start of a new scope</span>
+<span class="co">     */</span> 
+    <span class="dt">void</span> <span class="fu">beginScope</span>();
+
+    <span class="co">/** </span>
+<span class="co">     * endScope must be called at the end of a scope</span>
+<span class="co">     */</span> 
+    <span class="dt">void</span> <span class="fu">endScope</span>();
+}</code></pre></div>
+<ol class="example" style="list-style-type: decimal">
+<li><p>La Table de symboles manipule des identifiants de type <code>Id</code>.</p>
+<p>On aurait pu implémenter les objets Id comme de simples chaînes de caractère. Mais comparer deux identifiants aurait requis une comparaison de chaîne qui est une opération couteuse. En analysant le code de <code>src/jtiger/bind/Id.java</code> expliquez pourquoi on peut tester l’égalité de deux identifiants directement en utilisant <code>==</code> et pourquoi cela est moins couteux qu’une comparaison de chaîne.</p>
+<blockquote>
+<p>En Java normalement pour s’assurer que deux objets sont identiques on utilise la méthode <code>equals()</code> (équivalence structurelle). L’opérateur <code>==</code> est utilisé lorsque l’on veut savoir si deux références pointent vers le même objet (équivalence référentielle). Pourtant dans le cas d’Id, on peut utiliser <code>==</code> pour l’équivalence structurelle. Pourquoi ?</p>
+</blockquote></li>
+<li><p>Implémentez la classe Table dans le fichier <code>src/jtiger/bind/Table.java</code>.</p></li>
+<li><p>Lors de la phase de bind on va utiliser trois tables de symboles différentes. Les trois tables vont être rassemblées dans un objet de type <code>Environment</code>.</p></li>
+</ol>
+<ul>
+<li>une première table, <code>Environment.vars</code> sera utilisée pour enregistrer les déclarations de variables</li>
+<li>une deuxième table, <code>Environment.types</code> sera utilisée pour enregistrer les déclarations de types</li>
+<li>une troisième table, <code>Environment.funcs</code> sera utilisée pour enregistrer les déclarations de fonctions</li>
+</ul>
+<p>Étudiez le code d’Environment. Que fait-il ? À quoi servent les appels à Primitive.create ?</p>
+<h2 id="binding-des-variables">Binding des variables</h2>
+<p>Maintenant on va implémenter le binding des variables. La classe <code>src/jtiger/bind/Binder.java</code> implémente un squelette de Visiteur d’AST.</p>
+<p>Ce visiteur est appellé dans la classe <code>src/jtiger/cli/Control.java</code> à l’aide du code suivant:</p>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java">        ast.<span class="fu">acceptVisitor</span>(<span class="kw">new</span> <span class="fu">AstTraverse</span>(<span class="kw">new</span> <span class="bu">Binder</span>()));</code></pre></div>
+<p><code>ast</code> est l’objet de type <code>ast.Node</code> produit par votre parseur. <code>AstTraverse</code> est un visiteur dont le rôle est de traverser l’arbre en profondeur et pour chaque noeud rencontré appeller un visiteur délégué. Ici le visiteur délégué est bien sur le visiteur <code>Binder</code>.</p>
+<p>Pour chaque type de noeud, <code>Binder</code> implémente une méthode <code>enter</code> qui est appellée lorsque l’on arrive sur le sous-arbre dominé par ce noeud et une méthode <code>exit</code> qui est appellée lorsque l’on quitte le sous-arbre dominé par ce noeud.</p>
+<ol start="4" class="example" style="list-style-type: decimal">
+<li>Implémentez le binding de variables, de manière à associer chaque utilisation d’une variable à sa déclaration. Pour associer une variable à sa déclaration vous devez faire pointer le champ <code>_declaration</code> dans les noeuds de type Variable vers la déclaration qui va bien. N’oubliez pas de gérer correctement la portée.</li>
+</ol>
+<p>Si une variable est déclarée deux fois dans la même portée ou utilisée mais pas déclarée, levez une erreur avec <code>Errors.Error</code>.</p>
+<h2 id="binding-des-variables-de-boucle">Binding des variables de boucle</h2>
+<p>Les variables de boucles font l’effet d’un traîtement spécial dans le compilateur. Lorsque qu’une variable est déclarée dans une boucle for,</p>
+<pre><code>for i := 0 to 10 do
+ print_int(i)</code></pre>
+<p>il faut faire pointer le champ spécial de la Variable <code>_forVariable</code> vers l’objet <code>ForExp</code> qui la déclare.</p>
+<ol start="5" class="example" style="list-style-type: decimal">
+<li>Implémentez le binding des variables de boucle.</li>
+</ol>
+<h2 id="binding-des-fonctions">Binding des fonctions</h2>
+<ol start="6" class="example" style="list-style-type: decimal">
+<li><p>Implémentez le binding des fonctions. Faitez pointer pour chaque objet <code>CallExp</code> le champ <code>_declaration</code> vers la déclaration de fonction.</p>
+<p>Si une fonction est déclarée deux fois dans la même portée ou utilisée mais pas déclarée, levez une erreur avec <code>Errors.Error</code>.</p>
+<p>Attention aux règles de visibilité des fonctions, vous pouvez vous raffrichir la mémoire en consultant les <a href="/jtiger/handout/T3#spécifications-syntaxiques-du-langage-tiger">spécifications du langage Tiger</a>.</p></li>
+</ol>
+<h2 id="binding-des-types">Binding des types</h2>
+<ol start="7" class="example" style="list-style-type: decimal">
+<li><p>Étudiez les classes dans <code>src/jtiger/types/</code> et en particulier la class <code>Ty</code> pour comprendre comment sont déclarés les types dans le compilateur.</p></li>
+<li><p>Implémentez le binding des types en complétant le champ <code>_typeDefinition</code> partout où cela est nécessaire.</p></li>
+</ol>
+<p>Les fonctions qui ne retournent pas de résultat doivent être associés au type <code>void</code> qui peut être crée en utilisant un appel à <code>Ty.createVoid()</code>.</p>
+<h2 id="binding-des-breaks">Binding des breaks</h2>
+<ol start="9" class="example" style="list-style-type: decimal">
+<li>Pour chaque objet de type <code>BreakExp</code> associez le champ <code>_enclosingLoop</code> à la boucle la plus interne qui l’engloble.</li>
+</ol>
+<p>Si un break est en dehors d’une boucle levez une exception.</p>
+<h2 id="escape-visitor">Escape Visitor</h2>
+<p>Nous avons vu en cours qu’une variable pourra être stockée en assembleur:</p>
+<ul>
+<li>soit dans un registre de manière temporaire</li>
+<li>soit sur la pile</li>
+</ul>
+<p>Le choix de stocker une variable en pile ou registre est fait tout à la fin du compilateur lors de l’allocation de registres. Néanmoins il est important que certaines variables ne soient pas stockées dans des registres. On dira que ces variables <em>Échappent</em>.</p>
+<p>Voici un exemple de variable qui <em>échappe</em>:</p>
+<pre><code>1 func foo() : int =
+2   let a:= 5 
+3       func bar() = (a := a + 3)
+4   in 
+5       bar();
+6       a
+7   end</code></pre>
+<p><code>a</code> est une variable locale de la fonction <code>foo</code>. Néanmoins <code>a</code> est lue et modifiée depuis la fonction interne <code>bar</code>. On dit que <code>a</code> échappe car on peut y acceder en dehors de la fonction où elle est déclarée.</p>
+<p>Si <code>a</code> était stockée dans un registre, cela serait très problématique pour l’implémentation, en effet l’état des registres n’est pas conservé d’une fonction à l’autre. C’est pourquoi on veut détecter les variables qui échappent.</p>
+<p>Créez un nouveau visiteur d’AST dans le fichier <code>src/jtiger/bind/Escapes.java</code>.</p>
+<ol start="10" class="example" style="list-style-type: decimal">
+<li>Faites en sortes que <code>Escapes</code> remplisse le champ <code>_depth</code> pour les objets de type <code>FuncDec</code>, <code>VarDec</code> et <code>CallExp</code>. Le champ <code>_depth</code> doit contenir un entier qui compte le nombre de noeuds <code>FuncDec</code> qui doivent être traversées dans l’AST pour atteindre depuis la racine le noeud courant.</li>
+</ol>
+<p>Par exemple, <code>_depth</code> vaut 1 pour <code>foo</code>, la déclaration de <code>a</code> ligne 2, l’utilisation de <code>a</code> ligne 6 et l’appel ligne 5.</p>
+<p>Par contre, <code>_depth</code> vaut 2 pour la déclaration de <code>bar</code> et les utilisations de <code>a</code> ligne 3.</p>
+<ol start="11" class="example" style="list-style-type: decimal">
+<li>En vous servant du champ <code>_depth</code> faites en sorte que le visiteur mette champ <code>_escapes</code> à <code>true</code> pour toutes les déclarations de variables qui échappent.</li>
+</ol>
+</body>
+</html>

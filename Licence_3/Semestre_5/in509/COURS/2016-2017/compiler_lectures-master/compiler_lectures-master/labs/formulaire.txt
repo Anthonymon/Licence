@@ -1,0 +1,62 @@
+Projet Compilation - Formulaire Individuel
+==========================================
+
+Numéro de groupe:
+Nom:
+Prénom:
+
+* Décrivez précisément votre contribution personnelle dans ce projet ? 
+  (10 lignes max
+   exemples: j'ai écrit les tests, j'ai écrit la classe Frame.java,
+   Moi et XXX avons écrit la fonction qui produit le prologue/épilogue,
+   etc...)
+
+* Choissisez une partie du compilateur sur laquelle vous avez
+  personnelement travaillé et détaillez et justifiez l'implémentation
+  que vous avez faite.
+  (20 lignes max)
+
+* Écrivez dans la table ci-dessous à la place des _______ 
+  le nom de chaque membre de votre groupe (et vous aussi).
+
+  Nous considérons trois critères: 
+
+        - (T) travail: quantité de travail fournie (peu importe si le
+          travail fourni était utilisable ou pas).
+          Ici il s'agit d'évaluer le temps passé sur le projet.
+          
+        - (Q) qualité du travail:
+          le travail de la personne a contribué beaucoup au succès du
+          projet ou pas du tout ? Ici on n'évalue pas le temps
+          passé, mais la qualité des contributions.
+          
+        - (E) esprit d'equipe: est-ce que la personne s'est investie pour 
+          que le groupe fonctionne bien ? est-ce que la personne a pris
+          en charge l'organisation d'une partie du projet ou a pris
+          du temps pour expliquer des choses à d'autres membres ?                    
+
+    Répartissez 20 points sur la colonne T entre les membres du groupe
+    Répartissez 20 points sur la colonne Q entre les membres du groupe
+    Répartissez 20 points sur la colonne E entre les membres du groupe
+                       
+      Nom
+
+    * ______________    T:    Q:    E: 
+
+    * ______________    T:    Q:    E: 
+
+    * ______________    T:    Q:    E: 
+
+    * ______________    T:    Q:    E:
+
+    * ______________    T:    Q:    E:
+
+ Attention, vos notes auront un effet sur la note de "Contribution
+ Individuelle" de vos camarades. Soyez justes et mesurés !
+ Mais si quelqu'un ne s'est vraiment pas investi, n'hésitez pas à
+ répartir les points parmi les autres membres.
+
+ Attention, seuls 20 points sont disponibles par catégorie à répartir
+ entre tous les membres. 
+
+* Avez vous d'autres remarques (question ouverte) ?

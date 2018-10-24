@@ -1,0 +1,560 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="pandoc.css" type="text/css" />
+</head>
+<body>
+<div id="TOC">
+<ul>
+<li><a href="#projet-jtiger-td-3">Projet JTiger : TD 3</a><ul>
+<li><a href="#mise-en-place">Mise en place</a><ul>
+<li><a href="#reconnaître-le-langage-de-programmation-tiger">Reconnaître le langage de programmation Tiger</a></li>
+<li><a href="#les-déclarations-de-variables-et-fonctions">Les déclarations de variables et fonctions</a></li>
+<li><a href="#nouvelles-expressions">Nouvelles Expressions</a></li>
+<li><a href="#les-structures-de-contrôle">Les structures de contrôle</a></li>
+<li><a href="#les-types">Les types</a></li>
+<li><a href="#spécifications-syntaxiques-du-langage-tiger">Spécifications syntaxiques du langage Tiger</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<h1 id="projet-jtiger-td-3">Projet JTiger : TD 3</h1>
+<h2 id="mise-en-place">Mise en place</h2>
+<p>Récupérez et décompressez l’archive contenant le code fourni pour ce livrable <a href="http://tahiti.prism.uvsq.fr/tigergrader/static/support/livrable-T3.zip" class="uri">http://tahiti.prism.uvsq.fr/tigergrader/static/support/livrable-T3.zip</a>. Pour compiler et soumettre le projet, faites comme dans les TPs précédents.</p>
+<p>Pour faire ce TD partez de votre fichier <code>src/parser/tiger.cup</code> du T2B.</p>
+<p>L’archive qui vous est fournie comporte un répertoire <code>testcases</code>. Ce répertoire contient 51 fichiers Tiger complets suffixés par l’extension `<code>.tig</code>. Ces tests sont fournis par A.W. Appel de l``université de Princeton et créateur du langage Tiger <a href="http://www.cs.princeton.edu/~appel/modern/" class="uri">http://www.cs.princeton.edu/~appel/modern/</a>.</p>
+<p>Pour chaque test, j’ai inclus un fichier éponyme suffixé par <code>.tig.expected</code>. Ce fichier contient la sortie attendue après l’exécution de l’analyseur sémantique.</p>
+<p>Les fichiers sont inclus pour vous aider à débugger votre parseur au fur à mesure du TP.</p>
+<h3 id="reconnaître-le-langage-de-programmation-tiger">Reconnaître le langage de programmation Tiger</h3>
+<p>Nous allons augmenter le parseur que vous avez codé lors du T2B pour reconnaître l’ensemble du langage Tiger. Le langage Tiger est spécifié complètement ci-dessous, dans la dernière section. Prennez le temps de lire les exemples et de bien comprendre comment le langage fonctionne.</p>
+<p>Dans le TP précédent vous avez pris en compte les entiers, les séquences, ainsi que toutes les expressions formées avec des opérateurs. Vous avez généré l’AST correspondant à différents programmes d’entrées.</p>
+<p>Dans ce TP nous étendons la grammaire pour prendre en compte l’ensemble des expressions, les tests et structures de contrôles, les déclarations de variables et de types.</p>
+<h3 id="les-déclarations-de-variables-et-fonctions">Les déclarations de variables et fonctions</h3>
+<p>Pour l’instant dans notre grammaire on n’a pris en compte que des expressions, c’est à dire des éléments du langage qui peuvent être évalués et retournent une valeur. Maintenant on s’intéresse aux <em>déclarations</em>, qui définissent des fonctions, variables ou types.</p>
+<p>Avant de pouvoir manipuler des déclarations il faut définir une dernière expression, appellée <code>letExp</code>. Les blocs lets permettent de définir la portée d’un ensemble de déclarations, par exemple, dans le bloc qui suit</p>
+<pre><code>    let
+        var a : int := 0
+    in
+        a + 5
+    end</code></pre>
+<p>on déclare une variable <code>a</code> visible uniquement à l’intérieur du bloc <code>let</code>.</p>
+<ol class="example" style="list-style-type: decimal">
+<li>Rajoutez une règle pour gérer les <code>letExp</code>. Une expression <em>let</em> à la grammaire suivante:</li>
+</ol>
+<pre><code>exp ::= ... | letExp                  (letExp est de type Exp dans l&#39;AST)
+
+letExp ::= `let` decs `in` exps `end` (de type LetExp dans l&#39;AST)
+
+decs ::= { dec }                      (une suite de déclarations de type LinkedList&lt;Dec&gt;, voir question suivante)</code></pre>
+<ol start="2" class="example" style="list-style-type: decimal">
+<li>Rajoutez maintenant des règles pour gérer les déclarations. L’ensemble des règles est donné ci-dessous, on a omis les déclarations de types que l’on fera ultérieurement,</li>
+</ol>
+<pre><code>dec ::= varDec                  (Les déclarations retournent un noeud AST de type Dec) 
+      | funcsDec 
+
+
+varDec ::=                      (AST de type VarDec) 
+       `var` id typeannotation `:=` exp  
+
+funcsDec ::= { funcDec }        (AST de type FuncsDec, une liste de funcDec)
+funcDec ::=                     (AST de type FuncDec)
+        `function` id `(` params `)` typeannotation `=` exp
+
+params ::=                      (AST de type LinkedList&lt;VarDec&gt;, voir explication ci-dessous) 
+       [ param { `,`  param } ] 
+
+param ::= id `:` id             (AST de type VarDec) 
+     
+
+typeannotation ::= | `:` id     (Retourne un objet de type Id) 
+
+id := ID                        (Retourne un objet de type Id)</code></pre>
+<p>Les objets de type Id sont définis dans <code>src/jtiger/bind/Id</code>, ils permettent de manipuler efficacement des identifiants (de variable, de types, de fonctions).</p>
+<p>Pour nous faciliter la vie dans les étapes suivantes du compilateur, on a décidé de modéliser les paramètres de fonction (<code>param</code>) dans l’AST comme un objet de type <code>VarDec</code>, avec l’identifiant dans l’attribut <code>name</code> et le type dans l’attribut <code>type</code>. L’attribut <code>exp</code> est initialisé à <code>null</code> pour les paramètres de fonctions.</p>
+<p>Normalement après cette question votre parseur est capable de produire l’AST du programme <code>testcases/test-tp1.tig</code>.</p>
+<h3 id="nouvelles-expressions">Nouvelles Expressions</h3>
+<p>Maintenant il s’agit de completer les expressions que votre parseur reconnaît. Normalement vous avez déjà implémenté <code>letExp</code>, <code>negExp</code>, <code>opExp</code>, <code>seqExp</code>, <code>intExp</code>. Voici la liste de toutes les expressions du langage Tiger qu’il reste à implémenter</p>
+<pre><code>exp::= nilExp
+   | stringExp
+   | var
+   | assignExp
+   | callExp</code></pre>
+<ol start="3" class="example" style="list-style-type: decimal">
+<li>Implémentez nilExp</li>
+</ol>
+<pre><code>    nilExp::= `nil`      (AST de type NilExp)</code></pre>
+<ol start="4" class="example" style="list-style-type: decimal">
+<li>Implémentez stringExp</li>
+</ol>
+<pre><code>    stringExp::= string   (AST de type StringExp)</code></pre>
+<ol start="5" class="example" style="list-style-type: decimal">
+<li>Implémentez les variables. Il y a trois sortes de variables: les variables simples (<code>a</code>), les variables de tableau (<code>a[3]</code>) et les variables de structure (<code>a.champ</code>).</li>
+</ol>
+<pre><code>    var ::= simpleVar            (AST de type Var)
+          | arrayVar 
+          | recordVar
+
+    simpleVar ::= id             (AST de type SimpleVar)
+
+    recordVar ::= var `.` id     (AST de type RecordVar)
+    
+    arrayVar ::= var `[` exp `]` (AST de type ArrayVar)</code></pre>
+<ol start="6" class="example" style="list-style-type: decimal">
+<li>Implémentez l’affectation de variable</li>
+</ol>
+<pre><code>    assignExp::= var `:=` exp        (AST de type AssignExp)</code></pre>
+<ol start="7" class="example" style="list-style-type: decimal">
+<li>Implémentez les appels de fonction</li>
+</ol>
+<pre><code>    callExp::= id `(` arguments `)`            (AST de type CallExp)
+
+    arguments::= [ argument { `,` argument } ] (AST de type LinkedList&lt;Exp&gt;, 
+                                                liste possiblement vide d&#39;arguments)
+    argument::= exp                            (AST de type Exp, un argument est 
+                                                toute expression valide)</code></pre>
+<p>Normalement, arrivés ici, votre parseur peut reconnaître les programmes test 6,7,13,18,19,24,25,26,27,31,34,35,36,37,39,40,43.</p>
+<h3 id="les-structures-de-contrôle">Les structures de contrôle</h3>
+<p>Les structures de contrôle sont traitées comme des expressions dans l’AST. Cette partie consiste à les implémenter.</p>
+<pre><code>exp::=
+   | breakExp  (AST de type Exp)
+   | ifExp
+   | whileExp
+   | forExp</code></pre>
+<ol start="8" class="example" style="list-style-type: decimal">
+<li>Implémentez breakExp</li>
+</ol>
+<pre><code>    breakExp::= break    (AST de type BreakExp)</code></pre>
+<ol start="9" class="example" style="list-style-type: decimal">
+<li>Implémentez ifExp, whileExp et forExp:</li>
+</ol>
+<pre><code>    forExp::= `for` id `:=` exp `to` exp `do` exp (AST de type ForExp)
+    whileExp::= `while` exp `do` exp              (AST de type WhileExp) 
+    ifExp::= `if` exp `then` exp                  (AST de type IfExp, avec le champ else initialisé à null)
+         |   `if` exp `then` exp `else` exp       (AST de type IfExp)</code></pre>
+<p>Normalement, arrivés ici, votre parseur peut reconnaître les programmes test 4,8,9,10,11,12,15,20,21.</p>
+<h3 id="les-types">Les types</h3>
+<p>Dans cette partie vous aller implémenter les déclaration de types.</p>
+<ol start="10" class="example" style="list-style-type: decimal">
+<li>Tout d’abord rajoutez les règles suivantes pour pouvoir déclarer des types</li>
+</ol>
+<pre><code>    dec ::= typesDec 
+
+    typesDec ::= { typeDec }        (AST de type TypesDec, 
+                                     un ensemble de déclarations de type)
+    
+    typeDec ::= `type` id `=` type  (AST de type TypeDec)
+
+    type ::= nameType               (AST de type TypeDef)
+           | arrayType 
+           | recordType</code></pre>
+<p>Tiger autorise à definir des types alias (ou <code>nameType</code>). Par exemple,</p>
+<pre><code>    let 
+        type myint = int
+        var a : myint := 0
+    in
+        a
+    end</code></pre>
+<ol start="11" class="example" style="list-style-type: decimal">
+<li>Implémentez les <code>nametype</code></li>
+</ol>
+<pre><code>    nameType ::= id    (AST de type NameType)</code></pre>
+<p>Tiger autorise à définir des types tableaux (<code>arrayType</code>). Par exemple,</p>
+<pre><code>    let
+        type tableau = array of int
+        var a : tableau := tableau [10] of 0
+    in
+        a[1] := 42
+    end</code></pre>
+<p>Ce programme déclare un type pour les tableaux d’entiers, puis déclare une variable tableau <code>a</code> avec 10 éléments initialisés à 0.</p>
+<ol start="12" class="example" style="list-style-type: decimal">
+<li>Implémentez les types tableaux.</li>
+</ol>
+<pre><code>    arrayType::= `array` `of` id              (AST de type ArrayType)
+
+    Il faut aussi créer une nouvelle expression pour initialiser les tableaux,
+    comme dans l&#39;exemple ci-dessus.
+
+    exp::= arrayExp
+
+    arrayExp::= id `[` exp `]` `of` exp       (AST de type ArrayExp)
+                 </code></pre>
+<p>Tiger autorise à définir des types structure (<code>recordType</code>). Par exemple,</p>
+<pre><code>    let
+        type personne = {name:string, age:int}
+        var a : personne := personne {name=&quot;Marvin&quot;, age=42}
+    in
+        a.age := a.age + 1 
+    end</code></pre>
+<ol start="13" class="example" style="list-style-type: decimal">
+<li>Implémentez les types structure</li>
+</ol>
+<pre><code>    recordType::= `{` fields `}`  (AST de type RecordType)
+
+    fields ::=                    
+        [ id `:` id  {`,` id `:` id } ]
+        (AST de type LinkedList&lt;Field&gt;, list vide ou pas de Field)
+
+    Il faut également créer une expression pour initialiser les types structure.
+
+    exp ::= recordExp
+
+    recordExp ::= id `{` efields `}`  (AST de type RecordExp)
+
+    efields ::= [ id `=` exp { `,` id `=` exp } ] 
+                (AST de type LinkedList&lt;ExpField&gt;, liste d&#39;affectations)</code></pre>
+<p>Arrivés là, vous reconnaissez tout Tiger ! Félicitations :)</p>
+<p><img src='/tigergrader/static/support/Tiger.jpg' height='100px'></p>
+<h3 id="spécifications-syntaxiques-du-langage-tiger">Spécifications syntaxiques du langage Tiger</h3>
+<p>Ces spécifications sont reprises de <a href="http://www.lrde.epita.fr/~akim/ccmp/tiger.txt" class="uri">http://www.lrde.epita.fr/~akim/ccmp/tiger.txt</a>. Merci à Akim Demaille de nous avoir autorisé à les réutiliser dans le cadre de notre cours.</p>
+<p>We use Extended BNF, with <code>[</code> and <code>]</code> for zero or once, and <code>{</code> and <code>}</code> for any number of repetition including zero.</p>
+<pre><code> program ::=
+     exp
+
+ exp ::=
+   # Literals.
+     `nil`
+   | integer
+   | string
+
+   # Array and record creations.
+   | id `[` exp `]` `of` exp
+   | id `{`[ id `=` exp { `,` id `=` exp } ] `}`
+
+   # Variables, field, elements of an array.
+   | var
+
+   # Function call.
+   | id `(` [ exp { `,` exp }] `)`
+
+   # Operations.
+   | `-` exp
+   | exp op exp
+   | `(` exps `)`
+
+   # Assignment.
+   | var `:=` exp
+
+   # Control structures.
+   | `if` exp `then` exp [`else` exp]
+   | `while` exp `do` exp
+   | `for` id `:=` exp `to` exp `do` exp
+   | `break`
+   | `let` decs `in` exps `end`
+
+ var ::= id
+   | var `.` id
+   | var `[` exp `]`
+ exps ::= [ exp { `;` exp } ]
+
+ decs ::= { dec }
+ dec ::=
+   # Type declaration.
+     `type` id `=` type
+   # Variable declaration.
+   | vardec
+   # Function declaration.
+   | `function` id `(` params `)` [ `:` id ] `=` exp
+
+ params ::= [ id `:` id { `,` id `:` id } ]
+
+ vardec ::= `var` id [ `:` id ] `:=` exp
+
+   # Types.
+ type ::=
+    # Type alias.
+    id
+    # Record type definition.
+    | `{` fields  `}`
+    # Array type definition.
+    | `array` `of` id 
+ fields ::= [ id `:` id { `,` id `:` id } ]</code></pre>
+<h4 id="declarations">Declarations</h4>
+<h5 id="type-declarations">Type Declarations</h5>
+<p><strong>arrays</strong></p>
+<p>The size of the array does not belong to the type. Index of arrays starts from 0 and ends at size - 1.</p>
+<pre><code>      let
+        type int_array = array of int
+        var  table := int_array[100] of 0
+      in
+        ...
+      end</code></pre>
+<p>Arrays are initialized with the <strong>same</strong> instance of value. This leads to aliasing for entities with pointer semantics (strings, arrays and records).</p>
+<pre><code>      let
+        type rec = { val : int }
+        type rec_arr = array of rec
+        var  table := rec_arr[2] of rec { val = 42 }
+      in
+        table[0].val := 51
+        /* Now table[1].val = 51. */
+      end</code></pre>
+<p>Use a loop to instantiate several initialization values.</p>
+<pre><code>      let
+        type rec = { val : int }
+        type rec_arr = array of rec
+        var  table := rec_arr[2] of nil
+      in
+        for i := 0 to 1 do
+          table[i] := rec { val = 42 };
+        table[0].val := 51
+        /* table[1].val = 42. */
+      end</code></pre>
+<p><strong>records</strong></p>
+<p>Records are defined by a list of fields between braces. Fields are described as “fieldname : id” and are separated by a coma. Field names are unique for a given record type.</p>
+<pre><code>      let
+        type indexed_string = {index : int, value : string}
+      in
+        ...
+      end</code></pre>
+<p><strong>recursive types</strong></p>
+<p>Types can be recursive,</p>
+<pre><code>      let
+        type stringlist = {head : string, tail : stringlist}
+      in
+        ...
+      end</code></pre>
+<p>or mutually recursive (if they are declared in the same chunk) in Tiger.</p>
+<pre><code>      let
+        type indexed_string = {index : int, value : string}
+        type indexed_string_list = {head : indexed_string, tail :
+        indexed_string_list}
+      in
+        ...
+      end</code></pre>
+<p>but there shall be no cycle. This</p>
+<pre><code>      let
+        type a = b
+        type b = a
+      in
+        ...
+      end</code></pre>
+<p>is invalid.</p>
+<p><strong>type equivalence</strong></p>
+<p>Two types are equivalent iff there are issued from the same type construction (array or record construction, or primitive type). As in C, unlike Pascal, structural equivalence is rejected.</p>
+<p>Type aliases do not build new types, hence they are equivalent.</p>
+<pre><code>      let
+        type a = int
+        type b = int
+        var a := 1
+        var b := 2
+      in
+        a = b           /* OK */
+      end
+
+      let
+        type a = {foo : int}
+        type b = {foo : int}
+        var va := a{foo = 1}
+        var vb := b{foo = 2}
+      in
+        va = vb
+      end
+
+      is invalid, and must be rejected with exit status set to 5.</code></pre>
+<h5 id="variable-declarations">Variable Declarations</h5>
+<p><strong>variables</strong></p>
+<p>There are two forms of variable declarations in Tiger: the short one and the long one.</p>
+<p>In the short form, only the name of the variable and the initial value of the variable are specified, the variable type is “inferred”.</p>
+<pre><code>      let
+        var foo := 1  /* foo is typed as an integer */
+      in
+        ...
+      end</code></pre>
+<p>In the long form, the type of the variable is specified. Since one cannot infer a record type for <code>nil</code>, the long form is mandated when declaring a variable initialized to <code>nil</code>.</p>
+<pre><code>      let
+        type foo = {foo : int}
+        var bar : foo := nil       /* Correct.   */
+        var baz       := nil       /* Incorrect. */
+      in
+        ...
+      end</code></pre>
+<h5 id="function-declarations">Function Declarations</h5>
+<p><strong>functions</strong></p>
+<p>To declare a function, provide its return value type:</p>
+<pre><code>      let
+        function not (i : int) : int =
+          if i = 0 then
+            1
+          else
+            0
+      in
+        ...
+      end</code></pre>
+<p>A procedure has no value return type.</p>
+<pre><code>      let
+        function print_conditional (s : string, i : int) =
+          if i then
+            print (s)
+          else
+            print (&quot;error&quot;)
+      in
+        print_string (&quot;foo&quot;, 1)
+      end</code></pre>
+<p>Functions can be recursive, but mutually recursive functions must be in the same sequence of function declarations (no other declaration should be placed between them).</p>
+<h4 id="expressions">Expressions</h4>
+<p><strong>L-values</strong></p>
+<p>The <code>l-values</code> (whose value can be read or changed) are: elements of arrays, fields of records, arguments and variables.</p>
+<p><strong>Valueless expressions</strong></p>
+<p>Some expressions have no value: procedure calls, assignments, <code>if</code>s with no <code>else</code> clause, loops and <code>break</code>. Empty sequences (<code>()</code>) and <code>let</code>s with an empty body are also valueless.</p>
+<p><strong>Nil</strong></p>
+<p>The reserved word <code>nil</code> refers to a value from a <code>record</code> type. Do not use <code>nil</code> where its type cannot be determined.</p>
+<pre><code>      let
+        type any_record = {any : int}
+        var nil_var : any_record := nil
+        function nil_test(parameter : any_record) : int = ...
+        var invalid := nil             /* no type, invalid */
+      in
+        if nil &lt;&gt; nil_var then
+          ...
+        if nil_test (nil_var) then
+          ...
+        if nil = nil then ...         /* no type, invalid */
+      end</code></pre>
+<p><strong>Integers</strong></p>
+<p>An integer literal is a series of decimal digits (therefore it is non-negative). Since the compiler aims at 32-bit architectures, since it needs to handle signed integers, a literal integer value must fit in a signed 32-bit integer. Any other integer value is a scanner error.</p>
+<p><strong>Booleans</strong></p>
+<p>There is no Boolean type in Tiger: they are encoded as integers, with the same semantics as in C, i.e., 0 is the only value standing for “false”, anything else stands for “true”.</p>
+<p><strong>Strings</strong></p>
+<p>A string constant is a possibly empty series of printable characters, spaces or escapes sequences (see *note Lexical Specifications::) enclosed between double quotes.</p>
+<pre><code>      let
+        var s := &quot;\t\124\111\107\105\122\n&quot;
+      in
+        print(s)
+      end</code></pre>
+<p><strong>Function call</strong></p>
+<p>Function arguments are evaluated from the left to the right. Arrays and records arguments are passed by reference, strings and integer are passed by value.</p>
+<p>The following example:</p>
+<pre><code>      let
+        type my_record = {value : int}
+        function reference(parameter : my_record) =
+          parameter.value := 42
+        function value(parameter : string) =
+          parameter := &quot;Tiger is the best language\n&quot;
+        var rec1 := my_record{value = 1}
+        var str := &quot;C++ rulez&quot;
+      in
+        reference (rec1);
+        print_int (rec1.value);
+        print (&quot;\n&quot;);
+        value (str);
+        print (str);
+        print (&quot;\n&quot;)
+      end</code></pre>
+<p>results in:</p>
+<pre><code>      42
+
+      C++ rulez</code></pre>
+<p><strong>Boolean operators</strong></p>
+<p>Tiger Boolean operators normalize their result to 0/1. For instance, because <code>&amp;</code> and <code>|</code> can be implemented as syntactic sugar, one could easily make <code>123 | 456</code> return <code>1</code> or <code>123</code>: make them return <code>1</code>. Andrew Appel does not enforce this for <code>&amp;</code> and <code>|</code>; we do, so that the following program has a well defined behavior:</p>
+<pre><code>      print_int (&quot;0&quot; &lt; &quot;9&quot; | 42)</code></pre>
+<p><strong>Arithmetic</strong></p>
+<p>Arithmetic expressions only apply on integers and return integers. Available operators in Tiger are : +,-,* and /.</p>
+<p><strong>Comparison</strong></p>
+<p>Comparison operators (<code>=</code>, <code>&lt;&gt;</code>, and <code>&lt;=</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&gt;</code>) return a Boolean value.</p>
+<ul>
+<li><p><strong>Integer and string comparison</strong> All the comparison operators apply to pairs of strings and pairs of integers, with obvious semantics.</p></li>
+<li><p><strong>String comparison</strong> Comparison of strings is based on the lexicographic order.</p></li>
+<li><p><strong>Array and record comparison</strong> Pairs of arrays and pairs of records <strong>of the same type</strong> can be compared for equality (<code>=</code>) and inequality (<code>&lt;&gt;</code>). Identity equality applies, i.e., an array or a record is only equal to itself (shallow equality), regardless of the contents equality (deep equality). The value <code>nil</code> can be compared against a value which type is that of a record, e.g. `nil = nil’ is invalid. Arrays and records cannot be ordered: <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code> are valid only for pairs of strings or integers.</p></li>
+<li><p><strong>Void comparison</strong> In conformance with A. Appel’s specifications, any two void entities are equal.</p></li>
+</ul>
+<p><strong>Assignment</strong></p>
+<p>Assignments yield no value. The following code is syntactically correct, but type incorrect:</p>
+<pre><code>      let
+        var foo := 1
+        var bar := 1
+      in
+        foo := (bar := 2) + 1
+      end</code></pre>
+<p>Note that the following code is valid:</p>
+<pre><code>      let
+        var void1 := ()
+        var void2 := ()
+        var void3 := ()
+      in
+        void1 := void2 := void3 := ()
+      end</code></pre>
+<p><strong>Array and record assignment</strong></p>
+<p>Array and record assignments are shallow, not deep, copies. Therefore aliasing effects arise: if an array or a record variable A is assigned another variable B of the same type, then changes on B will affect A and vice versa.</p>
+<pre><code>      let
+        type bar = {foo : int}
+        var rec1 := bar{foo = 1}
+        var rec2 := bar{foo = 2}
+      in
+        print_int(rec1.foo);
+        print(&quot; is the value of rec1\n&quot;);
+        print_int(rec2.foo);
+        print(&quot; is the value of rec2\n&quot;);
+        rec1 := rec2;
+        rec2.foo = 42;
+        print_int(rec1.foo);
+        print(&quot; is the new value of rec1\n&quot;)
+      end</code></pre>
+<p><strong>Sequences</strong></p>
+<p>A sequence is a possibly empty series of expressions separated by semicolons and enclosed by parenthesis. By convention, there are no sequences of a single expression (see the following item). The sequence is evaluated from the left to the right. The value of the whole sequence is that of its last expression.</p>
+<pre><code>      let
+        var a := 1
+      in
+        a := (
+               print (&quot;first exp to display\n&quot;);
+               print (&quot;second exp to display\n&quot;);
+               a := a + 1;
+               a
+             ) + 42;
+        print (&quot;the last value of a is : &quot;);
+        print_int (a);
+        print (&quot;\n&quot;)
+      end</code></pre>
+<p><strong>Parentheses</strong></p>
+<p>Parentheses enclosing a single expression enforce syntactic grouping.</p>
+<p><strong>Lifetime</strong></p>
+<p>Records and arrays have infinite lifetime: their values lasts forever even if the scope of their creation is left.</p>
+<pre><code>      let
+        type bar = {foo : int}
+        var rec1 := bar{foo = 1}
+      in
+        rec1 := let
+                  var rec2 := bar{foo = 42}
+                in
+                  rec2
+                end;
+        print_int(rec1.foo);
+        print(&quot;\n&quot;)
+      end</code></pre>
+<p><strong>if-then-else</strong></p>
+<p>In an if-expression:</p>
+<pre><code>      if EXP1 then
+        EXP2
+      else
+        EXP3</code></pre>
+<p>EXP1 is typed as an integer, EXP2 and EXP3 must have the same type which will be the type of the entire structure. The resulting type cannot be that of <code>nil</code>.</p>
+<p><strong>if-then</strong></p>
+<p>In an if-expression:</p>
+<pre><code>      if EXP1 then
+        EXP2</code></pre>
+<p>EXP1 is typed as an integer, and EXP2 must have no value. The whole expression has no value either.</p>
+<p><strong>while</strong></p>
+<p>In a while-expression:</p>
+<pre><code>      while EXP1 do
+        EXP2</code></pre>
+<p>EXP1 is typed as an integer, EXP2 must have no value. The whole expression has no value either.</p>
+<p><strong>for</strong></p>
+<p>The following <code>for</code> loop</p>
+<pre><code>      for ID := EXP1 to EXP2 do
+        EXP3</code></pre>
+<p>introduces a fresh variable, ID, which ranges from the value of EXP1 to that of EXP2, inclusive, by steps of 1. The scope of ID is restricted to EXP3. The variable ID cannot be assigned to. The type of both EXP1 and EXP2 is integer, they can range from the minimal to the maximal integer values. The body EXP3 and the whole loop have no value.</p>
+<p><strong>break</strong></p>
+<p>A break terminates the nearest enclosing loop (<code>while</code> or <code>for</code>). A break must be enclosed by a loop. A break cannot appear inside a definition (e.g., between <code>let</code> and <code>in</code>), except if it is enclosed by a loop, of course.</p>
+<p><strong>let</strong></p>
+<p>In the let-expression:</p>
+<pre><code>      let
+        DECS
+      in
+        EXPS
+      end</code></pre>
+<p>DECS is a sequence of declaration and EXPS is a sequence of expressions separated by a semi-colon. The whole expression has the value of EXPS.</p>
+</body>
+</html>
