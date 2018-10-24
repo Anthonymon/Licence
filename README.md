@@ -1,7 +1,7 @@
 # Licence
 Licence Informatique UVSQ Versailles
 
-Contenus des TDs en Licence 1/2/3 
+Contenus des COURS/TD/PROJET/EXAM en Licence 1/2/3 
 
 ## Licence 1
 + IN100 : Franck Quessette
